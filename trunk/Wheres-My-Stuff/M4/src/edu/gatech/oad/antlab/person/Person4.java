@@ -31,7 +31,14 @@ public class Person4 {
      */
     private String calc(String input) {
       //Person 4 put your implementation here
-      return null;
+    	char[] letters = input.toCharArray();
+    	char firstLetter = letters[0];
+    	for (int i = 0; i< letters.length; i++ ){
+    		letters[i] = letters[i+1];
+    	}
+    	letters[length] = firstLetter;
+    	
+      return new String(letters);
     }
     
     /**
