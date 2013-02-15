@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<bkim343xml version="1.0" encoding="UTF-8"?>
+    <!-- build.xml -->
 <project name="Wheres-My-Stuff" basedir="." default="main">
 <property name="src.dir" value="src"/>
 <property name="build.dir" value="build"/>
