@@ -36,7 +36,7 @@ public class Person4 {
     	for (int i = 0; i< letters.length; i++ ){
     		letters[i] = letters[i+1];
     	}
-    	letters[length] = firstLetter;
+    	letters[letters.length -1] = firstLetter;
     	
       return new String(letters);
     }
