@@ -33,10 +33,10 @@ public class Person4 {
       //Person 4 put your implementation here
     	char[] letters = input.toCharArray();
     	char firstLetter = letters[0];
-    	for (int i = 0; i< letters.length; i++ ){
+    	for (int i = 0; i< letters.length-1; i++ ){
     		letters[i] = letters[i+1];
     	}
-    	letters[letters.length -1] = firstLetter;
+    	letters[letters.length-1] = firstLetter;
     	
       return new String(letters);
     }
