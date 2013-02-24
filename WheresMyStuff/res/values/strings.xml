@@ -1,5 +1,10 @@
 <resources>
 
     <string name="app_name">Wheres My Stuff</string>
-
+    <style name="MyTheme.NoTitleBar.CustomBackground" parent="@android:Theme.Black">    
+        <item name="android:windowBackground">@drawable/load</item>    
+        <item name="android:windowNoTitle">true</item>    
+        <item name="android:windowFullscreen">true</item>    
+        <item name="android:windowContentOverlay">@null</item>    
+    </style>  
 </resources>
