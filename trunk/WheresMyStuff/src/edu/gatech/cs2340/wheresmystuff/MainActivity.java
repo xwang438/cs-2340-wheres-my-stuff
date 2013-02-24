@@ -3,11 +3,8 @@ package edu.gatech.cs2340.wheresmystuff;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-import android.widget.Button;
-import android.widget.TextView;
 
-public class InitActivity extends Activity {
-
+public class MainActivity extends Activity {  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
