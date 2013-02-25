@@ -48,10 +48,11 @@ public class UserVerifier{
     return false;
   }
   
-  public void addUser(String newUser, String newPassword){
+  public Boolean addUser(String newUser, String newPassword){
     for(int i =0; i < usernames.length; i++){
       if(usernames[i].equals(newUser)){
-        break;
+        System.out.println("Username already exists.");
+        return false;
       }
     }
     String[] tempUsers = usernames;
@@ -64,9 +65,27 @@ public class UserVerifier{
     }
     usernames[usernames.length-1] = newUser;
     passwords[passwords.length-1] = newPassword;
+    return true;
     }
-      
   
+  public boolean loginCheck(String username, String password){
+    if(this.checkUsername(username)){
+      if(this.checkPassword(password)){
+        return true;
+      }
+      System.out.println("Incorrect Password. Please try again.");
+    }
+    System.out.println("Incorrect Username. Please try again.");
+    return false;
+  }
+      
+  public String toString(){
+    String result = new String("");
+    for(int i=0; i < usernames.length; i++){
+      result = result + "User" + i + ": " + usernames[i] + "; Password: " + passwords[i] + "\n";
+    }
+    return result;
+  }
   
   
   
