@@ -1,6 +1,6 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".LoginActivity" >
+    tools:context=".LoginActivity, .UserVerifier" >
 
     <!-- Login progress -->
 
@@ -68,6 +68,7 @@
                 android:layout_marginTop="16dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
+                android:onClick="loginCheck"
                 android:text="@string/action_sign_in_register" />
 
             <Button
