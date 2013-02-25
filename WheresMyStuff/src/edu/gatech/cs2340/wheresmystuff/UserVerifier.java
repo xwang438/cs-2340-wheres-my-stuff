@@ -57,8 +57,8 @@ public class UserVerifier{
   
   /**
    * 
-   * @param user loops through
-   * @return
+   * @param user loops through list of usernames and checks if the input parameter exists in the list
+   * @return returns true if the username exists, false is it doesn't
    */
   public boolean checkUsername(String user){
     for(int i = 0; i < usernames.length; i++){
@@ -70,6 +70,11 @@ public class UserVerifier{
     return false;
   }
   
+  /**
+   * 
+   * @param user loops through list of passwords and checks if the input parameter exists in the list
+   * @return returns true if the password exists, false is it doesn't
+   */
   public boolean checkPassword(String pass){
       if(passwords[userIndex].equals(pass)){
         userIndex = -1;
@@ -78,6 +83,12 @@ public class UserVerifier{
     return false;
   }
   
+  /**
+   * 
+   * @param newUser adds this parameter to the usernames array
+   * @param newPassword adds this parameter to the passwords array
+   * @return true if the username and password were successfully added to the arrays, false if the username already exists
+   */
   public Boolean addUser(String newUser, String newPassword){
     for(int i =0; i < usernames.length; i++){
       if(usernames[i].equals(newUser)){
@@ -98,6 +109,12 @@ public class UserVerifier{
     return true;
     }
   
+  /**
+   * 
+   * @param username username parameter to be checked
+   * @param password password parameter to be checked
+   * @return true if the password and username match, false if not
+   */
   public boolean loginCheck(String username, String password){
     if(this.checkUsername(username)){
       if(this.checkPassword(password)){
@@ -108,7 +125,10 @@ public class UserVerifier{
     System.out.println("Incorrect Username. Please try again.");
     return false;
   }
-      
+/**
+ *       
+ * @return returns the values of the lists of usernames and passwords as a string
+ */
   public String toString(){
     String result = new String("");
     for(int i=0; i < usernames.length; i++){
