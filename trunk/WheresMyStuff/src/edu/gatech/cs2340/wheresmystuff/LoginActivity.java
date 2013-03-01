@@ -22,6 +22,10 @@ import android.app.Dialog.*;
  * well.
  */
 public class LoginActivity extends Activity {
+	
+	// 1. Instantiate an AlertDialog.Builder with its constructor
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
 	/**
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
@@ -78,14 +82,11 @@ public class LoginActivity extends Activity {
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
-
+		
 		findViewById(R.id.sign_in_button).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						// 1. Instantiate an AlertDialog.Builder with its constructor
-						AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
 						// 2. Chain together various setter methods to set the dialog characteristics
 						builder.setMessage(R.string.dialog_message)
 						       .setTitle(R.string.dialog_title);
