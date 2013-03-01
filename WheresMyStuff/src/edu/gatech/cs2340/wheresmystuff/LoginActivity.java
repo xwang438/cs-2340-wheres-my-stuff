@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -93,6 +94,7 @@ public class LoginActivity extends Activity {
 
 						// 3. Get the AlertDialog from create()
 						AlertDialog dialog = builder.create();
+						dialog.show();
 						attemptLogin();
 					}
 				});
