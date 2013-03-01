@@ -12,4 +12,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
 
+    
+    <string name="dialog_message">You entered an incorrect username or password.</string>
+    <string name="dialog_title">Incorrect Login</string>
 </resources>
