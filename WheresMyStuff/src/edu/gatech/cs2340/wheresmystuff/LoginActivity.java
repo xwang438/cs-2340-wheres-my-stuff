@@ -83,6 +83,15 @@ public class LoginActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
+						// 1. Instantiate an AlertDialog.Builder with its constructor
+						AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+						// 2. Chain together various setter methods to set the dialog characteristics
+						builder.setMessage(R.string.dialog_message)
+						       .setTitle(R.string.dialog_title);
+
+						// 3. Get the AlertDialog from create()
+						AlertDialog dialog = builder.create();
 						attemptLogin();
 					}
 				});
@@ -101,16 +110,6 @@ public class LoginActivity extends Activity {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
-		// 1. Instantiate an AlertDialog.Builder with its constructor
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-		// 2. Chain together various setter methods to set the dialog characteristics
-		builder.setMessage(R.string.dialog_message)
-		       .setTitle(R.string.dialog_title);
-
-		// 3. Get the AlertDialog from create()
-		AlertDialog dialog = builder.create();
-		
 		
 		if (mAuthTask != null) {
 			return;
