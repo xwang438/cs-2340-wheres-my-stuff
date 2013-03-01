@@ -15,6 +15,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import android.app.Dialog.*;
+
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
@@ -99,6 +101,17 @@ public class LoginActivity extends Activity {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
+		// 1. Instantiate an AlertDialog.Builder with its constructor
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+		// 2. Chain together various setter methods to set the dialog characteristics
+		builder.setMessage(R.string.dialog_message)
+		       .setTitle(R.string.dialog_title);
+
+		// 3. Get the AlertDialog from create()
+		AlertDialog dialog = builder.create();
+		
+		
 		if (mAuthTask != null) {
 			return;
 		}
@@ -239,4 +252,5 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 		}
 	}
+	
 }
