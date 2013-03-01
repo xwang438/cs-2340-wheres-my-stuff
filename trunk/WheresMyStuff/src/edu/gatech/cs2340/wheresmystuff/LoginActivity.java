@@ -102,7 +102,7 @@ public class LoginActivity extends Activity {
 	 */
 	public void attemptLogin() {
 		// 1. Instantiate an AlertDialog.Builder with its constructor
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 		// 2. Chain together various setter methods to set the dialog characteristics
 		builder.setMessage(R.string.dialog_message)
