@@ -16,7 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import android.app.Dialog.*;
+//USER VERIFIER NEEDS TO GET CALLED IN HERE
 
 /**
  * Activity which displays a login screen to the user, offering registration as
