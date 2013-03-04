@@ -18,12 +18,14 @@ public class UserVerifier{
   private static String[] usernames = new String[1];
   private static String[] passwords = new String[1];
   private int userIndex;
+  private int loginAttempts;
   
   //Basic constructor, creates a "default" username and password for demo purposes
   public UserVerifier(){
     usernames[0] = "Admin1";
     passwords[0] = "password1";
     userIndex = -1;
+    loginAttempts = 0;
   }
   
   /**
@@ -126,6 +128,22 @@ public class UserVerifier{
     System.out.println("Incorrect Username. Please try again.");
     return false;
   }
+  
+  /**
+   * 
+   * @param attempts a variable describing how many times the user has tried to login
+   * @return true if login may proceed, false if the user has failed too many times
+   */
+  public boolean checkAttempt(int attempts){
+	  if(attempts >= 3){
+		  return false;
+	  }
+	  else{
+		  return true;
+	  }
+  }
+  
+  
 /**
  *       
  * @return returns the values of the lists of usernames and passwords as a string
