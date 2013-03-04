@@ -135,7 +135,7 @@ public class UserVerifier{
    * @return true if login may proceed, false if the user has failed too many times
    */
   public boolean checkAttempt(int attempts){
-	  if(attempts >= 3){
+	  if(attempts <= 3){
 		  return false;
 	  }
 	  else{
