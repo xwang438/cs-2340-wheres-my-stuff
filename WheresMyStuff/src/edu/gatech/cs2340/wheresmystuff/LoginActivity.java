@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-
 //USER VERIFIER NEEDS TO GET CALLED IN HERE
 
 /**
@@ -55,6 +54,7 @@ public class LoginActivity extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -98,6 +98,8 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+		
+
 	}
 
 	@Override
