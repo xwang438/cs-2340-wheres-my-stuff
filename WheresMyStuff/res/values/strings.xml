@@ -28,4 +28,5 @@
     <string name="loststuff_date">When did you lost it?</string>
     <string name="loststuff_cancle">Cancle</string>
     <string name="loststuff_prize">Any prize for getting back this stuff?</string>
+    <string name="loststuff_title">Lost Stuff Information</string>
 </resources>
