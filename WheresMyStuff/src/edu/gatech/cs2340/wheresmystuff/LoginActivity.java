@@ -165,6 +165,7 @@ public class LoginActivity extends Activity {
 		}
 	}
 
+
 	/**
 	 * Shows the progress UI and hides the login form.
 	 */
