@@ -1,3 +1,5 @@
+// TODO: Kyle, make a User class and embed it in UserVerifier. It should have all the properties for User according to the CRC. 
+
 package edu.gatech.cs2340.wheresmystuff;
 
 /**
