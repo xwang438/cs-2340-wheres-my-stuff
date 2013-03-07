@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-//USER VERIFIER NEEDS TO GET CALLED IN HERE
+
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -96,6 +97,17 @@ public class LoginActivity extends Activity {
 						AlertDialog dialog = builder.create();
 						dialog.show();
 						attemptLogin();
+					}
+				});
+		
+		findViewById(R.id.button_register).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+					
+						Intent intent = new Intent();
+						intent.setClass(LoginActivity.this,RegisterActivity.class);
+						startActivity(intent);
 					}
 				});
 		
