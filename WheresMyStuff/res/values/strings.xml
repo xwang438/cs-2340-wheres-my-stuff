@@ -14,9 +14,11 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_lost">Lost</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="button_submit">&quot;Submit like when you're done with registering&quot;</string>
+    <string name="button_register">&quot;Register&quot;</string>
     <string name="button_lost">&quot;I have lost something&quot;</string>
     <string name="edit_lastName">&quot;Last Name&quot;</string>
     <string name="register_button">Register</string>
+    <string name="edit_email">Email</string>
+    <string name="edit_password">Password</string>
 
 </resources>
