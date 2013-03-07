@@ -12,14 +12,12 @@
         <LinearLayout android:id="@+id/header"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@layout/header_gradient"
-                android:paddingTop="5dip"
-                android:paddingBottom="5dip">
+                android:background="@layout/header_gradient">
                 <!-- Logo Start-->
                 <ImageView android:src="@drawable/logo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dip"/>
+                            android:layout_marginLeft="0.1dip"/>
                 <!-- Logo Ends -->
         </LinearLayout>
         <!--  Header Ends -->
@@ -29,14 +27,14 @@
          android:orientation="vertical"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:padding="10dip"
+          android:padding="1dip"
           android:layout_below="@+id/header">
         <!-- Lost button -->
           <Button 	    
                 android:id="@+id/btnHome"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
+                android:layout_marginTop="1dip"
                 android:text="@string/button_home"
                 android:onClick="Ilostsomething" />
  

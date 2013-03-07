@@ -44,5 +44,9 @@
             android:name="edu.gatech.cs2340.wheresmystuff.HomeActivity"
             android:label="@string/app_name" >
         </activity>
+                <activity
+            android:name="edu.gatech.cs2340.wheresmystuff.LostActivity"
+            android:label="@string/LostStuff" >
+        </activity>
     </application>
 </manifest>

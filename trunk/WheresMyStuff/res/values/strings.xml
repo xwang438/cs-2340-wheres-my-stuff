@@ -20,4 +20,12 @@
     <string name="register_button">Register</string>
     <string name="edit_email">Email</string>
     <string name="edit_password">Password</string>
+    <string name="loststuff_name">The name of your lost stuff</string>
+    <string name="loststuff_submit">Submit</string>
+    <string name="LostStuff">Lost Stuff Information</string>
+    <string name="loststuff_loc">Where did you lost it?</string>
+    <string name="loststuff_disc">Brife discription of the stuff</string>
+    <string name="loststuff_date">When did you lost it?</string>
+    <string name="loststuff_cancle">Cancle</string>
+    <string name="loststuff_prize">Any prize for getting back this stuff?</string>
 </resources>
