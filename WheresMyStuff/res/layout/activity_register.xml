@@ -13,12 +13,12 @@
 	    android:hint="@string/edit_firstName" />
 
 	<Button
+	    android:id="@+id/register_button"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_alignParentBottom="true"
 	    android:layout_alignParentLeft="true"
-	    android:text="@string/button_submit"
-	    android:onClick="createNewAccount" />
+	    android:text="@string/button_register" />
 
 	<EditText
 	    android:id="@+id/edit_lastName"
@@ -26,9 +26,28 @@
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/edit_firstName"
 	    android:ems="10"
-	    android:hint="@string/edit_lastName" >
+	    android:hint="@string/edit_lastName" />
 
-	    <requestFocus />
-	</EditText>
+	<EditText
+	    android:id="@+id/edit_email"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/register_button"
+	    android:layout_alignParentLeft="true"
+	    android:layout_marginBottom="145dp"
+	    android:ems="10"
+	    android:hint="@string/edit_email"
+	    android:inputType="textEmailAddress" />
+
+	<EditText
+	    android:id="@+id/edit_password"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignTop="@+id/edit_email"
+	    android:layout_marginTop="44dp"
+	    android:ems="10"
+	    android:hint="@string/edit_password"
+	    android:inputType="textPassword" />
     
 </RelativeLayout>

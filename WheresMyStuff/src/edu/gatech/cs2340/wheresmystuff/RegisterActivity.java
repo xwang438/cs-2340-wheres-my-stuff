@@ -1,16 +1,42 @@
 package edu.gatech.cs2340.wheresmystuff;
 
+import edu.gatech.cs2340.wheresmystuff.LoginActivity.UserLoginTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 
 public class RegisterActivity extends Activity {
 
-	@Override
+	private EditText emailView;
+	private EditText passwordView;
+	private EditText firstNameView;
+	private EditText lastNameView;
+	
+	/**
+	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
+	 * for the Register button
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		
+		emailView = (EditText) findViewById(R.id.edit_email);
+		passwordView = (EditText) findViewById(R.id.edit_password);
+		firstNameView = (EditText) findViewById(R.id.edit_firstName);
+		lastNameView = (EditText) findViewById(R.id.edit_lastName);
+		
+
+		findViewById(R.id.register_button).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						createNewAccount();
+					}
+				});
 	}
 
 	@Override
@@ -20,8 +46,20 @@ public class RegisterActivity extends Activity {
 		return true;
 	}
 	
-	public void createNewAccount(View view){
+	/**
+	 * Sets the info from the Register UI as attributes for the user. Adds the username and password to the array of all users
+	 * in UserVerifier
+	 */
+	public void createNewAccount(){
 		//Do something. 
+		
+		String firstName = firstNameView.getText().toString();
+		String lastName = lastNameView.getText().toString();
+		String username = emailView.getText().toString();
+		String password = passwordView.getText().toString();
+		
+		//Grab singleton object. uv.addUser(username, password);
+		
 	}
 
 }
