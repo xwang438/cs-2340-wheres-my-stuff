@@ -13,11 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="edu.gatech.cs2340.wheresmystuff.LoginActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
+        
         <activity
             android:name="edu.gatech.cs2340.wheresmystuff.LoadActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -29,23 +25,28 @@
             </intent-filter>
         </activity>
         <activity android:name="edu.gatech.cs2340.wheresmystuff.MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+          
         </activity>
-
+        <activity
+            android:name="edu.gatech.cs2340.wheresmystuff.LoginActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
         <activity
             android:name="edu.gatech.cs2340.wheresmystuff.RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
-         <activity android:name="edu.gatech.cs2340.wheresmystuff.ListActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+         <activity 
+             android:name="edu.gatech.cs2340.wheresmystuff.HomeActivity" 
+             android:label="@string/app_name" >
+        </activity>
+        <activity 
+             android:name="edu.gatech.cs2340.wheresmystuff.LostActivity" 
+             android:label="@string/loststuff_title" >
+        </activity>
+        <activity 
+             android:name="edu.gatech.cs2340.wheresmystuff.ListActivity" 
+             android:label="@string/app_name" >
         </activity>
     </application>
 </manifest>

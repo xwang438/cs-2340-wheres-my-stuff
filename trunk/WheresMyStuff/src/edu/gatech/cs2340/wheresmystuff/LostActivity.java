@@ -43,7 +43,7 @@ public class LostActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(LostActivity.this,HomeActivity.class);
+				intent.setClass(LostActivity.this,ListActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -52,9 +52,9 @@ public class LostActivity extends Activity {
 		{
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(LostActivity.this,HomeActivity.class);
-				startActivity(intent);
+				Intent intent1 = new Intent();
+				intent1.setClass(LostActivity.this,HomeActivity.class);
+				startActivity(intent1);
 			}
 		});
 	}
