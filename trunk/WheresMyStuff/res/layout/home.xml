@@ -32,11 +32,12 @@
           android:padding="10dip"
           android:layout_below="@+id/header">
         <!-- Lost button -->
-          <Button 	    android:id="@+id/btnLost"
+          <Button 	    
+                android:id="@+id/btnHome"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:text="@string/button_lost"
+                android:text="@string/button_home"
                 android:onClick="Ilostsomething" />
  
         </LinearLayout>

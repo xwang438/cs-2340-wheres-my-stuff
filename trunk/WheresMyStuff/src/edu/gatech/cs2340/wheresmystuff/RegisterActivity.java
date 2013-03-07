@@ -8,14 +8,16 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-
+import android.content.Intent;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 public class RegisterActivity extends Activity {
 
 	private EditText emailView;
 	private EditText passwordView;
 	private EditText firstNameView;
 	private EditText lastNameView;
-	
+	private Button button;
 	/**
 	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
 	 * for the Register button
@@ -37,6 +39,17 @@ public class RegisterActivity extends Activity {
 						createNewAccount();
 					}
 				});
+		this.button = (Button) this.findViewById(R.id.register_button);
+		this.button.setOnClickListener(new OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(RegisterActivity.this,HomeActivity.class);
+				startActivity(intent);
+			}
+		});
+
 	}
 
 	@Override
