@@ -55,6 +55,8 @@ public class LoginActivity extends Activity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+	
+	private UserVerifier uv = new UserVerifier();
 
 	
 	@Override
@@ -173,9 +175,16 @@ public class LoginActivity extends Activity {
 		} else {
 			//Eventually this should check against user verifier 
 			//This will just take us to the Home Activity
-			Intent intent = new Intent();
-			intent.setClass(LoginActivity.this,HomeActivity.class);
-			startActivity(intent);
+			if(uv.loginCheck(mEmail, mPassword)) {
+				Intent intent = new Intent();
+				intent.setClass(LoginActivity.this,HomeActivity.class);
+				startActivity(intent);
+			} else {
+				if(uv.checkAttempt()) {
+					findViewById(R.id.sign_in_button).setOnClickListener(null);
+				}
+			}
+			
 		}
 	}
 
