@@ -78,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="@string/loststuff_prize"/>
+
           <EditText android:id="@+id/loststuff_prize"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -85,20 +86,24 @@
                 android:layout_marginTop="5dip"
                 android:inputType="textNoSuggestions"/>
           <!-- Register Button -->
-          <Button android:id="@+id/loststuff_submit"
-                android:layout_width="fill_parent"   
-                android:layout_height="wrap_content"   
-                android:layout_marginLeft="42dp"   
-                android:layout_marginRight="42dp"   
-                android:layout_marginTop="10dp"   
-                android:text="@string/loststuff_submit"/>
-          <Button android:id="@+id/loststuff_cancel"
-                android:layout_width="fill_parent"   
-                android:layout_height="wrap_content"    
-                android:layout_marginLeft="42dp"   
-                android:layout_marginRight="42dp"   
-                android:layout_marginTop="10dp" 
-                android:text="@string/loststuff_cancel"/>
+
+          <Button
+              android:id="@+id/loststuff_submit"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="42dp"
+              android:layout_marginRight="42dp"
+              android:layout_marginTop="10dp"
+              android:text="@string/loststuff_submit" />
+
+          <Button
+              android:id="@+id/loststuff_cancel"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="42dp"
+              android:layout_marginRight="42dp"
+              android:layout_marginTop="10dp"
+              android:text="@string/loststuff_cancel" />
       
         </LinearLayout>
         <!-- Registration Form Ends -->
