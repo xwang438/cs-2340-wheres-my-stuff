@@ -1,3 +1,6 @@
+/**
+ * @author Emily
+ */
 package edu.gatech.cs2340.wheresmystuff;
 
 import edu.gatech.cs2340.wheresmystuff.LoginActivity.UserLoginTask;
