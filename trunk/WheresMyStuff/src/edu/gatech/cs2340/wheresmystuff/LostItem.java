@@ -1,11 +1,14 @@
 package edu.gatech.cs2340.wheresmystuff;
 
 public class LostItem {
+	public static LostItem item; // PLEASE TAKE ME OUT AS SOON AS POSSIBLE. THIS IS HORRIBLE CODE.
+	
 	String name = "";
 	int	id;
 	String description = "";
 
-	public LostItem() {
+	public LostItem(String name) {
+		this.name = name;
 		
 	}
 
