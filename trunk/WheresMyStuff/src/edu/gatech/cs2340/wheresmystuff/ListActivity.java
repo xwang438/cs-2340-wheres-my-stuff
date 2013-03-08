@@ -14,12 +14,20 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-
+/**
+ * 
+ * @author Bongsu Kim
+ *this is list of lost items.
+ *
+ */
 public class ListActivity extends Activity {
 	private MyAdapter adapter;
 	private ListView lvitems;
 
 	@Override
+	/**
+	 * link list view items to adapter and onitemlicklistener
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listview);
@@ -29,13 +37,21 @@ public class ListActivity extends Activity {
 		lvitems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
+			/**
+			 * bring out each postion of items
+			 */
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
 				LostItem item = (LostItem) lvitems.getItemAtPosition(position);
 			}
 		});
 
-		if(LostItem.item != null) adapter.addItem(LostItem.item);
+		/* test add item in the list */
+		LostItem bong = new LostItem();
+		bong.setName("kim");
+
+		adapter.addItem(bong);
+
 	}
 
 	@Override
@@ -45,7 +61,11 @@ public class ListActivity extends Activity {
 	}
 
 }
-
+/**
+ * 
+ * @author Bongsu
+ *adapter work for putting items in the list
+ */
 class MyAdapter extends BaseAdapter {
 	private ArrayList<LostItem> items;
 	private TextView tvname, tvdescription;
@@ -58,11 +78,16 @@ class MyAdapter extends BaseAdapter {
 		items = new ArrayList<LostItem>();
 		this.context = context;
 	}
-
+/**
+ * add lost items
+ * @param item is lost item that user will add on
+ */
 	public void addItem(LostItem item) {
 		items.add(item);
 	}
-
+/**
+ * count items
+ */
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -71,19 +96,25 @@ class MyAdapter extends BaseAdapter {
 		else
 			return items.size();
 	}
-
+/**
+ * bring item in each position
+ */
 	@Override
 	public LostItem getItem(int position) {
 		// TODO Auto-generated method stub
 		return items.get(position);
 	}
-
+/**
+ * bring item id in each position
+ */
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return position;
 	}
-
+/**
+ * view list of lost items
+ */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
