@@ -25,7 +25,8 @@ import android.widget.TextView;
 public class LoginActivity extends Activity {
 	
 	// 1. Instantiate an AlertDialog.Builder with its constructor
-	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	//THIS IS CAUSING AN ERROR BEFORE OUR DEMO OF M5/6 so i'm commenting it out.
+	//	AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 	/**
 	 * A dummy authentication store containing known user names and passwords.
@@ -90,12 +91,12 @@ public class LoginActivity extends Activity {
 					@Override
 					public void onClick(View view) {
 						// 2. Chain together various setter methods to set the dialog characteristics
-						builder.setMessage(R.string.dialog_message)
-						       .setTitle(R.string.dialog_title);
+						//builder.setMessage(R.string.dialog_message)
+						  //     .setTitle(R.string.dialog_title);
 
 						// 3. Get the AlertDialog from create()
-						AlertDialog dialog = builder.create();
-						dialog.show();
+						//AlertDialog dialog = builder.create();
+						//dialog.show();
 						attemptLogin();
 					}
 				});
@@ -170,12 +171,11 @@ public class LoginActivity extends Activity {
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
-			// Show a progress spinner, and kick off a background task to
-			// perform the user login attempt.
-			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
-			showProgress(true);
-			mAuthTask = new UserLoginTask();
-			mAuthTask.execute((Void) null);
+			//Eventually this should check against user verifier 
+			//This will just take us to the Home Activity
+			Intent intent = new Intent();
+			intent.setClass(LoginActivity.this,HomeActivity.class);
+			startActivity(intent);
 		}
 	}
 
