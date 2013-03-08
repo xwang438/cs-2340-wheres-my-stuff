@@ -57,7 +57,7 @@ public class LostActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		this.button1 = (Button) this.findViewById(R.id.loststuff_cancle);
+		this.button1 = (Button) this.findViewById(R.id.loststuff_cancel);
 		this.button1.setOnClickListener(new OnClickListener() 
 		{
 			@Override

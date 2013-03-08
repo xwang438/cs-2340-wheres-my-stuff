@@ -92,13 +92,13 @@
                 android:layout_marginRight="42dp"   
                 android:layout_marginTop="10dp"   
                 android:text="@string/loststuff_submit"/>
-          <Button android:id="@+id/loststuff_cancle"
+          <Button android:id="@+id/loststuff_cancel"
                 android:layout_width="fill_parent"   
                 android:layout_height="wrap_content"    
                 android:layout_marginLeft="42dp"   
                 android:layout_marginRight="42dp"   
                 android:layout_marginTop="10dp" 
-                android:text="@string/loststuff_cancle"/>
+                android:text="@string/loststuff_cancel"/>
       
         </LinearLayout>
         <!-- Registration Form Ends -->
