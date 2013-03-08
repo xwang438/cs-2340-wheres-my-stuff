@@ -7,7 +7,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-
+/**
+ * The first page after launching the app. 
+ * It is connected with the LoginActivity and the RegisterActivity
+ * @author Xinlu
+ *
+ */
 
 public class MainActivity extends Activity {  
 	private Button button,button1;

@@ -5,7 +5,12 @@ import android.content.Intent;
 import android.graphics.PixelFormat;  
 import android.os.Handler;   
 
-	  
+/**
+ * The LoadActivity enable the app to show a tornado picture
+ * when the user launch the app	  
+ * @author Xinlu
+ *
+ */
 public class LoadActivity extends Activity {  
 	      
 	    //time for picture display  
