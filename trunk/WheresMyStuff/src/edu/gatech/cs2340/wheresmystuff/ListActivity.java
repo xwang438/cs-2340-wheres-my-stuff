@@ -38,7 +38,7 @@ public class ListActivity extends Activity {
 
 			@Override
 			/**
-			 * bring out each postion of items
+			 * bring out each position of items
 			 */
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
