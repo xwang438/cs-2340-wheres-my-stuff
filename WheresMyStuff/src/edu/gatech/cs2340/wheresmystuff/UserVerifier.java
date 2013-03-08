@@ -128,6 +128,7 @@ public class UserVerifier{
       System.out.println("Incorrect Password. Please try again.");
     }
     System.out.println("Incorrect Username. Please try again.");
+    loginAttempts++;
     return false;
   }
   
@@ -136,8 +137,8 @@ public class UserVerifier{
    * @param attempts a variable describing how many times the user has tried to login
    * @return true if login may proceed, false if the user has failed too many times
    */
-  public boolean checkAttempt(int attempts){
-	  if(attempts <= 3){
+  public boolean checkAttempt(){
+	  if(loginAttempts <= 3){
 		  return false;
 	  }
 	  else{
