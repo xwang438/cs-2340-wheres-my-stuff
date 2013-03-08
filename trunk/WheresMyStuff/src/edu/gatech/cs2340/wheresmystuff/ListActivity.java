@@ -46,11 +46,7 @@ public class ListActivity extends Activity {
 			}
 		});
 
-		/* test add item in the list */
-		LostItem bong = new LostItem();
-		bong.setName("kim");
-
-		adapter.addItem(bong);
+		if(LostItem.item != null) adapter.addItem(LostItem.item);
 
 	}
 
