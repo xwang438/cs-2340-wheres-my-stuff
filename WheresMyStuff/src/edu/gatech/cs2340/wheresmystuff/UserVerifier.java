@@ -24,7 +24,7 @@ public class UserVerifier{
   
   //Basic constructor, creates a "default" username and password for demo purposes
   public UserVerifier(){
-    usernames[0] = "Admin1";
+    usernames[0] = "Admin1@gatech.edu";
     passwords[0] = "password1";
     userIndex = -1;
     loginAttempts = 0;
