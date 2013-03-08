@@ -10,7 +10,12 @@ import android.widget.EditText;
 import android.content.Intent;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-
+/**
+ * The LostActivity enable the user to add a new item that 
+ * they have lost
+ * @author Xinlu
+ *
+ */
 public class LostActivity extends Activity {
 
 	private EditText stuffname;
@@ -36,7 +41,9 @@ public class LostActivity extends Activity {
 						createNewLost();
 					}
 				});
-
+        /**
+         * Connect the LostActivity with the ListActivity and the HomeActivity
+         */
 		this.button = (Button) this.findViewById(R.id.loststuff_submit);
 		this.button.setOnClickListener(new OnClickListener() 
 		{
