@@ -29,14 +29,14 @@ public class DatabaseConnector {
 	         database.close();
 	   }	   
 	   
-	   public void insertUser(String email, String password, String firstName, String lastName, int type, int locked) 
+	   public void insertUser(String email, String password, String firstName, String lastName, boolean locked, boolean admin) 
 			   {
 			      ContentValues newCon = new ContentValues();
 			      newCon.put("email", email);
 			      newCon.put("password", password);
 			      newCon.put("firstName", firstName);
 			      newCon.put("lastName", lastName);
-			      newCon.put("type", type);
+			      newCon.put("type", admin);
 			      newCon.put("locked", locked);
 
 			      open();
@@ -45,14 +45,14 @@ public class DatabaseConnector {
 			   }
 
 			
-			   public void updateUser(int _id, String email, String password, String firstName, String lastName, int type, int locked) 
+			   public void updateUser(int _id, String email, String password, String firstName, String lastName, boolean locked, boolean admin) 
 			   {
 			      ContentValues editCon = new ContentValues();
 			      editCon.put("email", email);
 			      editCon.put("password", password);
 			      editCon.put("firstName", firstName);
 			      editCon.put("lastName", lastName);
-			      editCon.put("type", type);
+			      editCon.put("type", admin);
 			      editCon.put("locked", locked);
 
 

@@ -74,9 +74,9 @@ public class RegisterActivity extends Activity {
 	private void saveUser() 
 	   {
 	      DatabaseConnector DB = new DatabaseConnector(this);
-	      //in type, 0 means regular user and 1 is administrator.
-	      //in locked, 0 means unlocked and 1 is locked.
-	      DB.insertUser(emailView.getText().toString(), passwordView.getText().toString(),firstNameView.getText().toString(), lastNameView.getText().toString(), 0, 0);
+	      //in type, false means regular user and true is administrator.
+	      //in locked, false means unlocked and true is locked.
+	      DB.insertUser(emailView.getText().toString(), passwordView.getText().toString(),firstNameView.getText().toString(), lastNameView.getText().toString(), false, false);
 	      /*if (getIntent().getExtras() == null)
 	      {
 	    	  DB.insertContact(emailView.getText().toString(),

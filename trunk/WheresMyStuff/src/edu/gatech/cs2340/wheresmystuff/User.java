@@ -18,7 +18,9 @@ public class User{
 		this.admin = admin;
 	}
 	
-	//TODO: add constructor chaining
+	public User(String username, String password){
+		this(username, password, "New", "User", false, false);
+	}
 	
 	public String getName(){
 		return firstName + " " + lastName;
