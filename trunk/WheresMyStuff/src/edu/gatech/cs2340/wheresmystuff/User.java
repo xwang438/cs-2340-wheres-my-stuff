@@ -2,12 +2,12 @@ package edu.gatech.cs2340.wheresmystuff;
 
 public class User{
 	//instance variables
-	String username;
-	String password;
-	String firstName;
-	String lastName;
-	Boolean locked = false;
-	Boolean admin = false;
+	private String username;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private Boolean locked = false;
+	private Boolean admin = false;
 	
 	public User(String username, String password, String firstName, String lastName, Boolean locked, Boolean admin){
 		this.username = username;
@@ -22,22 +22,49 @@ public class User{
 		this(username, password, "New", "User", false, false);
 	}
 	
-	public String getName(){
-		return firstName + " " + lastName;
+	public String getUsername(){
+		return username;
+	}
+	
+	public void setUsername(String username){
+		this.username = username;
+	}
+	
+	public String getPassword(){
+		return password;
+	}
+	
+	public void setPassword(String password){
+		this.password = password;
+	}
+	
+	public String getFirstname(){
+		return firstName;
 	}
 	
 	public void setFirstName(String firstName){
 		this.firstName = firstName;
 	}
 	
+	public String getLastname(){
+		return lastName;
+	}
+	
 	public void setLastName(String lastName){
 		this.lastName = lastName;
+	}
+	
+	public boolean isAdmin(){
+		return admin;
 	}
 	
 	public void setAsAdmin(){
 		admin = true;
 	}
 	
+	public boolean isLocked(){
+		return locked;
+	}
 	public void lockAccount(){
 		locked = true;
 	}
