@@ -1,5 +1,8 @@
 package edu.gatech.cs2340.wheresmystuff;
 
+import android.database.Cursor;
+import android.widget.RadioButton;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,7 +37,7 @@ public class AdminActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						modifyUser();
+						modifyUser(userToModifyField);
 					}
 				});
         /**
@@ -78,9 +81,25 @@ public class AdminActivity extends Activity {
 	 */
 	public void modifyUser(){
 		//Do something. 
+		DatabaseConnector DB = new DatabaseConnector(this);
+		String userToModify = userToModifyField.getText().toString();
+		Cursor cursor = DB.getAllUser();
+		String[] usernames = new String[cursor.getCount()];
 		
-		//String userToModify = userToModifyField.getText().toString();
-		
+		for(int i = 0; !cursor.isAfterLast(); i++) {
+			usernames[i] = cursor.getString(1);
+			
+			if(usernames[i].equals(userToModify)) {
+				if(((RadioButton)findViewById(R.id.admin_lockUserButton)).isChecked())
+					DB.updateUser(true, cursor.getInt(0));
+				else if(((RadioButton)findViewById(R.id.admin_unlockUserButton)).isChecked())
+					DB.updateUser(false, cursor.getInt(0));
+				else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked())
+					DB.updateUser(cursor.getInt(0), true);
+			}
+			cursor.moveToNext();
+		}
+			
 		//Grab singleton object. uv.addUser(username, password);
 		
 	}
