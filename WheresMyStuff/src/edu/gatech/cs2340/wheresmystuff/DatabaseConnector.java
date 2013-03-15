@@ -42,7 +42,7 @@ public class DatabaseConnector {
 		newCon.put("lastName", lastName);
 		newCon.put("type", admin);
 		newCon.put("locked", locked);
-		newCon.put("loggedIn", false);
+		newCon.put("loggedIn", 0);
 
 		open();
 		database.insert("user", null, newCon);
@@ -58,7 +58,7 @@ public class DatabaseConnector {
 		editCon.put("lastName", lastName);
 		editCon.put("type", admin);
 		editCon.put("locked", locked);
-		editCon.put("loggedIn", false);
+		editCon.put("loggedIn", 0);
 		
 		open();
 		database.update("user", editCon, "_id=" + _id, null);
@@ -85,7 +85,7 @@ public class DatabaseConnector {
 
 	public void logInUser(int _id) {
 		ContentValues editCon = new ContentValues();
-		editCon.put("loggedIn", true);
+		editCon.put("loggedIn", 1);
 		
 		open();
 		database.update("user", editCon, "_id=" + _id, null);
@@ -94,11 +94,37 @@ public class DatabaseConnector {
 	
 	public void logOutUser(int _id) {
 		ContentValues editCon = new ContentValues();
-		editCon.put("loggedIn", false);
+		editCon.put("loggedIn", 0);
 		
 		open();
 		database.update("user", editCon, "_id=" + _id, null);
 		close();
+	}
+	
+	public boolean isLoggedInAsAdmin() {
+		Cursor cursor = database.query("user", new String[] { "_id", "email", "type", "loggedIn"}, null,
+				null, null, null, null);
+		
+		for(int i = 0; !cursor.isAfterLast(); i++) {
+			  if(cursor.getInt(3) == 1)
+				  if(cursor.getString(2).equals("true"))
+					  return true;
+				  
+			  cursor.moveToNext();
+		  }
+		return false;
+	}
+	
+	public boolean isAdmin() {
+		Cursor cursor = database.query("user", new String[] { "_id", "email", "type"}, null,
+				null, null, null, null);
+		
+		for(int i = 0; !cursor.isAfterLast(); i++) {
+			  if(cursor.getString(2).equals("true"))
+				  return true;
+			  cursor.moveToNext();
+		  }
+		return false;
 	}
 	
 	public int findID(String user) {

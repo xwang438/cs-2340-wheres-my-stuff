@@ -45,9 +45,11 @@ public class HomeActivity extends Activity {
 			{
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent();
-					intent.setClass(HomeActivity.this,AdminActivity.class);
-					startActivity(intent);
+					if(DB.isLoggedInAsAdmin()) {
+						Intent intent = new Intent();
+						intent.setClass(HomeActivity.this,AdminActivity.class);
+						startActivity(intent);
+					}
 				}
 			});
 			
