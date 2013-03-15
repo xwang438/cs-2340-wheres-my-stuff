@@ -17,15 +17,15 @@ package edu.gatech.cs2340.wheresmystuff;
 
 public class UserVerifier{
   
-  private static String[] usernames = new String[1];
-  private static String[] passwords = new String[1];
-  private int userIndex;
-  private int loginAttempts;
+	private static String[] usernames = new String[1];
+	private static String[] passwords = new String[1];
+	private int userIndex;
+	private int loginAttempts;
   
   //Basic constructor, creates a "default" username and password for demo purposes
-  public UserVerifier(){
-    usernames[0] = "Admin1@gatech.edu";
-    passwords[0] = "password1";
+  public UserVerifier(DatabaseConnector DB){
+    usernames = DB.getUsernames(DB);
+    passwords = DB.getPasswords(DB);
     userIndex = -1;
     loginAttempts = 0;
   }
