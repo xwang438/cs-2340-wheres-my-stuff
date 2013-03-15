@@ -96,6 +96,8 @@ public class AdminActivity extends Activity {
 					DB.updateUser(false, cursor.getInt(0));
 				else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked())
 					DB.updateUser(cursor.getInt(0), true);
+				else if(((RadioButton)findViewById(R.id.admin_removeUserButton)).isChecked())
+					DB.deleteUser(cursor.getInt(0));
 			}
 			cursor.moveToNext();
 		}
