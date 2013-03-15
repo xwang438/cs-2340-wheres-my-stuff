@@ -14,6 +14,7 @@ public class DatabaseConnector {
 
 	public DatabaseConnector(Context context) {
 		DB = new Database(context, DB_NAME, null, 1);
+		insertUser("admin@gatech.edu", "admin1", "Admin", "Admin", false, true);
 	}
 
 	public void open() throws SQLException {
