@@ -12,7 +12,7 @@ import android.widget.Button;
  */
 
 public class HomeActivity extends Activity {
-   private Button button;
+   private Button button, buttonA;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,5 +32,21 @@ public class HomeActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		
+		/**
+	     * Set the intent between HomeActivity and AdminActivity. 
+	     * 
+	     * 
+	     */
+			this.buttonA = (Button) this.findViewById(R.id.adminButton);
+			this.buttonA.setOnClickListener(new OnClickListener() 
+			{
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					intent.setClass(HomeActivity.this,AdminActivity.class);
+					startActivity(intent);
+				}
+			});
 	}
 }
