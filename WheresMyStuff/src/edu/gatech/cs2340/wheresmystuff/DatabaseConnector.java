@@ -61,6 +61,24 @@ public class DatabaseConnector {
 		database.update("user", editCon, "_id=" + _id, null);
 		close();
 	}
+	
+	public void updateUser(boolean locked, int _id) {
+		ContentValues editCon = new ContentValues();
+		editCon.put("locked", locked);
+
+		open();
+		database.update("user", editCon, "_id=" + _id, null);
+		close();
+	}
+	
+	public void updateUser(int _id, boolean admin) {
+		ContentValues editCon = new ContentValues();
+		editCon.put("type", admin);
+
+		open();
+		database.update("user", editCon, "_id=" + _id, null);
+		close();
+	}
 
 	public Cursor getAllUser() {
 		return database.query("user", new String[] { "_id", "email" }, null,
