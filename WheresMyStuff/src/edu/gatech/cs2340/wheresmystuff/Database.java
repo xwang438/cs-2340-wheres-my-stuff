@@ -14,7 +14,7 @@ public class Database extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String createQuery = "CREATE TABLE user (_id integer primary key autoincrement,email, password, firstName, lastName, locked boolean, admin boolean);";
+		String createQuery = "CREATE TABLE user (_id integer primary key autoincrement,email, password, firstName, lastName, locked boolean, admin boolean, loggedIn boolean);";
 		db.execSQL(createQuery);
 		String createString = "CREATE TABLE item (_id integer primary key autoincrement,name, description, date, location);";
 		db.execSQL(createString);
