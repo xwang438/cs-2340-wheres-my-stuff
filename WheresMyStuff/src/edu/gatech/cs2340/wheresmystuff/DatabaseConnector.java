@@ -101,6 +101,17 @@ public class DatabaseConnector {
 		close();
 	}
 	
+	public int findID(String user) {
+		  Cursor cursor = database.query("user", new String[] { "_id", "email" }, null,
+					null, null, null, null);
+		  for(int i = 0; !cursor.isAfterLast(); i++) {
+			  if(user.equals(cursor.getString(1)))
+				  return cursor.getInt(0);
+			  cursor.moveToNext();
+		  }
+		return 0;
+	  }
+	
 	public Cursor getAllUser() {
 		return database.query("user", new String[] { "_id", "email" }, null,
 				null, null, null, null);
@@ -115,8 +126,11 @@ public class DatabaseConnector {
 		Cursor cursor = DB.getUsersForLoginCheck();
 		String[] usernames = new String[cursor.getCount()];
 		
-		for(int i = 0; !cursor.isAfterLast(); i++)
+		for(int i = 0; !cursor.isAfterLast(); i++) {
 			usernames[i] = cursor.getString(1);
+			cursor.moveToNext();
+		}
+			
 		
 		return usernames;
 	}
@@ -125,8 +139,11 @@ public class DatabaseConnector {
 		Cursor cursor = DB.getUsersForLoginCheck();
 		String[] passwords = new String[cursor.getCount()];
 		
-		for(int i = 0; !cursor.isAfterLast(); i++)
+		for(int i = 0; !cursor.isAfterLast(); i++) {
 			passwords[i] = cursor.getString(2);
+			cursor.moveToNext();
+		}
+			
 		
 		return passwords;
 	}
