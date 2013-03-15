@@ -12,7 +12,9 @@ import android.widget.Button;
  */
 
 public class HomeActivity extends Activity {
-   private Button button, buttonA;
+	
+	private DatabaseConnector DB = new DatabaseConnector(this);
+	private Button button, buttonA, buttonL;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,5 +50,26 @@ public class HomeActivity extends Activity {
 					startActivity(intent);
 				}
 			});
+			
+			
+			
+			/**
+		     * Set the intent between HomeActivity and LoginActivity. 
+		     * 
+		     * 
+		     */
+				this.buttonL = (Button) this.findViewById(R.id.logOutButton);
+				this.buttonL.setOnClickListener(new OnClickListener() 
+				{
+					@Override
+					public void onClick(View v) {
+						//Needs changing so that this will account for more than just the first user account.
+						DB.logOutUser(0);
+						Intent intent = new Intent();
+						intent.setClass(HomeActivity.this,LoginActivity.class);
+						startActivity(intent);
+					}
+				});
+			
 	}
 }

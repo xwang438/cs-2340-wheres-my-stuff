@@ -36,6 +36,7 @@
     <string name="admin_unlockUser">Unlock User</string>
     <string name="admin_label">User to Modify</string>
     
+    <string name="home_logOut">Logout</string>
     
     
 </resources>
