@@ -56,7 +56,8 @@ public class LoginActivity extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 	
-	private UserVerifier uv = new UserVerifier();
+	private DatabaseConnector DB = new DatabaseConnector(this);
+	private UserVerifier uv = new UserVerifier(DB);
 
 	
 	@Override

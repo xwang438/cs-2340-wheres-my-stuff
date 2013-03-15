@@ -84,7 +84,35 @@ public class DatabaseConnector {
 		return database.query("user", new String[] { "_id", "email" }, null,
 				null, null, null, null);
 	}
-
+	
+	public Cursor getUsersForLoginCheck() {
+		return database.query("user", new String[] { "_id", "email", "password" }, null,
+				null, null, null, null);
+	}
+	
+	public String[] getUsernames(DatabaseConnector DB) {
+		Cursor cursor = DB.getUsersForLoginCheck();
+		String[] usernames = new String[cursor.getCount()];
+		
+		for(int i = 0; !cursor.isAfterLast(); i++)
+			usernames[i] = cursor.getString(1);
+		
+		return usernames;
+	}
+	
+	public String[] getPasswords(DatabaseConnector DB) {
+		Cursor cursor = DB.getUsersForLoginCheck();
+		String[] passwords = new String[cursor.getCount()];
+		
+		for(int i = 0; !cursor.isAfterLast(); i++)
+			passwords[i] = cursor.getString(2);
+		
+		return passwords;
+	}
+	
+	
+	
+	
 	public Cursor getOneUser(long _id) {
 		return database.query("user", null, "_id=" + _id, null, null, null,
 				null);
