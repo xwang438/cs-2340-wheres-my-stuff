@@ -42,6 +42,7 @@ public class DatabaseConnector {
 		newCon.put("lastName", lastName);
 		newCon.put("type", admin);
 		newCon.put("locked", locked);
+		newCon.put("loggedIn", false);
 
 		open();
 		database.insert("user", null, newCon);
@@ -57,7 +58,8 @@ public class DatabaseConnector {
 		editCon.put("lastName", lastName);
 		editCon.put("type", admin);
 		editCon.put("locked", locked);
-
+		editCon.put("loggedIn", false);
+		
 		open();
 		database.update("user", editCon, "_id=" + _id, null);
 		close();
@@ -81,6 +83,24 @@ public class DatabaseConnector {
 		close();
 	}
 
+	public void logInUser(int _id) {
+		ContentValues editCon = new ContentValues();
+		editCon.put("loggedIn", true);
+		
+		open();
+		database.update("user", editCon, "_id=" + _id, null);
+		close();
+	}
+	
+	public void logOutUser(int _id) {
+		ContentValues editCon = new ContentValues();
+		editCon.put("loggedIn", false);
+		
+		open();
+		database.update("user", editCon, "_id=" + _id, null);
+		close();
+	}
+	
 	public Cursor getAllUser() {
 		return database.query("user", new String[] { "_id", "email" }, null,
 				null, null, null, null);
