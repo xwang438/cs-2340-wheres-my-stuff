@@ -79,7 +79,7 @@ public class AdminActivity extends Activity {
 	 * 
 	 * 
 	 */
-	public void modifyUser(){
+	public void modifyUser(EditText userToModifyField){
 		//Do something. 
 		DatabaseConnector DB = new DatabaseConnector(this);
 		String userToModify = userToModifyField.getText().toString();
