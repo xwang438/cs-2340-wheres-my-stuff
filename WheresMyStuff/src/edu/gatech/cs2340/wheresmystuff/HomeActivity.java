@@ -14,7 +14,7 @@ import android.widget.Button;
 public class HomeActivity extends Activity {
 	
 	private DatabaseConnector DB = new DatabaseConnector(this);
-	private Button button, buttonA, buttonL;
+	private Button button, buttonA, buttonL,button1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +50,16 @@ public class HomeActivity extends Activity {
 						intent.setClass(HomeActivity.this,AdminActivity.class);
 						startActivity(intent);
 					}
+				}
+			});
+			this.button1 = (Button) this.findViewById(R.id.btnHome2);
+			this.button1.setOnClickListener(new OnClickListener() 
+			{
+				@Override
+				public void onClick(View v) {
+					Intent intent1 = new Intent();
+					intent1.setClass(HomeActivity.this,MainActivity.class);
+					startActivity(intent1);
 				}
 			});
 			
