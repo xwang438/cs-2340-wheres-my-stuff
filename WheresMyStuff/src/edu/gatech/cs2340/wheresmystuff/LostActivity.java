@@ -22,7 +22,7 @@ public class LostActivity extends Activity {
 	private EditText stuffloc;
 	private EditText stuffdisc;
 	private EditText stuffdate;
-	private Button button,button1;
+	private Button button,button1,button2;
 	/**
 	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
 	 * for the Register button
@@ -65,6 +65,16 @@ public class LostActivity extends Activity {
 				Intent intent1 = new Intent();
 				intent1.setClass(LostActivity.this,HomeActivity.class);
 				startActivity(intent1);
+			}
+		});
+		this.button2 = (Button) this.findViewById(R.id.loststuff_logout);
+		this.button2.setOnClickListener(new OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) {
+				Intent intent2 = new Intent();
+				intent2.setClass(LostActivity.this,MainActivity.class);
+				startActivity(intent2);
 			}
 		});
 	}

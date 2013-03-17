@@ -29,7 +29,9 @@
     <string name="loststuff_cancel">Cancel</string>
     <string name="loststuff_prize">Any reward for getting back this stuff?</string>
     <string name="loststuff_title">Lost Stuff Information</string>
-    
+    <string name="button_home2">Log out</string>
+    <string name="loststuff_logout">Log out</string>
+    <string name="liststuff_logout">Log out</string>
     <string name="admin_makeAdmin">Make Admin</string>
     <string name="admin_removeUser">Remove User</string>
     <string name="admin_lockUser">Lock User</string>
