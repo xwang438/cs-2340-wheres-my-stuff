@@ -45,11 +45,11 @@ public class ListActivity extends Activity {
 			 */
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
-				LostItem item = (LostItem) lvitems.getItemAtPosition(position);
+				Item item = (Item) lvitems.getItemAtPosition(position);
 			}
 		});
 
-		if(LostItem.item != null) adapter.addItem(LostItem.item);
+		if(Item.item != null) adapter.addItem(Item.item);
 		this.button = (Button) this.findViewById(R.id.liststuff_logout);
 		this.button.setOnClickListener(new OnClickListener() 
 		{
@@ -75,7 +75,7 @@ public class ListActivity extends Activity {
  *adapter work for putting items in the list
  */
 class MyAdapter extends BaseAdapter {
-	private ArrayList<LostItem> items;
+	private ArrayList<Item> items;
 	private TextView tvname, tvdescription;
 	private LayoutInflater inflater;
 	private Context context;
@@ -83,14 +83,14 @@ class MyAdapter extends BaseAdapter {
 	public MyAdapter(Context context) {
 		inflater = (LayoutInflater) context
 				.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-		items = new ArrayList<LostItem>();
+		items = new ArrayList<Item>();
 		this.context = context;
 	}
 /**
  * add lost items
  * @param item is lost item that user will add on
  */
-	public void addItem(LostItem item) {
+	public void addItem(Item item) {
 		items.add(item);
 	}
 /**
@@ -108,7 +108,7 @@ class MyAdapter extends BaseAdapter {
  * bring item in each position
  */
 	@Override
-	public LostItem getItem(int position) {
+	public Item getItem(int position) {
 		// TODO Auto-generated method stub
 		return items.get(position);
 	}
@@ -129,7 +129,7 @@ class MyAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.lostitem, null);
 			tvname = (TextView) convertView.findViewById(R.id.tv_name);
 
-			LostItem item = (LostItem) getItem(position);
+			Item item = (Item) getItem(position);
 			tvname.setText(item.getName());
 
 		}

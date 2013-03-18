@@ -56,8 +56,8 @@ public class LoginActivity extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 	
-	private DatabaseConnector DB = new DatabaseConnector(this);
-	private UserVerifier uv = new UserVerifier(DB);
+	private DatabaseConnector DB;
+	private UserVerifier uv;
 
 	
 	@Override
@@ -65,6 +65,11 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
+		
+		// set up db connector
+		DB = new DatabaseConnector(LoginActivity.this);
+		
+		
 
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -72,6 +77,12 @@ public class LoginActivity extends Activity {
 		mEmailView.setText(mEmail);
 
 		mPasswordView = (EditText) findViewById(R.id.password);
+		mLoginFormView = findViewById(R.id.login_form);
+		mLoginStatusView = findViewById(R.id.login_status);
+		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
+		
+		uv = new UserVerifier(DB);
+		
 		mPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
@@ -85,9 +96,7 @@ public class LoginActivity extends Activity {
 					}
 				});
 
-		mLoginFormView = findViewById(R.id.login_form);
-		mLoginStatusView = findViewById(R.id.login_status);
-		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
+		
 		
 		findViewById(R.id.sign_in_button).setOnClickListener(
 				new View.OnClickListener() {
@@ -115,7 +124,7 @@ public class LoginActivity extends Activity {
 					}
 				});
 		
-
+		
 	}
 
 	@Override
@@ -178,7 +187,7 @@ public class LoginActivity extends Activity {
 			//This will just take us to the Home Activity
 			if(uv.loginCheck(mEmail, mPassword)) {
 				Intent intent = new Intent();
-				intent.setClass(LoginActivity.this,HomeActivity.class);
+				intent.setClass(LoginActivity.this, HomeActivity.class);
 				startActivity(intent);
 			} else {
 				if(uv.checkAttempt()) {

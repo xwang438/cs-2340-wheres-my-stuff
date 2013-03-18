@@ -50,8 +50,8 @@ public class LostActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 		 
-				LostItem newLost = new LostItem(stuffname.getText().toString());
-				LostItem.item = newLost;
+				Item newLost = new Item(stuffname.getText().toString());
+				Item.item = newLost;
 				Intent intent = new Intent();
 				intent.setClass(LostActivity.this,ListActivity.class);
 				startActivity(intent);

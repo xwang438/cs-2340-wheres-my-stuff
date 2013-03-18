@@ -5,8 +5,8 @@ package edu.gatech.cs2340.wheresmystuff;
  * @author Bongsu
  *This is information of lost items
  */
-public class LostItem {
-	public static LostItem item; // PLEASE TAKE ME OUT AS SOON AS POSSIBLE after the demo.
+public class Item {
+	public static Item item; // PLEASE TAKE ME OUT AS SOON AS POSSIBLE after the demo.
 	
 	String name = "";
 	int	id;
@@ -16,7 +16,7 @@ public class LostItem {
 	 * Constructor for the LostItem class. Please do not delete.
 	 * @param name
 	 */
-	public LostItem(String name) {
+	public Item(String name) {
 		this.name = name;
 	}
 /**
