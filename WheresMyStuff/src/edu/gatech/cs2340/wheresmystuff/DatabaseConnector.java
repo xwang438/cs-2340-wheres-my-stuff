@@ -144,7 +144,7 @@ public class DatabaseConnector {
 	}
 	
 	public Cursor getUsersForLoginCheck() {
-		return database.query("email", new String[] { "_id", "email", "password" }, null,
+		return database.query("user", new String[] { "_id", "email", "password" }, null,
 				null, null, null, null);
 	}
 	
