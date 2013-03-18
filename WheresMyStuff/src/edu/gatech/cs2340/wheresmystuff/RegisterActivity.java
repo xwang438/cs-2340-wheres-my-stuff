@@ -21,10 +21,10 @@ public class RegisterActivity extends Activity {
 	private EditText passwordView;
 	private EditText firstNameView;
 	private EditText lastNameView;
-	private String firstName = firstNameView.getText().toString();
-	private String lastName = lastNameView.getText().toString();
-	private String username = emailView.getText().toString();
-	private String password = passwordView.getText().toString();
+	private String firstName;
+	private String lastName;
+	private String username;
+	private String password;
 
 	/**
 	 * On create, this method sets up all the instance variables of text from
@@ -39,6 +39,11 @@ public class RegisterActivity extends Activity {
 		firstNameView = (EditText) findViewById(R.id.edit_firstName);
 		lastNameView = (EditText) findViewById(R.id.edit_lastName);
 
+		firstName = firstNameView.getText().toString();
+		lastName = lastNameView.getText().toString();
+		username = emailView.getText().toString();
+		password = passwordView.getText().toString();
+		
 		findViewById(R.id.register_button).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
@@ -64,9 +69,9 @@ public class RegisterActivity extends Activity {
 
 		Intent intent = new Intent();
 		intent.setClass(RegisterActivity.this, HomeActivity.class);
-		startActivity(intent);
+		
 		saveUser();
-
+		startActivity(intent);
 	}
 
 	private void saveUser() {
