@@ -105,7 +105,7 @@ public class DatabaseConnector {
 		Cursor cursor = database.query("user", new String[] { "_id", "email", "type", "loggedIn"}, null,
 				null, null, null, null);
 		
-		for(int i = 0; !cursor.isAfterLast(); i++) {
+		while(!cursor.isAfterLast()) {
 			  if(cursor.getInt(3) == 1)
 				  if(cursor.getString(2).equals("true"))
 					  return true;
@@ -119,7 +119,7 @@ public class DatabaseConnector {
 		Cursor cursor = database.query("user", new String[] { "_id", "email", "type"}, null,
 				null, null, null, null);
 		
-		for(int i = 0; !cursor.isAfterLast(); i++) {
+		  while(!cursor.isAfterLast()) {
 			  if(cursor.getString(2).equals("true"))
 				  return true;
 			  cursor.moveToNext();
@@ -130,7 +130,7 @@ public class DatabaseConnector {
 	public int findID(String user) {
 		  Cursor cursor = database.query("user", new String[] { "_id", "email" }, null,
 					null, null, null, null);
-		  for(int i = 0; !cursor.isAfterLast(); i++) {
+		  while(!cursor.isAfterLast()) {
 			  if(user.equals(cursor.getString(1)))
 				  return cursor.getInt(0);
 			  cursor.moveToNext();
