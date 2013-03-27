@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+@SuppressWarnings("unused")
 public class RegisterActivity extends Activity {
 
 	private EditText emailView;
@@ -72,18 +73,23 @@ public class RegisterActivity extends Activity {
 		Intent intent = new Intent();
 		intent.setClass(RegisterActivity.this, HomeActivity.class);
 		
+		//Adds the users credentials to the arrays in User Verifier
 		uv.addUser(username, password);
 		saveUser();
 		startActivity(intent);
 	}
 
 	private void saveUser() {
-		DatabaseConnector DB = new DatabaseConnector(this);
+
 		// in type, false means regular user and true is administrator.
 		// in locked, false means unlocked and true is locked.
 		User newUser = new User(username, password, firstName, lastName, false,
 				false);
-		DB.insertUser(newUser);
+		//Adds the user object to the database. 
+		db.insertUser(newUser);
+		
+		
+		//What does this do? And who wrote it?
 		/*
 		 * if (getIntent().getExtras() == null) {
 		 * DB.insertContact(emailView.getText().toString(),
@@ -92,6 +98,7 @@ public class RegisterActivity extends Activity {
 		 * emailView.getText().toString(), passwordView.getText().toString(),
 		 * lastNameView.getText().toString(),
 		 * firstNameView.getText().toString()); }
-		 */}
+		 */
+			}
 
 }
