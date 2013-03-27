@@ -105,6 +105,8 @@ public class DatabaseConnector {
 		Cursor cursor = database.query("user", new String[] { "_id", "email", "type", "loggedIn"}, null,
 				null, null, null, null);
 		
+		cursor.moveToFirst();
+		
 		while(!cursor.isAfterLast()) {
 			  if(cursor.getInt(3) == 1)
 				  if(cursor.getString(2).equals("true"))
@@ -119,6 +121,8 @@ public class DatabaseConnector {
 		Cursor cursor = database.query("user", new String[] { "_id", "email", "type"}, null,
 				null, null, null, null);
 		
+		cursor.moveToFirst();
+		
 		  while(!cursor.isAfterLast()) {
 			  if(cursor.getString(2).equals("true"))
 				  return true;
@@ -130,6 +134,9 @@ public class DatabaseConnector {
 	public int findID(String user) {
 		  Cursor cursor = database.query("user", new String[] { "_id", "email" }, null,
 					null, null, null, null);
+		  
+		  cursor.moveToFirst();
+		  
 		  while(!cursor.isAfterLast()) {
 			  if(user.equals(cursor.getString(1)))
 				  return cursor.getInt(0);
@@ -152,6 +159,8 @@ public class DatabaseConnector {
 		Cursor cursor = DB.getUsersForLoginCheck();
 		String[] usernames = new String[cursor.getCount()];
 		
+		cursor.moveToFirst();
+		
 		for(int i = 0; !cursor.isAfterLast(); i++) {
 			usernames[i] = cursor.getString(1);
 			cursor.moveToNext();
@@ -164,6 +173,8 @@ public class DatabaseConnector {
 	public String[] getPasswords(DatabaseConnector DB) {
 		Cursor cursor = DB.getUsersForLoginCheck();
 		String[] passwords = new String[cursor.getCount()];
+		
+		cursor.moveToFirst();
 		
 		for(int i = 0; !cursor.isAfterLast(); i++) {
 			passwords[i] = cursor.getString(2);
