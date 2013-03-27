@@ -21,7 +21,7 @@ import android.widget.Button;
 public class AdminActivity extends Activity {
 
 	private EditText userToModifyField;
-	private Button button,button1;
+	private Button submitButton,cancelButton; //STOP CALLING YOUR BUTTONS "button"
 	/**
 	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
 	 * for the Submit button
@@ -43,12 +43,12 @@ public class AdminActivity extends Activity {
         /**
          * Connect the AdminActivity with the ListActivity and the HomeActivity
          */
-		this.button = (Button) this.findViewById(R.id.admin_submit);
-		this.button.setOnClickListener(new OnClickListener() 
+		this.submitButton = (Button) this.findViewById(R.id.admin_submit);
+		this.submitButton.setOnClickListener(new OnClickListener() 
 		{
 			@Override
 			public void onClick(View v) {
-		 
+				//WHY IS THIS COMMENTED OUT??
 				//LostItem newLost = new LostItem(userToModifyField.getText().toString());
 				//LostItem.item = newLost;
 				Intent intent = new Intent();
@@ -56,8 +56,8 @@ public class AdminActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		this.button1 = (Button) this.findViewById(R.id.admin_cancel);
-		this.button1.setOnClickListener(new OnClickListener() 
+		this.cancelButton = (Button) this.findViewById(R.id.admin_cancel);
+		this.cancelButton.setOnClickListener(new OnClickListener() 
 		{
 			@Override
 			public void onClick(View v) {
@@ -102,7 +102,7 @@ public class AdminActivity extends Activity {
 			cursor.moveToNext();
 		}
 			
-		//Grab singleton object. uv.addUser(username, password);
+		
 		
 	}
 
