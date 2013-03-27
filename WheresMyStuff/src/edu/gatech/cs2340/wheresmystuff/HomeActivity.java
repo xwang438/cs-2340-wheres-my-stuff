@@ -14,7 +14,7 @@ import android.widget.Button;
 public class HomeActivity extends Activity {
 	
 	private DatabaseConnector DB = new DatabaseConnector(this);
-	private Button button, buttonA, buttonL,button1;
+	private Button lostButton, adminButton, logoutButton,button1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,8 +24,8 @@ public class HomeActivity extends Activity {
      * to input their lost stuff information after they confirm that they have lost
      * something
      */
-		this.button = (Button) this.findViewById(R.id.btnHome);
-		this.button.setOnClickListener(new OnClickListener() 
+		this.lostButton = (Button) this.findViewById(R.id.btnHome);
+		this.lostButton.setOnClickListener(new OnClickListener() 
 		{
 			@Override
 			public void onClick(View v) {
@@ -40,8 +40,8 @@ public class HomeActivity extends Activity {
 	     * 
 	     * 
 	     */
-			this.buttonA = (Button) this.findViewById(R.id.adminButton);
-			this.buttonA.setOnClickListener(new OnClickListener() 
+			this.adminButton = (Button) this.findViewById(R.id.adminButton);
+			this.adminButton.setOnClickListener(new OnClickListener() 
 			{
 				@Override
 				public void onClick(View v) {
@@ -52,6 +52,8 @@ public class HomeActivity extends Activity {
 					}
 				}
 			});
+			
+			//WHAT DOES THIS DO? -emily
 			this.button1 = (Button) this.findViewById(R.id.btnHome2);
 			this.button1.setOnClickListener(new OnClickListener() 
 			{
@@ -70,8 +72,8 @@ public class HomeActivity extends Activity {
 		     * 
 		     * 
 		     */
-				this.buttonL = (Button) this.findViewById(R.id.logOutButton);
-				this.buttonL.setOnClickListener(new OnClickListener() 
+				this.logoutButton = (Button) this.findViewById(R.id.logOutButton);
+				this.logoutButton.setOnClickListener(new OnClickListener() 
 				{
 					@Override
 					public void onClick(View v) {
