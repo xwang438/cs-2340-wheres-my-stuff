@@ -173,7 +173,7 @@ public class DatabaseConnector {
 	public String[] getPasswords(DatabaseConnector DB) {
 		Cursor cursor = DB.getUsersForLoginCheck();
 		String[] passwords = new String[cursor.getCount()];
-		
+		int i = 0;
 		cursor.moveToFirst();
 		
 		do {
