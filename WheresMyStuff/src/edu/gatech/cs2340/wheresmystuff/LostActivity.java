@@ -95,7 +95,9 @@ public class LostActivity extends Activity {
 		
 		String newName = stuffname.getText().toString();
 		
-		//Grab singleton object. uv.addUser(username, password);
+		//Add lost item to the database???
+		//Create new database connector
+		//dc.insertItem()
 		
 	}
 
