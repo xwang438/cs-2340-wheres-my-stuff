@@ -169,8 +169,7 @@ public class LoginActivity extends Activity {
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
-			//Eventually this should check against user verifier 
-			//This will just take us to the Home Activity
+			
 			if(uv.loginCheck(mEmail, mPassword)) {
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, HomeActivity.class);

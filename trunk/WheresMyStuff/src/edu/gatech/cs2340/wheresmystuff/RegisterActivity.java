@@ -25,6 +25,8 @@ public class RegisterActivity extends Activity {
 	private String lastName;
 	private String username;
 	private String password;
+	private DatabaseConnector db = new DatabaseConnector(RegisterActivity.this);
+	private UserVerifier uv = new UserVerifier(db);
 
 	/**
 	 * On create, this method sets up all the instance variables of text from
@@ -70,6 +72,7 @@ public class RegisterActivity extends Activity {
 		Intent intent = new Intent();
 		intent.setClass(RegisterActivity.this, HomeActivity.class);
 		
+		uv.addUser(username, password);
 		saveUser();
 		startActivity(intent);
 	}
