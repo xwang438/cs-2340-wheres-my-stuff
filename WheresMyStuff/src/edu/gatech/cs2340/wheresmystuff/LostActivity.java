@@ -22,7 +22,7 @@ public class LostActivity extends Activity {
 	private EditText stuffloc;
 	private EditText stuffdisc;
 	private EditText stuffdate;
-	private Button button,button1,button2;
+	private Button submitButton,cancelButton,button2;
 	/**
 	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
 	 * for the Register button
@@ -44,8 +44,11 @@ public class LostActivity extends Activity {
         /**
          * Connect the LostActivity with the ListActivity and the HomeActivity
          */
-		this.button = (Button) this.findViewById(R.id.loststuff_submit);
-		this.button.setOnClickListener(new OnClickListener() 
+		//I don't understand what newLost is and does. I think it should just create an item, set the status to lost and then
+		// add that item to the database, where the database will create the list. So connecting it to list activity doesn't
+		// really matter. 
+		this.submitButton = (Button) this.findViewById(R.id.loststuff_submit);
+		this.submitButton.setOnClickListener(new OnClickListener() 
 		{
 			@Override
 			public void onClick(View v) {
@@ -57,8 +60,8 @@ public class LostActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		this.button1 = (Button) this.findViewById(R.id.loststuff_cancel);
-		this.button1.setOnClickListener(new OnClickListener() 
+		this.cancelButton = (Button) this.findViewById(R.id.loststuff_cancel);
+		this.cancelButton.setOnClickListener(new OnClickListener() 
 		{
 			@Override
 			public void onClick(View v) {
