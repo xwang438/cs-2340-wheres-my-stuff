@@ -24,20 +24,12 @@ import android.widget.TextView;
  */
 public class LoginActivity extends Activity {
 	
-	// 1. Instantiate an AlertDialog.Builder with its constructor
-	//THIS IS CAUSING AN ERROR BEFORE OUR DEMO OF M5/6 so i'm commenting it out.
-	//	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:hello", "bar@example.com:world" };
+	//Removed dummy authentication store. 
 
 	/**
 	 * The default email to populate the email field with.
 	 */
+	//IS THIS NECESSARY
 	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
 
 	/**
@@ -56,7 +48,7 @@ public class LoginActivity extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 	
-	private DatabaseConnector DB;
+	private DatabaseConnector db;
 	private UserVerifier uv;
 
 	
@@ -67,7 +59,7 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		// set up db connector
-		DB = new DatabaseConnector(LoginActivity.this);
+		db = new DatabaseConnector(LoginActivity.this);
 		
 		
 
@@ -81,7 +73,7 @@ public class LoginActivity extends Activity {
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 		
-		uv = new UserVerifier(DB);
+		uv = new UserVerifier(db);
 		
 		mPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -102,13 +94,7 @@ public class LoginActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						// 2. Chain together various setter methods to set the dialog characteristics
-						//builder.setMessage(R.string.dialog_message)
-						  //     .setTitle(R.string.dialog_title);
-
-						// 3. Get the AlertDialog from create()
-						//AlertDialog dialog = builder.create();
-						//dialog.show();
+					
 						attemptLogin();
 					}
 				});
@@ -256,13 +242,14 @@ public class LoginActivity extends Activity {
 				return false;
 			}
 
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
-				}
-			}
+//		TODO: Change this to check credentials against UserVerifier/ Databases list of users
+//			for (String credential : DUMMY_CREDENTIALS) {
+//				String[] pieces = credential.split(":");
+//				if (pieces[0].equals(mEmail)) {
+//					// Account exists, return true if the password matches.
+//					return pieces[1].equals(mPassword);
+//				}
+//			}
 
 			// TODO: register the new account here.
 			return true;
