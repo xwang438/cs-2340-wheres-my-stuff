@@ -158,13 +158,13 @@ public class DatabaseConnector {
 	public String[] getUsernames(DatabaseConnector DB) {
 		Cursor cursor = DB.getUsersForLoginCheck();
 		String[] usernames = new String[cursor.getCount()];
-		
+		int i = 0;
 		cursor.moveToFirst();
 		
-		for(int i = 0; !cursor.isAfterLast(); i++) {
+		do {
 			usernames[i] = cursor.getString(1);
-			cursor.moveToNext();
-		}
+			i++;
+		} while(cursor.moveToNext());
 			
 		
 		return usernames;
@@ -176,10 +176,10 @@ public class DatabaseConnector {
 		
 		cursor.moveToFirst();
 		
-		for(int i = 0; !cursor.isAfterLast(); i++) {
+		do {
 			passwords[i] = cursor.getString(2);
-			cursor.moveToNext();
-		}
+			i++;
+		} while(cursor.moveToNext());
 			
 		
 		return passwords;
