@@ -16,6 +16,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 @SuppressWarnings("unused")
+
+
 public class RegisterActivity extends Activity {
 
 	private EditText emailView;
