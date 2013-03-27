@@ -102,9 +102,10 @@ public class DatabaseConnector {
 	}
 	
 	public boolean isLoggedInAsAdmin() {
+		open();
 		Cursor cursor = database.query("user", new String[] { "_id", "email", "type", "loggedIn"}, null,
 				null, null, null, null);
-		
+		close();
 		cursor.moveToFirst();
 		
 		while(!cursor.isAfterLast()) {
@@ -118,9 +119,10 @@ public class DatabaseConnector {
 	}
 	
 	public boolean isAdmin() {
+		open();
 		Cursor cursor = database.query("user", new String[] { "_id", "email", "type"}, null,
 				null, null, null, null);
-		
+		close();
 		cursor.moveToFirst();
 		
 		  while(!cursor.isAfterLast()) {
@@ -132,9 +134,10 @@ public class DatabaseConnector {
 	}
 	
 	public int findID(String user) {
+		open();
 		  Cursor cursor = database.query("user", new String[] { "_id", "email" }, null,
 					null, null, null, null);
-		  
+		  close();
 		  cursor.moveToFirst();
 		  
 		  while(!cursor.isAfterLast()) {
@@ -146,13 +149,19 @@ public class DatabaseConnector {
 	  }
 	
 	public Cursor getAllUser() {
-		return database.query("user", new String[] { "_id", "email" }, null,
+		open();
+		Cursor cursor = database.query("user", new String[] { "_id", "email" }, null,
 				null, null, null, null);
+		close();
+		return cursor;
 	}
 	
 	public Cursor getUsersForLoginCheck() {
-		return database.query("user", new String[] { "_id", "email", "password" }, null,
+		open();
+		Cursor cursor = database.query("user", new String[] { "_id", "email", "password" }, null,
 				null, null, null, null);
+		close();
+		return cursor;
 	}
 	
 	public String[] getUsernames(DatabaseConnector DB) {
@@ -189,8 +198,11 @@ public class DatabaseConnector {
 	
 	
 	public Cursor getOneUser(long _id) {
-		return database.query("user", null, "_id=" + _id, null, null, null,
+		open();
+		Cursor cursor = database.query("user", null, "_id=" + _id, null, null, null,
 				null);
+		close();
+		return cursor;
 	}
 
 	public void deleteUser(long _id) {
@@ -226,13 +238,19 @@ public class DatabaseConnector {
 	}
 
 	public Cursor getAllItem() {
-		return database.query("item", new String[] { "_id", "name" }, null,
+		open();
+		Cursor cursor = database.query("item", new String[] { "_id", "name" }, null,
 				null, null, null, null);
+		close();
+		return cursor;
 	}
 
 	public Cursor getOneItem(long _id) {
-		return database.query("item", null, "_id=" + _id, null, null, null,
+		open();
+		Cursor cursor = database.query("item", null, "_id=" + _id, null, null, null,
 				null);
+		close();
+		return cursor;
 	}
 
 	public void deleteItem(long _id) {
