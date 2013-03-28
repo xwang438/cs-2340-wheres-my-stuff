@@ -27,18 +27,18 @@
           android:layout_below="@id/header">
           <!-- Stuff Name Label -->
           <Button
-                android:id="@+id/loststuff_logout"
+                android:id="@+id/find_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="230dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/loststuff_logout" /> 
+                android:text="@string/find_logout" /> 
           <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
-                android:text="@string/loststuff_name"/>
-          <EditText android:id="@+id/loststuff_name"
+                android:text="@string/find_name"/>
+          <EditText android:id="@+id/find_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
@@ -49,9 +49,9 @@
           <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
-                android:text="@string/loststuff_loc"/>
+                android:text="@string/find_loc"/>
           <EditText 
-                android:id="@+id/loststuff_loc"
+                android:id="@+id/find_loc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
@@ -59,46 +59,47 @@
                 android:layout_marginBottom="20dip"
                 android:inputType="textNoSuggestions"/>
           <!-- Discription Label -->
-
           <TextView 
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
-                android:text="@string/loststuff_date"/>
-          <EditText android:id="@+id/loststuff_date"
+                android:text="@string/find_date"/>
+          <EditText android:id="@+id/find_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:layout_marginTop="5dip"
                 android:inputType="datetime"/>
 
-          
-          <Spinner android:id="@+id/spinner2"
-
-                android:layout_height="wrap_content"
-                android:layout_width="fill_parent"/>
-          <Spinner android:id="@+id/spinner3"
-
-                android:layout_height="wrap_content"
-                android:layout_width="fill_parent"/>
+   
           <!-- Register Button -->
-          <Button
-              android:id="@+id/loststuff_submit"
-              android:layout_width="fill_parent"
+          
+          <Spinner android:id="@+id/spinner"
+
               android:layout_height="wrap_content"
-              android:layout_marginLeft="42dp"
-              android:layout_marginRight="42dp"
-              android:layout_marginTop="10dp"
-              android:text="@string/loststuff_submit" />
+              android:layout_width="fill_parent"/>
+           <Spinner android:id="@+id/spinner1"
+
+              android:layout_height="wrap_content"
+              android:layout_width="fill_parent"/>
 
           <Button
-              android:id="@+id/loststuff_cancel"
+              android:id="@+id/find_submit"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_marginLeft="42dp"
               android:layout_marginRight="42dp"
               android:layout_marginTop="10dp"
-              android:text="@string/loststuff_cancel" />
+              android:text="@string/find_submit" />
+
+          <Button
+              android:id="@+id/find_cancel"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="42dp"
+              android:layout_marginRight="42dp"
+              android:layout_marginTop="10dp"
+              android:text="@string/find_cancel" />
       
         </LinearLayout>
         <!-- Registration Form Ends -->
