@@ -13,8 +13,8 @@ import android.widget.Button;
 
 public class HomeActivity extends Activity {
 	
-	private DatabaseConnector DB = new DatabaseConnector(this);
-	private Button lostButton, adminButton, logoutButton,button1;
+	
+	private Button lostButton, adminButton, logoutButton,button1, findButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,7 +34,16 @@ public class HomeActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
+		this.findButton = (Button) this.findViewById(R.id.btnHome3);
+		this.findButton.setOnClickListener(new OnClickListener() 
+		{
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(HomeActivity.this,FoundActivity.class);
+				startActivity(intent);
+			}
+		});
 		/**
 	     * Set the intent between HomeActivity and AdminActivity. 
 	     * 
@@ -45,11 +54,9 @@ public class HomeActivity extends Activity {
 			{
 				@Override
 				public void onClick(View v) {
-					if(DB.isLoggedInAsAdmin()) {
 						Intent intent = new Intent();
 						intent.setClass(HomeActivity.this,AdminActivity.class);
 						startActivity(intent);
-					}
 				}
 			});
 			
@@ -78,9 +85,8 @@ public class HomeActivity extends Activity {
 					@Override
 					public void onClick(View v) {
 						//Needs changing so that this will account for more than just the first user account.
-						DB.logOutUser(0);
 						Intent intent = new Intent();
-						intent.setClass(HomeActivity.this,LoginActivity.class);
+						intent.setClass(HomeActivity.this,MainActivity.class);
 						startActivity(intent);
 					}
 				});

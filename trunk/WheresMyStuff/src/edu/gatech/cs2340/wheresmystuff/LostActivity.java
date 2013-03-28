@@ -2,14 +2,16 @@ package edu.gatech.cs2340.wheresmystuff;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.content.Intent;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.util.Log;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 /**
  * The LostActivity enable the user to add a new item that 
  * they have lost
@@ -20,9 +22,9 @@ public class LostActivity extends Activity {
 
 	private EditText stuffname;
 	private EditText stuffloc;
-	private EditText stuffdisc;
 	private EditText stuffdate;
 	private Button submitButton,cancelButton,button2;
+	private static final String TAG = "LostActivity";
 	/**
 	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
 	 * for the Register button
@@ -32,8 +34,51 @@ public class LostActivity extends Activity {
 		setContentView(R.layout.activity_lost);
 		
 		stuffname = (EditText) findViewById(R.id.loststuff_name);
+		stuffloc = (EditText) findViewById(R.id.loststuff_loc);
+		stuffdate = (EditText) findViewById(R.id.loststuff_date);
 		
+	       ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+	        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	        adapter2.add("Category");
+	        adapter2.add("Electronics");
+	        adapter2.add("Toys & Tools");
+	        adapter2.add("Clothing, Shoes & Jewelry");
+	        adapter2.add("Automotive & Industrial");
+	        adapter2.add("Grocery, Health & Beauty");
+	        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+	        spinner2.setAdapter(adapter2);
+	        
+	        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+	        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	        adapter1.add("Status");
+	        adapter1.add("Lost");
+	        adapter1.add("Found");
+	        Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
+	        spinner3.setAdapter(adapter1);
+	        spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+	     @Override
+
+	     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+
+
+	     Spinner spinner = (Spinner)adapterView;
+
+
+	     String itemContent = (String)adapterView.getItemAtPosition(position);
+
+	     }
+
+	     @Override
+
+	     public void onNothingSelected(AdapterView<?> view) {
+
+
+	     Log.i(TAG,  view.getClass().getName());
+
+	     }
+	             });
+	        
 		findViewById(R.id.loststuff_submit).setOnClickListener(
 				new View.OnClickListener() {
 					@Override

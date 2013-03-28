@@ -37,6 +37,13 @@
                 android:layout_marginTop="1dip"
                 android:text="@string/button_home"
                 android:onClick="Ilostsomething" />
+          <Button 	    
+                android:id="@+id/btnHome3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dip"
+                android:text="@string/button_home3"
+                android:onClick="Ifindsomething" />
  		  
           <Button 	    
                 android:id="@+id/logOutButton"
