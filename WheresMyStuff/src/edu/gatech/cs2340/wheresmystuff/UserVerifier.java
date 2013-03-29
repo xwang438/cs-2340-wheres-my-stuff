@@ -21,12 +21,14 @@ public class UserVerifier {
 	private static String[] passwords = new String[1];
 	private int userIndex;
 	private int loginAttempts;
-	private DatabaseConnector dbc;
+	//private DatabaseConnector dbc;
 
 	// Basic constructor, creates a "default" username and password for demo
 	// purposes
 	public UserVerifier() {
 		
+		usernames[0] = "test@test.com";
+		passwords[0] = "test";
 //		usernames = dbc.getUsernames(dbc);
 //		passwords = dbc.getPasswords(dbc);
 		userIndex = -1;
@@ -136,8 +138,8 @@ public class UserVerifier {
 	 */
 	public boolean loginCheck(String username, String password) {
 		if (this.checkUsername(username)) {
-			if (this.checkPassword(password)) {
-				dbc.logInUser(dbc.findID(username));
+			if (this.checkPassword(password)) { //doesn't check the password of the specific username!!!!!
+				//dbc.logInUser(dbc.findID(username));
 				return true;
 			}
 			System.out.println("Incorrect Password. Please try again.");
