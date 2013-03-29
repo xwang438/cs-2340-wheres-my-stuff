@@ -1,5 +1,7 @@
 package edu.gatech.cs2340.wheresmystuff;
 
+import edu.gatech.cs2340.wheresmystuff.Item.ItemCategory;
+import edu.gatech.cs2340.wheresmystuff.Item.ItemStatus;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -12,73 +14,78 @@ import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
 /**
- * The LostActivity enable the user to add a new item that 
- * they have lost
+ * The LostActivity enable the user to add a new item that they have lost
+ * 
  * @author Xinlu
- *
+ * 
  */
 public class LostActivity extends Activity {
 
 	private EditText stuffname;
 	private EditText stuffloc;
 	private EditText stuffdate;
-	private Button submitButton,cancelButton,button2;
+	private Spinner categorySpinner, spinner3;
+	private Button submitButton, cancelButton, button2;
 	private static final String TAG = "LostActivity";
+
 	/**
-	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
-	 * for the Register button
+	 * On create, this method sets up all the instance variables of text from
+	 * the UI. And sets up an on click listener for the Register button
 	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lost);
-		
+
 		stuffname = (EditText) findViewById(R.id.loststuff_name);
 		stuffloc = (EditText) findViewById(R.id.loststuff_loc);
 		stuffdate = (EditText) findViewById(R.id.loststuff_date);
-		
-	       ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-	        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	        adapter2.add("Category");
-	        adapter2.add("Electronics");
-	        adapter2.add("Toys & Tools");
-	        adapter2.add("Clothing, Shoes & Jewelry");
-	        adapter2.add("Automotive & Industrial");
-	        adapter2.add("Grocery, Health & Beauty");
-	        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-	        spinner2.setAdapter(adapter2);
-	        
-	        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-	        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	        adapter1.add("Status");
-	        adapter1.add("Lost");
-	        adapter1.add("Found");
-	        Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
-	        spinner3.setAdapter(adapter1);
-	        spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-	     @Override
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item);
+		adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adapter2.add("Category");
+		// adapter2.add("Electronics");
+		// adapter2.add("Toys & Tools");
+		// adapter2.add("Clothing, Shoes & Jewelry");
+		adapter2.add("Personal Items");
+		// adapter2.add("Automotive & Industrial");
+		adapter2.add("Appliance");
+		// adapter2.add("Grocery, Health & Beauty");
+		adapter2.add("Furniture");
+		categorySpinner = (Spinner) findViewById(R.id.spinner2);
+		categorySpinner.setAdapter(adapter2);
 
-	     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item);
+		adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adapter1.add("Status");
+		adapter1.add("Lost");
+		adapter1.add("Found");
+		spinner3 = (Spinner) findViewById(R.id.spinner3);
+		spinner3.setAdapter(adapter1);
+		spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+			@Override
+			public void onItemSelected(AdapterView<?> adapterView, View view,
+					int position, long id) {
 
-	     Spinner spinner = (Spinner)adapterView;
+				Spinner spinner = (Spinner) adapterView;
 
+				String itemContent = (String) adapterView
+						.getItemAtPosition(position);
 
-	     String itemContent = (String)adapterView.getItemAtPosition(position);
+			}
 
-	     }
+			@Override
+			public void onNothingSelected(AdapterView<?> view) {
 
-	     @Override
+				Log.i(TAG, view.getClass().getName());
 
-	     public void onNothingSelected(AdapterView<?> view) {
+			}
+		});
 
-
-	     Log.i(TAG,  view.getClass().getName());
-
-	     }
-	             });
-	        
 		findViewById(R.id.loststuff_submit).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
@@ -86,42 +93,73 @@ public class LostActivity extends Activity {
 						createNewLost();
 					}
 				});
-        /**
-         * Connect the LostActivity with the ListActivity and the HomeActivity
-         */
-		//I don't understand what newLost is and does. I think it should just create an item, set the status to lost and then
-		// add that item to the database, where the database will create the list. So connecting it to list activity doesn't
-		// really matter. 
+		/**
+		 * Connect the LostActivity with the ListActivity and the HomeActivity
+		 */
+		// I don't understand what newLost is and does. I think it should just
+		// create an item, set the status to lost and then
+		// add that item to the database, where the database will create the
+		// list. So connecting it to list activity doesn't
+		// really matter.
 		this.submitButton = (Button) this.findViewById(R.id.loststuff_submit);
-		this.submitButton.setOnClickListener(new OnClickListener() 
-		{
+		this.submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-		 
 				Item newLost = new Item(stuffname.getText().toString());
-				Item.item = newLost;
+				ItemCategory category;
+				switch (categorySpinner.getSelectedItemPosition()) {
+				case 1:
+					category = ItemCategory.PERSONAL_ITEM;
+					break;
+				case 2:
+					category = ItemCategory.APPLIANCE;
+					break;
+				case 3:
+					category = ItemCategory.FURNITURE;
+					break;
+				default:
+					category = ItemCategory.PERSONAL_ITEM;
+					break;
+
+				}
+				
+				ItemStatus status;
+				switch (spinner3.getSelectedItemPosition()) {
+				case 1:
+					status = ItemStatus.LOST_ITEM;
+					break;
+				case 2:
+					status = ItemStatus.FOUND_ITEM;
+					break;
+			
+				default:
+					status = ItemStatus.LOST_ITEM;
+					break;
+
+				}
+				newLost.setCategory(category);
+				newLost.setStatus(status);
 				Intent intent = new Intent();
-				intent.setClass(LostActivity.this,ListActivity.class);
+				intent.setClass(LostActivity.this, ListActivity.class);
+				intent.putExtra("ITEM", newLost);
 				startActivity(intent);
 			}
 		});
 		this.cancelButton = (Button) this.findViewById(R.id.loststuff_cancel);
-		this.cancelButton.setOnClickListener(new OnClickListener() 
-		{
+		this.cancelButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent1 = new Intent();
-				intent1.setClass(LostActivity.this,HomeActivity.class);
+				intent1.setClass(LostActivity.this, HomeActivity.class);
 				startActivity(intent1);
 			}
 		});
 		this.button2 = (Button) this.findViewById(R.id.loststuff_logout);
-		this.button2.setOnClickListener(new OnClickListener() 
-		{
+		this.button2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent2 = new Intent();
-				intent2.setClass(LostActivity.this,MainActivity.class);
+				intent2.setClass(LostActivity.this, MainActivity.class);
 				startActivity(intent2);
 			}
 		});
@@ -133,20 +171,20 @@ public class LostActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_lost, menu);
 		return true;
 	}
-	
+
 	/**
-	 * Sets the info from the Register UI as attributes for the user. Adds the username and password to the array of all users
-	 * in UserVerifier
+	 * Sets the info from the Register UI as attributes for the user. Adds the
+	 * username and password to the array of all users in UserVerifier
 	 */
-	public void createNewLost(){
-		//Do something. 
-		
+	public void createNewLost() {
+		// Do something.
+
 		String newName = stuffname.getText().toString();
-		
-		//Add lost item to the database???
-		//Create new database connector
-		//dc.insertItem()
-		
+
+		// Add lost item to the database???
+		// Create new database connector
+		// dc.insertItem()
+
 	}
 
 }

@@ -1,5 +1,7 @@
 package edu.gatech.cs2340.wheresmystuff;
 
+import edu.gatech.cs2340.wheresmystuff.Item.ItemCategory;
+import edu.gatech.cs2340.wheresmystuff.Item.ItemStatus;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -23,6 +25,7 @@ public class FoundActivity extends Activity {
 	private EditText findname;
 	private EditText findloc;
 	private EditText finddate;
+	private Spinner categorySpinner, spinner1;
 	private Button submitButton,cancelButton,button2;
 	private static final String TAG = "FoundActivity";
 	/**
@@ -32,23 +35,27 @@ public class FoundActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_found);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.add("Category");
-        adapter.add("Electronics");
-        adapter.add("Toys & Tools");
-        adapter.add("Clothing, Shoes & Jewelry");
-        adapter.add("Automotive & Industrial");
-        adapter.add("Grocery, Health & Beauty");
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setAdapter(adapter);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter2.add("Category");
+		// adapter2.add("Electronics");
+		// adapter2.add("Toys & Tools");
+		// adapter2.add("Clothing, Shoes & Jewelry");
+		adapter2.add("Personal Items");
+		// adapter2.add("Automotive & Industrial");
+		adapter2.add("Appliance");
+		// adapter2.add("Grocery, Health & Beauty");
+		adapter2.add("Furniture");
+		categorySpinner = (Spinner) findViewById(R.id.spinner);
+		categorySpinner.setAdapter(adapter2);
         
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter1.add("Status");
-        adapter1.add("Available");
+        adapter1.add("Found");
         adapter1.add("Returned");
-        Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+        adapter1.add("Donation");
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner1.setAdapter(adapter1);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -99,9 +106,45 @@ public class FoundActivity extends Activity {
 			public void onClick(View v) {
 		 
 				Item newFound = new Item(findname.getText().toString());
-				Item.item = newFound;
+				ItemCategory category;
+				switch (categorySpinner.getSelectedItemPosition()) {
+				case 1:
+					category = ItemCategory.PERSONAL_ITEM;
+					break;
+				case 2:
+					category = ItemCategory.APPLIANCE;
+					break;
+				case 3:
+					category = ItemCategory.FURNITURE;
+					break;
+				default:
+					category = ItemCategory.PERSONAL_ITEM;
+					break;
+
+				}
+				
+				ItemStatus status;
+				switch (spinner1.getSelectedItemPosition()) {
+				case 1:
+					status = ItemStatus.FOUND_ITEM;
+					break;
+				case 2:
+					status = ItemStatus.RETURNED_ITEM;
+					break;
+				case 3:
+					status = ItemStatus.DONATED_ITEM;
+					break;
+				default:
+					status = ItemStatus.FOUND_ITEM;
+					break;
+
+				}
+				
+				newFound.setStatus(status);
+				newFound.setCategory(category);
 				Intent intent = new Intent();
 				intent.setClass(FoundActivity.this,ListActivity.class);
+				intent.putExtra("ITEM", newFound);
 				startActivity(intent);
 			}
 		});
