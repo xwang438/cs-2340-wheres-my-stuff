@@ -2,6 +2,8 @@
 
 package edu.gatech.cs2340.wheresmystuff;
 
+import java.io.*;
+
 /**
  * M5
  * UserVerifier.java
@@ -21,16 +23,15 @@ public class UserVerifier {
 	private static String[] passwords = new String[1];
 	private int userIndex;
 	private int loginAttempts;
+	private TextFile usersFile;
 	//private DatabaseConnector dbc;
 
 	// Basic constructor, creates a "default" username and password for demo
 	// purposes
-	public UserVerifier() {
-		
-		usernames[0] = "test@test.com";
-		passwords[0] = "test";
-//		usernames = dbc.getUsernames(dbc);
-//		passwords = dbc.getPasswords(dbc);
+	public UserVerifier() throws IOException {
+		usersFile = new TextFile("users.txt");
+		usernames = usersFile.getUsernames();
+		passwords = usersFile.getPasswords();
 		userIndex = -1;
 		loginAttempts = 0;
 	}
@@ -93,7 +94,6 @@ public class UserVerifier {
 	 */
 	public boolean checkPassword(String pass) {
 		if (passwords[userIndex].equals(pass)) {
-			userIndex = -1;
 			return true;
 		}
 		return false;
@@ -108,13 +108,16 @@ public class UserVerifier {
 	 * @return true if the username and password were successfully added to the
 	 *         arrays, false if the username already exists
 	 */
-	public Boolean addUser(String newUser, String newPassword) {
+	public Boolean addUser(String newUser, String newPassword) throws IOException {
 		for (int i = 0; i < usernames.length; i++) {
 			if (usernames[i]!= null && usernames[i].equals(newUser)) {
 				System.out.println("Username already exists.");
 				return false;
 			}
 		}
+		
+		usersFile.addUser(new User(newUser, newPassword));
+		
 		String[] tempUsers = usernames;
 		usernames = new String[usernames.length + 1];
 		String[] tempPass = passwords;
@@ -138,8 +141,9 @@ public class UserVerifier {
 	 */
 	public boolean loginCheck(String username, String password) {
 		if (this.checkUsername(username)) {
-			if (this.checkPassword(password)) { //doesn't check the password of the specific username!!!!!
-				//dbc.logInUser(dbc.findID(username));
+			if (this.checkPassword(password)) {
+				usersFile.logInUser(userIndex);
+				userIndex = -1;
 				return true;
 			}
 			System.out.println("Incorrect Password. Please try again.");

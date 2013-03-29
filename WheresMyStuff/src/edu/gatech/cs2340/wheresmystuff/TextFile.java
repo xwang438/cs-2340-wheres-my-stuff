@@ -180,6 +180,98 @@ public class TextFile {
 		return true;
 	}
 	
+	public boolean logInUser(int index) throws IOException {
+		String info = getRow(index);
+		int indexOfUser = index;
+		String[] allLines = new String[getNumberOfLines()];
+		String newInfo;
+		
+		tokenizer = new StringTokenizer(info,":");
+		newInfo = tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" + 
+				tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" +
+				tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":loggedIn";
+		
+		openOutput();
+		for(int i = 0; i < indexOfUser; i++) {
+			allLines[i] = outputFile.nextLine();
+			if(i+1 == indexOfUser) {
+				i++;
+				allLines[i] = newInfo;
+				while(outputFile.hasNext()) {
+					i++;
+					allLines[i] = outputFile.nextLine();
+				}
+			}
+		}
+		closeOutput();
+		
+		inputFile = new PrintWriter(filename);
+		for(int i = 0; i < allLines.length; i++) {
+				inputFile.println(allLines[i]);
+		}
+		closeInput();
+		
+		return true;
+	}
+	
+	public boolean logOutUser(String username) throws IOException {
+		String info = getRow(username);
+		int indexOfUser = getIndexOfUser(username);
+		String[] allLines = new String[getNumberOfLines()];
+		String newInfo;
+		
+		tokenizer = new StringTokenizer(info,":");
+		newInfo = tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" + 
+				tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" +
+				tokenizer.nextToken() + ":" + tokenizer.nextToken();
+		
+		openOutput();
+		for(int i = 0; i < indexOfUser; i++) {
+			allLines[i] = outputFile.nextLine();
+			if(i+1 == indexOfUser) {
+				i++;
+				allLines[i] = newInfo;
+				while(outputFile.hasNext()) {
+					i++;
+					allLines[i] = outputFile.nextLine();
+				}
+			}
+		}
+		closeOutput();
+		
+		inputFile = new PrintWriter(filename);
+		for(int i = 0; i < allLines.length; i++) {
+				inputFile.println(allLines[i]);
+		}
+		closeInput();
+		
+		return true;
+	}
+	
+	public String getLoggedInUser() throws IOException {
+		String info;
+		String loggedInUser = "";
+		
+		openOutput();
+		while(outputFile.hasNext()) {
+			info = outputFile.nextLine();
+			tokenizer = new StringTokenizer(info,":");
+			if(tokenizer.countTokens() == 7)
+				loggedInUser = tokenizer.nextToken();
+		}
+		closeOutput();
+		
+		return loggedInUser;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String[] getUsernames() throws IOException {
 		String[] usernames = new String[getNumberOfLines()];
 		
