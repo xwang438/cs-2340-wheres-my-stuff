@@ -1,8 +1,6 @@
 package edu.gatech.cs2340.wheresmystuff;
 
-import android.database.Cursor;
 import android.widget.RadioButton;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,6 +11,7 @@ import android.widget.EditText;
 import android.content.Intent;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import java.io.*;
 /**
  * The AdminActivity enables admins to modify user accounts. 
  * @author Kenneth
@@ -48,9 +47,6 @@ public class AdminActivity extends Activity {
 		{
 			@Override
 			public void onClick(View v) {
-				//WHY IS THIS COMMENTED OUT??
-				//LostItem newLost = new LostItem(userToModifyField.getText().toString());
-				//LostItem.item = newLost;
 				Intent intent = new Intent();
 				intent.setClass(AdminActivity.this,ListActivity.class);
 				startActivity(intent);
@@ -81,28 +77,27 @@ public class AdminActivity extends Activity {
 	 */
 	public void modifyUser(EditText userToModifyField){
 		//Do something. 
-		DatabaseConnector DB = new DatabaseConnector(this);
+		try {
+		TextFile usersFile = new TextFile("users.txt");
 		String userToModify = userToModifyField.getText().toString();
-		Cursor cursor = DB.getAllUser();
-		String[] usernames = new String[cursor.getCount()];
+		String[] usernames = usersFile.getUsernames();
 		
-		for(int i = 0; !cursor.isAfterLast(); i++) {
-			usernames[i] = cursor.getString(1);
-			
-			if(usernames[i].equals(userToModify)) {
-				if(((RadioButton)findViewById(R.id.admin_lockUserButton)).isChecked())
-					DB.updateUser(true, cursor.getInt(0));
-				else if(((RadioButton)findViewById(R.id.admin_unlockUserButton)).isChecked())
-					DB.updateUser(false, cursor.getInt(0));
-				else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked())
-					DB.updateUser(cursor.getInt(0), true);
-				else if(((RadioButton)findViewById(R.id.admin_removeUserButton)).isChecked())
-					DB.deleteUser(cursor.getInt(0));
+			for(int i = 0; i < usernames.length; i++) {
+				if(usernames[i].equals(userToModify)) {
+					if(((RadioButton)findViewById(R.id.admin_lockUserButton)).isChecked())
+						usersFile.setLocked(usernames[i], true);
+					else if(((RadioButton)findViewById(R.id.admin_unlockUserButton)).isChecked())
+						usersFile.setLocked(usernames[i], false);
+					else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked())
+						usersFile.setAdmin(usernames[i], true);
+					else if(((RadioButton)findViewById(R.id.admin_removeUserButton)).isChecked())
+						usersFile.removeUser(usernames[i]);
+				}
 			}
-			cursor.moveToNext();
-		}
+		}	
+		catch (IOException e) {
 			
-		
+		}
 		
 	}
 
