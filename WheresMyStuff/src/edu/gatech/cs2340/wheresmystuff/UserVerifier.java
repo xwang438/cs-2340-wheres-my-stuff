@@ -92,6 +92,7 @@ public class UserVerifier {
 	 */
 	public boolean checkPassword(String pass) {
 		if (passwords[userIndex].equals(pass)) {
+			userIndex = -1;
 			return true;
 		}
 		return false;
@@ -131,29 +132,29 @@ public class UserVerifier {
 		return true;
 	}
 	
-	public Boolean addUser(User user) {
-		for (int i = 0; i < usernames.length; i++) {
-			if (usernames[i]!= null && usernames[i].equals(user.getUsername())) {
-				System.out.println("Username already exists.");
-				return false;
-			}
-		}
+	//public Boolean addUser(User user) {
+	//	for (int i = 0; i < usernames.length; i++) {
+	//		if (usernames[i]!= null && usernames[i].equals(user.getUsername())) {
+	//			System.out.println("Username already exists.");
+	//			return false;
+	//		}
+	//	}
 		
 		//usersFile.addUser(user);
 		
-		String[] tempUsers = usernames;
-		usernames = new String[usernames.length + 1];
-		String[] tempPass = passwords;
-		passwords = new String[passwords.length + 1];
-		for (int i = 0; i < tempUsers.length; i++) {
-			usernames[i] = tempUsers[i];
-			passwords[i] = tempPass[i];
-		}
-		usernames[usernames.length - 1] = user.getUsername();
-		passwords[passwords.length - 1] = user.getPassword();
+	//	String[] tempUsers = usernames;
+	//	usernames = new String[usernames.length + 1];
+	//	String[] tempPass = passwords;
+	//	passwords = new String[passwords.length + 1];
+	//	for (int i = 0; i < tempUsers.length; i++) {
+	//		usernames[i] = tempUsers[i];
+	//		passwords[i] = tempPass[i];
+	//	}
+	//	usernames[usernames.length - 1] = user.getUsername();
+	//	passwords[passwords.length - 1] = user.getPassword();
 		
-		return true;
-	}
+	//	return true;
+	//}
 
 	/**
 	 * 
@@ -166,7 +167,6 @@ public class UserVerifier {
 	public boolean loginCheck(String username, String password) {
 		if (this.checkUsername(username)) {
 			if (this.checkPassword(password)) {
-				userIndex = -1;
 				return true;
 			}
 			System.out.println("Incorrect Password. Please try again.");
