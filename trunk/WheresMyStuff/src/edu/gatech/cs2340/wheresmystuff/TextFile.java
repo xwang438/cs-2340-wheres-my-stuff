@@ -89,7 +89,8 @@ public class TextFile {
 			
 		}
 		
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		for(int i = 0; i < indexOfUser; i++) {
 			allLines[i] = outputFile.nextLine();
 			if(i+1 == indexOfUser) {
@@ -133,7 +134,8 @@ public class TextFile {
 			
 		}
 		
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		for(int i = 0; i < indexOfUser; i++) {
 			allLines[i] = outputFile.nextLine();
 			if(i+1 == indexOfUser) {
@@ -165,7 +167,8 @@ public class TextFile {
 		
 		String[] allLines = new String[getNumberOfLines()-1];
 		
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		for(int i = 0; i < indexOfUser; i++) {
 			allLines[i] = outputFile.nextLine();
 			if(i+1 == indexOfUser) {
@@ -201,7 +204,8 @@ public class TextFile {
 				tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" +
 				tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":loggedIn";
 		System.out.println("LIU2");
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		for(int i = 0; i < indexOfUser; i++) {
 			System.out.println("LIU3");
 			allLines[i] = outputFile.nextLine();
@@ -241,7 +245,8 @@ public class TextFile {
 				tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" +
 				tokenizer.nextToken() + ":" + tokenizer.nextToken();
 		
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		for(int i = 0; i < indexOfUser; i++) {
 			allLines[i] = outputFile.nextLine();
 			if(i+1 == indexOfUser) {
@@ -269,7 +274,8 @@ public class TextFile {
 		String info;
 		String loggedInUser = "";
 		
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		while(outputFile.hasNext()) {
 			info = outputFile.nextLine();
 			tokenizer = new StringTokenizer(info,":");
@@ -292,7 +298,8 @@ public class TextFile {
 	public String[] getUsernames() throws IOException {
 		String[] usernames = new String[getNumberOfLines()];
 		System.out.println("GUs1");
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		for(int i = 0; i < usernames.length; i++) {
 			System.out.println("GUs2");
 			usernames[i] = getUsername(outputFile.nextLine());
@@ -306,7 +313,8 @@ public class TextFile {
 	public String[] getPasswords() throws IOException {
 		String[] passwords = new String[getNumberOfLines()];
 		System.out.println("GPs1");
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		for(int i = 0; i < passwords.length; i++) {
 			System.out.println("GPs2");
 			passwords[i] = getPassword(outputFile.nextLine());
@@ -321,7 +329,8 @@ public class TextFile {
 		int i = 0;
 		boolean found = false;
 		System.out.println("GIoU1");
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		while(outputFile.hasNext() && !found) {
 			System.out.println("GIoU2");
 			if(username.equals(getUsername(outputFile.nextLine())))
@@ -339,7 +348,8 @@ public class TextFile {
 	public int getNumberOfLines() throws IOException {
 		int i = 0;
 		System.out.println("GLines1");
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		while(outputFile.hasNext()) {
 			System.out.println("GLines2");
 			i++;
@@ -353,7 +363,8 @@ public class TextFile {
 		String rowData = null;
 		int i = 0;
 		System.out.println("GRowwI1");
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		while(outputFile.hasNext() && i < rowIndex) {
 			System.out.println("GRowwI2");
 			if(i+1 == rowIndex) {
@@ -372,7 +383,8 @@ public class TextFile {
 		boolean found = false;
 		String nameInRow;
 		System.out.println("GRowwN1");
-		openOutput();
+		ourFile = new File(filename);
+		outputFile = new Scanner(ourFile);
 		while(outputFile.hasNext() && !found) {
 			System.out.println("GRowwN2");
 			nameInRow = getUsername(outputFile.nextLine());

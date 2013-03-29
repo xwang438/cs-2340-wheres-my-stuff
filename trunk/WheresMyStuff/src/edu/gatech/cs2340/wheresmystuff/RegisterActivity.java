@@ -78,11 +78,8 @@ public class RegisterActivity extends Activity {
 		User newUser = new User(username, password, firstName, lastName, false,
 					false);
 		//Adds the users credentials to the arrays in User Verifier
-		try {
 		uv.addUser(newUser);
-		} catch(IOException e) {
-			System.out.println("IOException encountered. D:");
-		}
+		
 		startActivity(intent);
 	}
 
