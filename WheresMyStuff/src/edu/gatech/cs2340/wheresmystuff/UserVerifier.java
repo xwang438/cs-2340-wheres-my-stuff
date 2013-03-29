@@ -19,8 +19,8 @@ package edu.gatech.cs2340.wheresmystuff;
 
 public class UserVerifier {
 
-	private static String[] usernames = new String[5];
-	private static String[] passwords = new String[5];
+	private static String[] usernames = new String[1];
+	private static String[] passwords = new String[1];
 	private int userIndex;
 	private int loginAttempts;
 

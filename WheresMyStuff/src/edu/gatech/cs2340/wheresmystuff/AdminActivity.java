@@ -77,27 +77,25 @@ public class AdminActivity extends Activity {
 	 */
 	public void modifyUser(EditText userToModifyField){
 		//Do something. 
-		try {
-		TextFile usersFile = new TextFile("users.txt");
+		//try {
+		//TextFile usersFile = new TextFile("users.txt");
 		String userToModify = userToModifyField.getText().toString();
-		String[] usernames = usersFile.getUsernames();
+		String[] usernames = {"admin@gatech.edu"};
 		
 			for(int i = 0; i < usernames.length; i++) {
 				if(usernames[i].equals(userToModify)) {
-					if(((RadioButton)findViewById(R.id.admin_lockUserButton)).isChecked())
-						usersFile.setLocked(usernames[i], true);
-					else if(((RadioButton)findViewById(R.id.admin_unlockUserButton)).isChecked())
-						usersFile.setLocked(usernames[i], false);
-					else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked())
-						usersFile.setAdmin(usernames[i], true);
-					else if(((RadioButton)findViewById(R.id.admin_removeUserButton)).isChecked())
-						usersFile.removeUser(usernames[i]);
+					if(((RadioButton)findViewById(R.id.admin_lockUserButton)).isChecked());
+						//usersFile.setLocked(usernames[i], true);
+					else if(((RadioButton)findViewById(R.id.admin_unlockUserButton)).isChecked());
+						//usersFile.setLocked(usernames[i], false);
+					else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked());
+						//usersFile.setAdmin(usernames[i], true);
+					else if(((RadioButton)findViewById(R.id.admin_removeUserButton)).isChecked());
+						//usersFile.removeUser(usernames[i]);
 				}
 			}
-		}	
-		catch (IOException e) {
-			
-		}
+		//}	
+		
 		
 	}
 
