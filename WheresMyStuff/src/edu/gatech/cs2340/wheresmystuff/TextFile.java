@@ -32,8 +32,11 @@ public class TextFile {
 	// purposes
 	public TextFile(String file) throws IOException {
 		filename = file;
-		PrintWriter opener = new PrintWriter(file);
-		opener.close();
+		
+		FileWriter fw = new FileWriter(filename, true);
+		PrintWriter pw = new PrintWriter(fw);
+		pw.print("");
+		pw.close();
 	}
 
 	/**
@@ -100,7 +103,8 @@ public class TextFile {
 		}
 		closeOutput();
 		
-		inputFile = new PrintWriter(filename);
+		FileWriter fw = new FileWriter(filename, true);
+		inputFile = new PrintWriter(fw);
 		for(int i = 0; i < allLines.length; i++) {
 				inputFile.println(allLines[i]);
 		}
@@ -143,7 +147,8 @@ public class TextFile {
 		}
 		closeOutput();
 		
-		inputFile = new PrintWriter(filename);
+		FileWriter fw = new FileWriter(filename, true);
+		inputFile = new PrintWriter(fw);
 		for(int i = 0; i < allLines.length; i++) {
 				inputFile.println(allLines[i]);
 		}
@@ -173,7 +178,8 @@ public class TextFile {
 		}
 		closeOutput();
 		
-		inputFile = new PrintWriter(filename);
+		FileWriter fw = new FileWriter(filename, true);
+		inputFile = new PrintWriter(fw);
 		for(int i = 0; i < allLines.length; i++) {
 				inputFile.println(allLines[i]);
 		}
@@ -207,7 +213,8 @@ public class TextFile {
 		}
 		closeOutput();
 		
-		inputFile = new PrintWriter(filename);
+		FileWriter fw = new FileWriter(filename, true);
+		inputFile = new PrintWriter(fw);
 		for(int i = 0; i < allLines.length; i++) {
 				inputFile.println(allLines[i]);
 		}
@@ -241,7 +248,8 @@ public class TextFile {
 		}
 		closeOutput();
 		
-		inputFile = new PrintWriter(filename);
+		FileWriter fw = new FileWriter(filename, true);
+		inputFile = new PrintWriter(fw);
 		for(int i = 0; i < allLines.length; i++) {
 				inputFile.println(allLines[i]);
 		}
