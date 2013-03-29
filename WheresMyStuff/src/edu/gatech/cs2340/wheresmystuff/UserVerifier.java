@@ -24,7 +24,6 @@ public class UserVerifier {
 	private int userIndex;
 	private int loginAttempts;
 	private TextFile usersFile;
-	//private DatabaseConnector dbc;
 
 	// Basic constructor, creates a "default" username and password for demo
 	// purposes
@@ -86,6 +85,7 @@ public class UserVerifier {
 	 * @return returns true if the username exists, false is it doesn't
 	 */
 	public boolean checkUsername(String user) {
+		if(usernames == null) System.out.println("I AM NULL D:");
 		for (int i = 0; i < usernames.length; i++) {
 			if (usernames[i].equals(user)) {
 				userIndex = i;
