@@ -25,10 +25,10 @@ public class UserVerifier {
 
 	// Basic constructor, creates a "default" username and password for demo
 	// purposes
-	public UserVerifier(DatabaseConnector DB) {
-		dbc = DB;
-		usernames = dbc.getUsernames(dbc);
-		passwords = dbc.getPasswords(dbc);
+	public UserVerifier() {
+		
+//		usernames = dbc.getUsernames(dbc);
+//		passwords = dbc.getPasswords(dbc);
 		userIndex = -1;
 		loginAttempts = 0;
 	}
@@ -108,7 +108,7 @@ public class UserVerifier {
 	 */
 	public Boolean addUser(String newUser, String newPassword) {
 		for (int i = 0; i < usernames.length; i++) {
-			if (usernames[i].equals(newUser)) {
+			if (usernames[i]!= null && usernames[i].equals(newUser)) {
 				System.out.println("Username already exists.");
 				return false;
 			}
