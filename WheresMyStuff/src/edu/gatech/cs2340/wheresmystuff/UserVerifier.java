@@ -19,8 +19,8 @@ import java.io.*;
 
 public class UserVerifier {
 
-	private static String[] usernames = new String[1];
-	private static String[] passwords = new String[1];
+	private static String[] usernames;
+	private static String[] passwords;
 	private int userIndex;
 	private int loginAttempts;
 	private TextFile usersFile;
@@ -115,8 +115,8 @@ public class UserVerifier {
 	 *            adds this parameter to the usernames array
 	 * @param newPassword
 	 *            adds this parameter to the passwords array
-	 * @return true if the username and password were successfully added to the
-	 *         arrays, false if the username already exists
+	 * @return true if the user name and password were successfully added to the
+	 *         arrays, false if the user name already exists
 	 */
 	public Boolean addUser(String newUser, String newPassword) throws IOException {
 		for (int i = 0; i < usernames.length; i++) {
@@ -128,16 +128,8 @@ public class UserVerifier {
 		
 		usersFile.addUser(new User(newUser, newPassword));
 		
-		String[] tempUsers = usernames;
-		usernames = new String[usernames.length + 1];
-		String[] tempPass = passwords;
-		passwords = new String[passwords.length + 1];
-		for (int i = 0; i < tempUsers.length; i++) {
-			usernames[i] = tempUsers[i];
-			passwords[i] = tempPass[i];
-		}
-		usernames[usernames.length - 1] = newUser;
-		passwords[passwords.length - 1] = newPassword;
+		usernames = usersFile.getUsernames();
+		passwords = usersFile.getPasswords();
 		return true;
 	}
 	
@@ -151,26 +143,29 @@ public class UserVerifier {
 		
 		usersFile.addUser(user);
 		
-		String[] tempUsers = usernames;
-		usernames = new String[usernames.length + 1];
+		/*String[] tempUsers = user names;
+		user names = new String[usernames.length + 1];
 		String[] tempPass = passwords;
 		passwords = new String[passwords.length + 1];
-		for (int i = 0; i < tempUsers.length; i++) {
-			usernames[i] = tempUsers[i];
+		for (integer i = 0; i < tempUsers.length; i++) {
+			user names[i] = tempUsers[i];
 			passwords[i] = tempPass[i];
 		}
-		usernames[usernames.length - 1] = user.getUsername();
-		passwords[passwords.length - 1] = user.getPassword();
+		user names[usernames.length - 1] = user.getUsername();
+		passwords[passwords.length - 1] = user.getPassword();*/
+		
+		usernames = usersFile.getUsernames();
+		passwords = usersFile.getPasswords();
 		return true;
 	}
 
 	/**
 	 * 
 	 * @param username
-	 *            username parameter to be checked
+	 *            user name parameter to be checked
 	 * @param password
 	 *            password parameter to be checked
-	 * @return true if the password and username match, false if not
+	 * @return true if the password and user name match, false if not
 	 */
 	public boolean loginCheck(String username, String password) {
 		if (this.checkUsername(username)) {
