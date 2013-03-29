@@ -194,30 +194,37 @@ public class TextFile {
 		String[] allLines = new String[getNumberOfLines()];
 		String newInfo;
 		
+		System.out.println("LIU1");
+		
 		tokenizer = new StringTokenizer(info,":");
 		newInfo = tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" + 
 				tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" +
 				tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":loggedIn";
-		
+		System.out.println("LIU2");
 		openOutput();
 		for(int i = 0; i < indexOfUser; i++) {
+			System.out.println("LIU3");
 			allLines[i] = outputFile.nextLine();
 			if(i+1 == indexOfUser) {
 				i++;
 				allLines[i] = newInfo;
 				while(outputFile.hasNext()) {
+					System.out.println("LIU4");
 					i++;
 					allLines[i] = outputFile.nextLine();
 				}
 			}
 		}
+		System.out.println("LIU5");
 		closeOutput();
-		
+		System.out.println("LIU6");
 		FileWriter fw = new FileWriter(filename, true);
 		inputFile = new PrintWriter(fw);
 		for(int i = 0; i < allLines.length; i++) {
-				inputFile.println(allLines[i]);
+			System.out.println("LIU7");
+			inputFile.println(allLines[i]);
 		}
+		System.out.println("LIU8");
 		closeInput();
 		
 		return true;
@@ -284,11 +291,13 @@ public class TextFile {
 	
 	public String[] getUsernames() throws IOException {
 		String[] usernames = new String[getNumberOfLines()];
-		
+		System.out.println("GUs1");
 		openOutput();
 		for(int i = 0; i < usernames.length; i++) {
+			System.out.println("GUs2");
 			usernames[i] = getUsername(outputFile.nextLine());
 		}
+		System.out.println("GUs3");
 		closeOutput();
 		
 		return usernames;
@@ -296,11 +305,13 @@ public class TextFile {
 	
 	public String[] getPasswords() throws IOException {
 		String[] passwords = new String[getNumberOfLines()];
-		
+		System.out.println("GPs1");
 		openOutput();
 		for(int i = 0; i < passwords.length; i++) {
+			System.out.println("GPs2");
 			passwords[i] = getPassword(outputFile.nextLine());
 		}
+		System.out.println("GPs3");
 		closeOutput();
 		
 		return passwords;
@@ -309,24 +320,28 @@ public class TextFile {
 	public int getIndexOfUser(String username) throws IOException {
 		int i = 0;
 		boolean found = false;
+		System.out.println("GIoU1");
 		openOutput();
 		while(outputFile.hasNext() && !found) {
+			System.out.println("GIoU2");
 			if(username.equals(getUsername(outputFile.nextLine())))
 				found = true;
 			i++;
 		}
+		System.out.println("GIoU3");
 		closeOutput();
 		
 		if(!found) i = -1;
-		
+		System.out.println("GIoU4");
 		return i;
 	}
 	
 	public int getNumberOfLines() throws IOException {
 		int i = 0;
-		
+		System.out.println("GLines1");
 		openOutput();
 		while(outputFile.hasNext()) {
+			System.out.println("GLines2");
 			i++;
 		}
 		closeOutput();
@@ -337,11 +352,13 @@ public class TextFile {
 	public String getRow(int rowIndex) throws IOException {
 		String rowData = null;
 		int i = 0;
-		
+		System.out.println("GRowwI1");
 		openOutput();
 		while(outputFile.hasNext() && i < rowIndex) {
+			System.out.println("GRowwI2");
 			if(i+1 == rowIndex) {
 				rowData = outputFile.nextLine();
+				System.out.println("GRowwI3");
 			}
 			i++;
 		}
@@ -354,11 +371,13 @@ public class TextFile {
 		String rowData = null;
 		boolean found = false;
 		String nameInRow;
-		
+		System.out.println("GRowwN1");
 		openOutput();
 		while(outputFile.hasNext() && !found) {
+			System.out.println("GRowwN2");
 			nameInRow = getUsername(outputFile.nextLine());
 			if(name == nameInRow) {
+				System.out.println("GRowwN3");
 				rowData = outputFile.nextLine();
 				found = true;
 			}
@@ -371,7 +390,7 @@ public class TextFile {
 	public String getUsername(String line) {
 		String username;
 		tokenizer = new StringTokenizer(line,":");
-		
+		System.out.println("GU1");
 		username = tokenizer.nextToken();
 		
 		return username;
@@ -380,7 +399,7 @@ public class TextFile {
 	public String getPassword(String line) {
 		String password;
 		tokenizer = new StringTokenizer(line,":");
-		
+		System.out.println("GP1");
 		tokenizer.nextToken();
 		password = tokenizer.nextToken();
 		
@@ -458,21 +477,29 @@ public class TextFile {
 	}
 	
 	public void openOutput() throws IOException {
+		System.out.println("OO1");
 		ourFile = new File(filename);
 		outputFile = new Scanner(ourFile);
+		System.out.println("OO2");
 	}
 	
 	public void openInput() throws IOException {
+		System.out.println("OI1");
 		fwriter = new FileWriter(filename, true);
 		inputFile = new PrintWriter(fwriter);
+		System.out.println("OI2");
 	}
 	
 	public void closeInput() throws IOException {
+		System.out.println("CI1");
 		inputFile.close();
+		System.out.println("CI2");
 	}
 	
 	public void closeOutput() throws IOException {
+		System.out.println("CO1");
 		outputFile.close();
+		System.out.println("CO2");
 	}
 
 	/**
