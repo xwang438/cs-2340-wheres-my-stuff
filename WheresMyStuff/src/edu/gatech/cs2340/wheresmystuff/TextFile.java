@@ -1,5 +1,3 @@
-// TODO: Kyle, make a User class and embed it in UserVerifier. It should have all the properties for User according to the CRC. 
-
 package edu.gatech.cs2340.wheresmystuff;
 
 import java.util.Scanner;
@@ -29,7 +27,6 @@ public class TextFile {
 	private Scanner outputFile;
 	
 	private StringTokenizer tokenizer;
-	private int userIndex;
 	
 	// Basic constructor, creates a "default" username and password for demo
 	// purposes
@@ -45,7 +42,143 @@ public class TextFile {
 	 * @return returns the found username as a string
 	 */
 	
+	public boolean addUser(User user) throws IOException {
+		String info = user.getUsername() + ":" + user.getPassword() + ":" + 
+				user.getFirstname() + ":" + user.getLastname() + ":";
+		
+		if(user.isLocked())
+			info += "true:";
+		else
+			info += "false";
+		
+		if(user.isAdmin())
+			info += "true:";
+		else
+			info += "false";
+			
+		
+		openInput();
+		inputFile.println(info);
+		closeInput();
+		
+		return true;
+	}
 	
+	public boolean setLocked(String username, boolean lock) throws IOException {
+		String info = getRow(username);
+		int indexOfUser = getIndexOfUser(username);
+		String[] allLines = new String[getNumberOfLines()];
+		String newInfo;
+		
+		if(getLocked(info) == lock)
+			return true;
+		else {
+			tokenizer = new StringTokenizer(info,":");
+			newInfo = tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" + 
+					tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":";
+			
+			if(lock)
+				newInfo += "true:" + tokenizer.nextToken();
+			else
+				newInfo += "false:" + tokenizer.nextToken();
+			
+		}
+		
+		openOutput();
+		for(int i = 0; i < indexOfUser; i++) {
+			allLines[i] = outputFile.nextLine();
+			if(i+1 == indexOfUser) {
+				i++;
+				allLines[i] = newInfo;
+				while(outputFile.hasNext()) {
+					i++;
+					allLines[i] = outputFile.nextLine();
+				}
+			}
+		}
+		closeOutput();
+		
+		inputFile = new PrintWriter(filename);
+		for(int i = 0; i < allLines.length; i++) {
+				inputFile.println(allLines[i]);
+		}
+		closeInput();
+		
+		return true;
+	}
+	
+	public boolean setAdmin(String username, boolean admin) throws IOException {
+		String info = getRow(username);
+		int indexOfUser = getIndexOfUser(username);
+		String[] allLines = new String[getNumberOfLines()];
+		String newInfo;
+		
+		if(getAdmin(info) == admin)
+			return true;
+		else {
+			tokenizer = new StringTokenizer(info,":");
+			newInfo = tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":" + 
+					tokenizer.nextToken() + ":" + tokenizer.nextToken() + ":";
+			
+			if(admin)
+				newInfo += tokenizer.nextToken() + ":true";
+			else
+				newInfo += tokenizer.nextToken() + ":false";
+			
+		}
+		
+		openOutput();
+		for(int i = 0; i < indexOfUser; i++) {
+			allLines[i] = outputFile.nextLine();
+			if(i+1 == indexOfUser) {
+				i++;
+				allLines[i] = newInfo;
+				while(outputFile.hasNext()) {
+					i++;
+					allLines[i] = outputFile.nextLine();
+				}
+			}
+		}
+		closeOutput();
+		
+		inputFile = new PrintWriter(filename);
+		for(int i = 0; i < allLines.length; i++) {
+				inputFile.println(allLines[i]);
+		}
+		closeInput();
+		
+		return true;
+	}
+	
+	public boolean removeUser(String username) throws IOException {
+		int indexOfUser = getIndexOfUser(username);
+		
+		if(indexOfUser == -1)
+			return true;
+		
+		String[] allLines = new String[getNumberOfLines()-1];
+		
+		openOutput();
+		for(int i = 0; i < indexOfUser; i++) {
+			allLines[i] = outputFile.nextLine();
+			if(i+1 == indexOfUser) {
+				outputFile.nextLine();
+				while(outputFile.hasNext()) {
+					i++;
+					allLines[i] = outputFile.nextLine();
+				}
+			}
+		}
+		closeOutput();
+		
+		inputFile = new PrintWriter(filename);
+		for(int i = 0; i < allLines.length; i++) {
+				inputFile.println(allLines[i]);
+		}
+		closeInput();
+		
+		return true;
+	}
 	
 	public String[] getUsernames() throws IOException {
 		String[] usernames = new String[getNumberOfLines()];
@@ -71,6 +204,22 @@ public class TextFile {
 		return passwords;
 	}
 	
+	public int getIndexOfUser(String username) throws IOException {
+		int i = 0;
+		boolean found = false;
+		openOutput();
+		while(outputFile.hasNext() && !found) {
+			if(username.equals(getUsername(outputFile.nextLine())))
+				found = true;
+			i++;
+		}
+		closeOutput();
+		
+		if(!found) i = -1;
+		
+		return i;
+	}
+	
 	public int getNumberOfLines() throws IOException {
 		int i = 0;
 		
@@ -88,11 +237,11 @@ public class TextFile {
 		int i = 0;
 		
 		openOutput();
-		while(outputFile.hasNext() && i <= rowIndex) {
-			i++;
-			if(i == rowIndex) {
+		while(outputFile.hasNext() && i < rowIndex) {
+			if(i+1 == rowIndex) {
 				rowData = outputFile.nextLine();
 			}
+			i++;
 		}
 		closeOutput();
 		
@@ -231,14 +380,7 @@ public class TextFile {
 	 *            found
 	 * @return returns the found password as a string
 	 */
-	public String getPassword(int index) {
-		if (index > passwords.length) {
-			System.out.println("Invalid Index");
-			return null;
-		} else {
-			return passwords[index];
-		}
-	}
+	
 
 	/**
 	 * 
@@ -247,15 +389,7 @@ public class TextFile {
 	 *            parameter exists in the list
 	 * @return returns true if the username exists, false is it doesn't
 	 */
-	public boolean checkUsername(String user) {
-		for (int i = 0; i < usernames.length; i++) {
-			if (usernames[i].equals(user)) {
-				userIndex = i;
-				return true;
-			}
-		}
-		return false;
-	}
+	
 
 	/**
 	 * 
@@ -264,14 +398,7 @@ public class TextFile {
 	 *            parameter exists in the list
 	 * @return returns true if the password exists, false is it doesn't
 	 */
-	public boolean checkPassword(String pass) {
-		
-		if (passwords[userIndex].equals(pass)) {
-			userIndex = -1;
-			return true;
-		}
-		return false;
-	}
+	
 
 	/**
 	 * 
@@ -282,25 +409,7 @@ public class TextFile {
 	 * @return true if the username and password were successfully added to the
 	 *         arrays, false if the username already exists
 	 */
-	public Boolean addUser(String newUser, String newPassword) {
-		for (int i = 0; i < usernames.length; i++) {
-			if (usernames[i].equals(newUser)) {
-				System.out.println("Username already exists.");
-				return false;
-			}
-		}
-		String[] tempUsers = usernames;
-		usernames = new String[usernames.length + 1];
-		String[] tempPass = passwords;
-		passwords = new String[passwords.length + 1];
-		for (int i = 0; i < tempUsers.length; i++) {
-			usernames[i] = tempUsers[i];
-			passwords[i] = tempPass[i];
-		}
-		usernames[usernames.length - 1] = newUser;
-		passwords[passwords.length - 1] = newPassword;
-		return true;
-	}
+	
 
 	/**
 	 * 
@@ -310,18 +419,7 @@ public class TextFile {
 	 *            password parameter to be checked
 	 * @return true if the password and username match, false if not
 	 */
-	public boolean loginCheck(String username, String password) {
-		if (this.checkUsername(username)) {
-			if (this.checkPassword(password)) {
-				//dbc.logInUser(dbc.findID(username));
-				return true;
-			}
-			System.out.println("Incorrect Password. Please try again.");
-		}
-		System.out.println("Incorrect Username. Please try again.");
-		//loginAttempts++;
-		return false;
-	}
+	
 
 	/**
 	 * 
@@ -331,26 +429,12 @@ public class TextFile {
 	 * @return true if login may proceed, false if the user has failed too many
 	 *         times
 	 */
-//	public boolean checkAttempt() {
-//		if (loginAttempts <= 3) {
-//			return false;
-//		} else {
-//			return true;
-//		}
-//	}
 
 	/**
 	 * 
 	 * @return returns the values of the lists of usernames and passwords as a
 	 *         string
 	 */
-	public String toString() {
-		String result = new String("");
-		for (int i = 0; i < usernames.length; i++) {
-			result = result + "User" + i + ": " + usernames[i] + "; Password: "
-					+ passwords[i] + "\n";
-		}
-		return result;
-	}
+	
 
 }
