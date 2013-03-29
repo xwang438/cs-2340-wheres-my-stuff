@@ -39,6 +39,11 @@ public class UserVerifier {
 		
 		userIndex = -1;
 		loginAttempts = 0;
+		try {
+		addUser(new User("admin@gatech.edu", "admin1", "Ad", "Min", false, true));
+		} catch(IOException e) {
+		
+		}
 	}
 
 	/**
