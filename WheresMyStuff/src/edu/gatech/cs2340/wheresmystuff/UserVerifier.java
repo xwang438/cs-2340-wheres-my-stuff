@@ -2,7 +2,7 @@
 
 package edu.gatech.cs2340.wheresmystuff;
 
-import java.io.*;
+//import java.io.*;
 
 /**
  * M5
@@ -19,30 +19,19 @@ import java.io.*;
 
 public class UserVerifier {
 
-	private static String[] usernames;
-	private static String[] passwords;
+	private static String[] usernames = new String[5];
+	private static String[] passwords = new String[5];
 	private int userIndex;
 	private int loginAttempts;
-	private TextFile usersFile;
 
 	// Basic constructor, creates a "default" username and password for demo
 	// purposes
 	public UserVerifier() {
-		try {
-		usersFile = new TextFile("file:///android_asset/users.txt");
-		usernames = usersFile.getUsernames();
-		passwords = usersFile.getPasswords();
-		} catch(IOException e) {
-			
-		}
+		usernames[0] = "admin@gatech.edu";
+		passwords[0] = "admin1";
 		
 		userIndex = -1;
 		loginAttempts = 0;
-		try {
-		addUser(new User("admin@gatech.edu", "admin1", "Ad", "Min", false, true));
-		} catch(IOException e) {
-		
-		}
 	}
 
 	/**
@@ -85,7 +74,6 @@ public class UserVerifier {
 	 * @return returns true if the username exists, false is it doesn't
 	 */
 	public boolean checkUsername(String user) {
-		if(usernames == null) System.out.println("I AM NULL D:");
 		for (int i = 0; i < usernames.length; i++) {
 			if (usernames[i].equals(user)) {
 				userIndex = i;
@@ -118,7 +106,7 @@ public class UserVerifier {
 	 * @return true if the user name and password were successfully added to the
 	 *         arrays, false if the user name already exists
 	 */
-	public Boolean addUser(String newUser, String newPassword) throws IOException {
+	public Boolean addUser(String newUser, String newPassword) {
 		for (int i = 0; i < usernames.length; i++) {
 			if (usernames[i]!= null && usernames[i].equals(newUser)) {
 				System.out.println("Username already exists.");
@@ -126,14 +114,24 @@ public class UserVerifier {
 			}
 		}
 		
-		usersFile.addUser(new User(newUser, newPassword));
+		//usersFile.addUser(new User(newUser, newPassword));
 		
-		usernames = usersFile.getUsernames();
-		passwords = usersFile.getPasswords();
+		String[] tempUsers = usernames;
+		usernames = new String[usernames.length + 1];
+		String[] tempPass = passwords;
+		passwords = new String[passwords.length + 1];
+		for (int i = 0; i < tempUsers.length; i++) {
+			usernames[i] = tempUsers[i];
+			passwords[i] = tempPass[i];
+		}
+		usernames[usernames.length - 1] = newUser;
+		passwords[passwords.length - 1] = newPassword;
+		
+		
 		return true;
 	}
 	
-	public Boolean addUser(User user) throws IOException {
+	public Boolean addUser(User user) {
 		for (int i = 0; i < usernames.length; i++) {
 			if (usernames[i]!= null && usernames[i].equals(user.getUsername())) {
 				System.out.println("Username already exists.");
@@ -141,21 +139,19 @@ public class UserVerifier {
 			}
 		}
 		
-		usersFile.addUser(user);
+		//usersFile.addUser(user);
 		
-		/*String[] tempUsers = user names;
-		user names = new String[usernames.length + 1];
+		String[] tempUsers = usernames;
+		usernames = new String[usernames.length + 1];
 		String[] tempPass = passwords;
 		passwords = new String[passwords.length + 1];
-		for (integer i = 0; i < tempUsers.length; i++) {
-			user names[i] = tempUsers[i];
+		for (int i = 0; i < tempUsers.length; i++) {
+			usernames[i] = tempUsers[i];
 			passwords[i] = tempPass[i];
 		}
-		user names[usernames.length - 1] = user.getUsername();
-		passwords[passwords.length - 1] = user.getPassword();*/
+		usernames[usernames.length - 1] = user.getUsername();
+		passwords[passwords.length - 1] = user.getPassword();
 		
-		usernames = usersFile.getUsernames();
-		passwords = usersFile.getPasswords();
 		return true;
 	}
 
@@ -170,11 +166,6 @@ public class UserVerifier {
 	public boolean loginCheck(String username, String password) {
 		if (this.checkUsername(username)) {
 			if (this.checkPassword(password)) {
-				try {
-					usersFile.logInUser(userIndex);
-				} catch(IOException e) {
-					
-				}
 				userIndex = -1;
 				return true;
 			}
