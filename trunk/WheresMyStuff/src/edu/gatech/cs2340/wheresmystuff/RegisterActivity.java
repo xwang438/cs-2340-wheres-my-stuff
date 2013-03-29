@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.content.Intent;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import java.io.*;
 
 @SuppressWarnings("unused")
 
@@ -76,7 +77,11 @@ public class RegisterActivity extends Activity {
 		intent.setClass(RegisterActivity.this, HomeActivity.class);
 		
 		//Adds the users credentials to the arrays in User Verifier
+		try {
 		uv.addUser(username, password);
+		} catch(IOException e) {
+			System.out.println("IOException encountered. D:");
+		}
 		saveUser();
 		startActivity(intent);
 	}
