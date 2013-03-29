@@ -31,6 +31,7 @@ public class TextFile {
 	private Scanner outputFile;
 	
 	private StringTokenizer tokenizer;
+	private int userIndex;
 	
 	// Basic constructor, creates a "default" username and password for demo
 	// purposes
@@ -148,6 +149,7 @@ public class TextFile {
 	 * @return returns true if the password exists, false is it doesn't
 	 */
 	public boolean checkPassword(String pass) {
+		
 		if (passwords[userIndex].equals(pass)) {
 			userIndex = -1;
 			return true;
@@ -195,13 +197,13 @@ public class TextFile {
 	public boolean loginCheck(String username, String password) {
 		if (this.checkUsername(username)) {
 			if (this.checkPassword(password)) {
-				dbc.logInUser(dbc.findID(username));
+				//dbc.logInUser(dbc.findID(username));
 				return true;
 			}
 			System.out.println("Incorrect Password. Please try again.");
 		}
 		System.out.println("Incorrect Username. Please try again.");
-		loginAttempts++;
+		//loginAttempts++;
 		return false;
 	}
 
@@ -213,13 +215,13 @@ public class TextFile {
 	 * @return true if login may proceed, false if the user has failed too many
 	 *         times
 	 */
-	public boolean checkAttempt() {
-		if (loginAttempts <= 3) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+//	public boolean checkAttempt() {
+//		if (loginAttempts <= 3) {
+//			return false;
+//		} else {
+//			return true;
+//		}
+//	}
 
 	/**
 	 * 
