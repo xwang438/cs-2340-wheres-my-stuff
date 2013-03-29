@@ -27,7 +27,7 @@ public class LoadActivity extends Activity {
 		        new Handler().postDelayed(new Runnable() {  
 		            public void run() {  
 		                //Go to main activity, and finish load activity  
-		                Intent mainIntent = new Intent(LoadActivity.this, MainActivity.class);  
+		                Intent mainIntent = new Intent(LoadActivity.this, LoginActivity.class);  
 		                LoadActivity.this.startActivity(mainIntent);  
 		                LoadActivity.this.finish();  
 		            }  

@@ -75,7 +75,12 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/button_register" />
-            
+
+            <Button
+                android:id="@+id/button_main"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="debug" />
         </LinearLayout>
     </ScrollView>
 

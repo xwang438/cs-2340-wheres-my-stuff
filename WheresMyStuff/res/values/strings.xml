@@ -32,6 +32,7 @@
     <string name="loststuff_prize">Any reward for getting back this stuff?</string>
     <string name="loststuff_title">Lost Stuff Information</string>
     <string name="loststuff_status">Lost Stuff Status</string>
+    <string name="loststuff_disc">Lost Stuff Description</string>
     <string name="find_status">Found Stuff Status</string>
     <string name="find_name">Name of Your Found Item</string>
     <string name="find_submit">Submit</string>
@@ -45,6 +46,7 @@
     <string name="loststuff_logout">Log out</string>
     <string name="find_logout">Log out</string>
     <string name="liststuff_logout">Log out</string>
+    <string name="liststuff_filter">Filter</string>
     <string name="admin_makeAdmin">Make Admin</string>
     <string name="admin_removeUser">Remove User</string>
     <string name="admin_lockUser">Lock User</string>
@@ -52,6 +54,10 @@
     <string name="admin_label">User to Modify</string>
     
     <string name="home_logOut">Logout</string>
-    
-    
+    <string name="category_prompt">Choose a category</string>
+    <string-array name="category_arrays">
+        <item>Furnitures</item>
+        <item>Personal Items</item>
+        <item>Appliances</item>
+        </string-array>
 </resources>

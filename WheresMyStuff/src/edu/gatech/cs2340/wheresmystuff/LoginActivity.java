@@ -13,23 +13,28 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
 public class LoginActivity extends Activity {
-	
-	//Removed dummy authentication store. 
+
+	// 1. Instantiate an AlertDialog.Builder with its constructor
+	// THIS IS CAUSING AN ERROR BEFORE OUR DEMO OF M5/6 so i'm commenting it
+	// out.
+	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	// Removed dummy authentication store.
 
 	/**
 	 * The default email to populate the email field with.
 	 */
-	//IS THIS NECESSARY
+	// IS THIS NECESSARY
 	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
 
 	/**
@@ -47,21 +52,19 @@ public class LoginActivity extends Activity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
-	
-	//private DatabaseConnector db;
+	private Button mDebugBtn;
+
+	// private DatabaseConnector db;
 	private UserVerifier uv;
 
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
-		
+
 		// set up db connector
-		//db = new DatabaseConnector(LoginActivity.this);
-		
-		
+		// db = new DatabaseConnector(LoginActivity.this);
 
 		// Set up the login form.
 		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
@@ -72,9 +75,21 @@ public class LoginActivity extends Activity {
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
-		
-		uv = new UserVerifier();
-		
+
+		// mDebugBtn = (Button) this.findViewById(R.id.button_main);
+		findViewById(R.id.button_main).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+
+						Intent intent = new Intent();
+						intent.setClass(LoginActivity.this, ListActivity.class);
+						startActivity(intent);
+					}
+				});
+
+		// uv = new UserVerifier();
+
 		mPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 					@Override
@@ -88,29 +103,35 @@ public class LoginActivity extends Activity {
 					}
 				});
 
-		
-		
 		findViewById(R.id.sign_in_button).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-					
+						// 2. Chain together various setter methods to set the
+						// dialog characteristics
+						// builder.setMessage(R.string.dialog_message)
+						// .setTitle(R.string.dialog_title);
+
+						// 3. Get the AlertDialog from create()
+						// AlertDialog dialog = builder.create();
+						// dialog.show();
+
 						attemptLogin();
 					}
 				});
-		
+
 		findViewById(R.id.button_register).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-					
+
 						Intent intent = new Intent();
-						intent.setClass(LoginActivity.this,RegisterActivity.class);
+						intent.setClass(LoginActivity.this,
+								RegisterActivity.class);
 						startActivity(intent);
 					}
 				});
-		
-		
+
 	}
 
 	@Override
@@ -126,7 +147,7 @@ public class LoginActivity extends Activity {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
-		
+
 		if (mAuthTask != null) {
 			return;
 		}
@@ -169,20 +190,19 @@ public class LoginActivity extends Activity {
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
-			
-			if(uv.loginCheck(mEmail, mPassword)) {
+
+			if (uv.loginCheck(mEmail, mPassword)) {
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, HomeActivity.class);
 				startActivity(intent);
 			} else {
-				if(uv.checkAttempt()) {
+				if (uv.checkAttempt()) {
 					findViewById(R.id.sign_in_button).setOnClickListener(null);
 				}
 			}
-			
+
 		}
 	}
-
 
 	/**
 	 * Shows the progress UI and hides the login form.
@@ -241,14 +261,15 @@ public class LoginActivity extends Activity {
 				return false;
 			}
 
-//		TODO: Change this to check credentials against UserVerifier/ Databases list of users
-//			for (String credential : DUMMY_CREDENTIALS) {
-//				String[] pieces = credential.split(":");
-//				if (pieces[0].equals(mEmail)) {
-//					// Account exists, return true if the password matches.
-//					return pieces[1].equals(mPassword);
-//				}
-//			}
+			// TODO: Change this to check credentials against UserVerifier/
+			// Databases list of users
+			// for (String credential : DUMMY_CREDENTIALS) {
+			// String[] pieces = credential.split(":");
+			// if (pieces[0].equals(mEmail)) {
+			// // Account exists, return true if the password matches.
+			// return pieces[1].equals(mPassword);
+			// }
+			// }
 
 			// TODO: register the new account here.
 			return true;
@@ -274,5 +295,5 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 		}
 	}
-	
+
 }
