@@ -32,6 +32,8 @@ public class TextFile {
 	// purposes
 	public TextFile(String file) throws IOException {
 		filename = file;
+		PrintWriter opener = new PrintWriter(file);
+		opener.close();
 	}
 
 	/**
