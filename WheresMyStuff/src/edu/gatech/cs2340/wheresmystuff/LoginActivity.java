@@ -48,7 +48,7 @@ public class LoginActivity extends Activity {
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
 	
-	private DatabaseConnector db;
+	//private DatabaseConnector db;
 	private UserVerifier uv;
 
 	
@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		// set up db connector
-		db = new DatabaseConnector(LoginActivity.this);
+		//db = new DatabaseConnector(LoginActivity.this);
 		
 		
 
@@ -73,7 +73,7 @@ public class LoginActivity extends Activity {
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 		
-		uv = new UserVerifier(db);
+		uv = new UserVerifier();
 		
 		mPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
