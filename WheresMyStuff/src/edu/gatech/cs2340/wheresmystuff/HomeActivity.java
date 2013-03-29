@@ -14,7 +14,7 @@ import android.widget.Button;
 public class HomeActivity extends Activity {
 	
 
-	private DatabaseConnector DB;	
+	//private DatabaseConnector DB;	
 	private Button lostButton, adminButton, logoutButton,button1, findButton;
 	
 	@Override
@@ -22,7 +22,7 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 		
-		DB = new DatabaseConnector(this);
+		//DB = new DatabaseConnector(this);
     /**
      * Set the intent between HomeActivity and LostActivity. The user could be able
      * to input their lost stuff information after they confirm that they have lost
