@@ -7,11 +7,11 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 /**
- * M5
- * UserVerifier.java
+ * M7
+ * TextFile.java
  * 
- * @author Kyle Hosford
- * @version 2/24/2013
+ * @author Kenneth Craig
+ * @version 3/29/2013
  **/
 
 /**
@@ -21,8 +21,6 @@ import java.util.StringTokenizer;
 
 public class TextFile {
 
-	private static String[] usernames = new String[1];
-	private static String[] passwords = new String[1];
 	private String filename;
 	private FileWriter fwriter;
 	private PrintWriter inputFile;
@@ -46,6 +44,45 @@ public class TextFile {
 	 *            found
 	 * @return returns the found username as a string
 	 */
+	
+	
+	
+	public String[] getUsernames() throws IOException {
+		String[] usernames = new String[getNumberOfLines()];
+		
+		openOutput();
+		for(int i = 0; i < usernames.length; i++) {
+			usernames[i] = getUsername(outputFile.nextLine());
+		}
+		closeOutput();
+		
+		return usernames;
+	}
+	
+	public String[] getPasswords() throws IOException {
+		String[] passwords = new String[getNumberOfLines()];
+		
+		openOutput();
+		for(int i = 0; i < passwords.length; i++) {
+			passwords[i] = getPassword(outputFile.nextLine());
+		}
+		closeOutput();
+		
+		return passwords;
+	}
+	
+	public int getNumberOfLines() throws IOException {
+		int i = 0;
+		
+		openOutput();
+		while(outputFile.hasNext()) {
+			i++;
+		}
+		closeOutput();
+		
+		return i;
+	}
+	
 	public String getRow(int rowIndex) throws IOException {
 		String rowData = null;
 		int i = 0;
@@ -82,12 +119,91 @@ public class TextFile {
 	
 	public String getUsername(String line) {
 		String username;
-		int i = 0;
 		tokenizer = new StringTokenizer(line,":");
 		
 		username = tokenizer.nextToken();
 		
 		return username;
+	}
+	
+	public String getPassword(String line) {
+		String password;
+		tokenizer = new StringTokenizer(line,":");
+		
+		tokenizer.nextToken();
+		password = tokenizer.nextToken();
+		
+		return password;
+	}
+	
+	public String getFirstName(String line) {
+		String firstName;
+		tokenizer = new StringTokenizer(line,":");
+		
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		firstName = tokenizer.nextToken();
+		
+		return firstName;
+	}
+	
+	public String getLastName(String line) {
+		String lastName;
+		tokenizer = new StringTokenizer(line,":");
+		
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		lastName = tokenizer.nextToken();
+		
+		return lastName;
+	}
+	
+	public boolean getLocked(String line) {
+		boolean locked;
+		String status;
+		tokenizer = new StringTokenizer(line,":");
+		
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		status = tokenizer.nextToken();
+		
+		if(status.equals("true"))
+			locked = true;
+		else
+			locked = false;
+		
+		return locked;
+	}
+	
+	public boolean getAdmin(String line) {
+		boolean admin;
+		String status;
+		tokenizer = new StringTokenizer(line,":");
+		
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		tokenizer.nextToken();
+		status = tokenizer.nextToken();
+		
+		if(status.equals("true"))
+			admin = true;
+		else
+			admin = false;
+		
+		return admin;
+	}
+	
+	public User getUser(String line) {
+		User user = new User(getUsername(line), getPassword(line),
+				getFirstName(line), getLastName(line), getLocked(line),
+				getAdmin(line));
+		
+		return user;
 	}
 	
 	public void openOutput() throws IOException {
