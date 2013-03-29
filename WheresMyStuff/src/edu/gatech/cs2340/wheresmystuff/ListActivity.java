@@ -51,8 +51,8 @@ public class ListActivity extends Activity {
 				Item item = (Item) listViewItems.getItemAtPosition(position);
 			}
 		});
-
-		if(Item.item != null) adapter.addItem(Item.item);
+		Item item = (Item) this.getIntent().getSerializableExtra("ITEM");
+		if(item != null) adapter.addItem(item);
 		this.button = (Button) this.findViewById(R.id.liststuff_logout);
 		this.button.setOnClickListener(new OnClickListener() 
 		{
@@ -137,7 +137,7 @@ class MyAdapter extends BaseAdapter {
 			
 			Item item = (Item) getItem(position);
 			tvName.setText(item.getName());
-			tvStatus.setText(item.getStatus());
+			tvStatus.setText(item.getStatus().toString());
 			tvCategory.setText(item.getCategory().toString());
 			
 

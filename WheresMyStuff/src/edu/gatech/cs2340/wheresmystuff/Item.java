@@ -1,11 +1,16 @@
 package edu.gatech.cs2340.wheresmystuff;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Bongsu + Emily
  *This is information of lost items
  */
-public class Item {
+public class Item implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	enum ItemCategory {
 		PERSONAL_ITEM("Personal Item"), APPLIANCE("Appliance"), FURNITURE("Furniture");
 		
@@ -19,12 +24,26 @@ public class Item {
 			return stringVal;
 		}
 	}
-	public static Item item; 
+	
+	enum ItemStatus {
+		LOST_ITEM("Lost"), FOUND_ITEM("Found"), RETURNED_ITEM("Returned"), DONATED_ITEM("Donation");
+		
+		private String stringVal;
+		
+		private ItemStatus(String stringVal) {
+			this.stringVal = stringVal;
+		}
+		
+		public String toString() {
+			return stringVal;
+		}
+	}
+	//public static Item item; 
 	
 	private String name = "";
 	private int	id;
 	private ItemCategory category; //I want this to be a enum type: PERSONAL ITEM, APPLIANCE, FURNITURE
-	private String status;
+	private ItemStatus status;
 	
 /**
  * Constructor for the LostItem class. Please do not delete.
@@ -71,11 +90,11 @@ public class Item {
  * lost or fond status of the item	
  * @return lost or found as a string
  */
-	public String getStatus() {
+	public ItemStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(ItemStatus status) {
 		this.status = status;
 	}
 	
