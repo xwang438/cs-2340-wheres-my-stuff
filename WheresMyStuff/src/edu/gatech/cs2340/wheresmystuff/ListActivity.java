@@ -17,15 +17,18 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+
+@SuppressWarnings("unused")
 /**
  * 
  * @author Bongsu Kim
  *this is list of lost items.
  *
  */
+
 public class ListActivity extends Activity {
 	private MyAdapter adapter;
-	private ListView lvitems;
+	private ListView listViewItems;
     private Button button;
 	@Override
 	/**
@@ -35,9 +38,9 @@ public class ListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listview);
 		adapter = new MyAdapter(this.getApplicationContext());
-		lvitems = (ListView) findViewById(R.id.listview);
-		lvitems.setAdapter(adapter);
-		lvitems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		listViewItems = (ListView) findViewById(R.id.listview);
+		listViewItems.setAdapter(adapter);
+		listViewItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			/**
@@ -45,7 +48,7 @@ public class ListActivity extends Activity {
 			 */
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
-				Item item = (Item) lvitems.getItemAtPosition(position);
+				Item item = (Item) listViewItems.getItemAtPosition(position);
 			}
 		});
 
@@ -76,7 +79,7 @@ public class ListActivity extends Activity {
  */
 class MyAdapter extends BaseAdapter {
 	private ArrayList<Item> items;
-	private TextView tvname, tvdescription;
+	private TextView tvName, tvCategory, tvStatus;
 	private LayoutInflater inflater;
 	private Context context;
 
@@ -98,7 +101,6 @@ class MyAdapter extends BaseAdapter {
  */
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		if (items == null)
 			return 0;
 		else
@@ -109,7 +111,7 @@ class MyAdapter extends BaseAdapter {
  */
 	@Override
 	public Item getItem(int position) {
-		// TODO Auto-generated method stub
+		
 		return items.get(position);
 	}
 /**
@@ -117,20 +119,27 @@ class MyAdapter extends BaseAdapter {
  */
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
+		
 		return position;
 	}
 /**
  * view list of lost items
+ * @author Emily 
+ * added status + category to list view
  */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.lostitem, null);
-			tvname = (TextView) convertView.findViewById(R.id.tv_name);
-
+			tvName = (TextView) convertView.findViewById(R.id.tv_name);
+			tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
+			tvCategory = (TextView) convertView.findViewById(R.id.tv_category);
+			
 			Item item = (Item) getItem(position);
-			tvname.setText(item.getName());
+			tvName.setText(item.getName());
+			tvStatus.setText(item.getStatus());
+			tvCategory.setText(item.getCategory().toString());
+			
 
 		}
 		return convertView;

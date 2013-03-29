@@ -2,20 +2,34 @@ package edu.gatech.cs2340.wheresmystuff;
 
 /**
  * 
- * @author Bongsu
+ * @author Bongsu + Emily
  *This is information of lost items
  */
 public class Item {
-	public static Item item; // PLEASE TAKE ME OUT AS SOON AS POSSIBLE after the demo.
+	enum ItemCategory {
+		PERSONAL_ITEM("Personal Item"), APPLIANCE("Appliance"), FURNITURE("Furniture");
+		
+		private String stringVal;
+		
+		private ItemCategory(String stringVal) {
+			this.stringVal = stringVal;
+		}
+		
+		public String toString() {
+			return stringVal;
+		}
+	}
+	public static Item item; 
 	
-	String name = "";
-	int	id;
-	String description = "";
+	private String name = "";
+	private int	id;
+	private ItemCategory category; //I want this to be a enum type: PERSONAL ITEM, APPLIANCE, FURNITURE
+	private String status;
 	
-	/**
-	 * Constructor for the LostItem class. Please do not delete.
-	 * @param name
-	 */
+/**
+ * Constructor for the LostItem class. Please do not delete.
+ * @param name
+ */
 	public Item(String name) {
 		this.name = name;
 	}
@@ -45,13 +59,24 @@ public class Item {
  * description of the items
  * @return description of the items
  */
-	public String getDescription() {
-		return description;
+	public ItemCategory getCategory() {
+		return category;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCategory(ItemCategory category) {
+		this.category = category;
 	}
 	
+/**
+ * lost or fond status of the item	
+ * @return lost or found as a string
+ */
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
 }
