@@ -75,37 +75,15 @@ public class RegisterActivity extends Activity {
 
 		Intent intent = new Intent();
 		intent.setClass(RegisterActivity.this, HomeActivity.class);
-		
+		User newUser = new User(username, password, firstName, lastName, false,
+					false);
 		//Adds the users credentials to the arrays in User Verifier
 		try {
-		uv.addUser(username, password);
+		uv.addUser(newUser);
 		} catch(IOException e) {
 			System.out.println("IOException encountered. D:");
 		}
-		saveUser();
 		startActivity(intent);
 	}
-
-	private void saveUser() {
-
-		// in type, false means regular user and true is administrator.
-		// in locked, false means unlocked and true is locked.
-		User newUser = new User(username, password, firstName, lastName, false,
-				false);
-		//Adds the user object to the database. 
-		//db.insertUser(newUser);
-		
-		
-		//What does this do? And who wrote it?
-		/*
-		 * if (getIntent().getExtras() == null) {
-		 * DB.insertContact(emailView.getText().toString(),
-		 * passwordView.getText().toString(), lastNameView.getText().toString(),
-		 * firstNameView.getText().toString()); } else { DB.updateContact(rowID,
-		 * emailView.getText().toString(), passwordView.getText().toString(),
-		 * lastNameView.getText().toString(),
-		 * firstNameView.getText().toString()); }
-		 */
-			}
 
 }
