@@ -29,7 +29,7 @@ public class UserVerifier {
 	// purposes
 	public UserVerifier() {
 		try {
-		usersFile = new TextFile("users.txt");
+		usersFile = new TextFile("file:///android_asset/users.txt");
 		usernames = usersFile.getUsernames();
 		passwords = usersFile.getPasswords();
 		} catch(IOException e) {
