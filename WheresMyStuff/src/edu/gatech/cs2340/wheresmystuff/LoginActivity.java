@@ -88,7 +88,7 @@ public class LoginActivity extends Activity {
 					}
 				});
 
-		// uv = new UserVerifier();
+		uv = new UserVerifier();
 
 		mPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -194,6 +194,7 @@ public class LoginActivity extends Activity {
 			if (uv.loginCheck(mEmail, mPassword)) {
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, HomeActivity.class);
+				intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			} else {
 				if (uv.checkAttempt()) {

@@ -37,7 +37,10 @@
             android:name="edu.gatech.cs2340.wheresmystuff.RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
-
+		<activity
+            android:name="edu.gatech.cs2340.wheresmystuff.AdminActivity"
+            android:label="@string/title_activity_admin" >
+        </activity>
         <activity 
              android:name="edu.gatech.cs2340.wheresmystuff.LostActivity" 
              android:label="@string/loststuff_title" >

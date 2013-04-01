@@ -16,13 +16,14 @@ public class HomeActivity extends Activity {
 
 	//private DatabaseConnector DB;	
 	private Button lostButton, adminButton, logoutButton,button1, findButton;
+	private UserVerifier uv;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
 		
-		//DB = new DatabaseConnector(this);
+		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
     /**
      * Set the intent between HomeActivity and LostActivity. The user could be able
      * to input their lost stuff information after they confirm that they have lost
@@ -58,9 +59,12 @@ public class HomeActivity extends Activity {
 			{
 				@Override
 				public void onClick(View v) {
+					if(uv.getLoggedInUser().isAdmin()) {
 						Intent intent = new Intent();
 						intent.setClass(HomeActivity.this,AdminActivity.class);
+						intent.putExtra("VERIFIER", uv);
 						startActivity(intent);
+					}
 				}
 			});
 			
