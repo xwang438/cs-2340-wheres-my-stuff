@@ -52,7 +52,7 @@
     <string name="admin_lockUser">Lock User</string>
     <string name="admin_unlockUser">Unlock User</string>
     <string name="admin_label">User to Modify</string>
-    
+    <string name="title_activity_admin">AdminActivity</string>
     <string name="home_logOut">Logout</string>
     <string name="category_prompt">Choose a category</string>
     <string-array name="category_arrays">

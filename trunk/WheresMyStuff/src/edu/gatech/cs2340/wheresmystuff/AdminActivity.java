@@ -21,6 +21,7 @@ public class AdminActivity extends Activity {
 
 	private EditText userToModifyField;
 	private Button submitButton,cancelButton; //STOP CALLING YOUR BUTTONS "button"
+	private UserVerifier uv;
 	/**
 	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
 	 * for the Submit button
@@ -30,7 +31,7 @@ public class AdminActivity extends Activity {
 		setContentView(R.layout.activity_admin);
 		
 		userToModifyField = (EditText) findViewById(R.id.admin_textField);
-		
+		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
 
 		findViewById(R.id.admin_submit).setOnClickListener(
 				new View.OnClickListener() {
@@ -64,12 +65,11 @@ public class AdminActivity extends Activity {
 		});
 	}
 
-	//@Override
-	//public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.activity_admin, menu);
-		//return true;
-	//}
+		getMenuInflater().inflate(R.menu.activity_admin, menu);
+		return true;
+	}
 	
 	/**
 	 * 
@@ -77,24 +77,26 @@ public class AdminActivity extends Activity {
 	 */
 	public void modifyUser(EditText userToModifyField){
 		//Do something. 
-		//try {
-		//TextFile usersFile = new TextFile("users.txt");
+		try {
+		TextFile usersFile = new TextFile("file:///android_asset/users.txt");
 		String userToModify = userToModifyField.getText().toString();
-		String[] usernames = {"admin@gatech.edu"};
+		String[] usernames = usersFile.getUsernames();
 		
 			for(int i = 0; i < usernames.length; i++) {
 				if(usernames[i].equals(userToModify)) {
-					if(((RadioButton)findViewById(R.id.admin_lockUserButton)).isChecked());
-						//usersFile.setLocked(usernames[i], true);
-					else if(((RadioButton)findViewById(R.id.admin_unlockUserButton)).isChecked());
-						//usersFile.setLocked(usernames[i], false);
-					else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked());
-						//usersFile.setAdmin(usernames[i], true);
-					else if(((RadioButton)findViewById(R.id.admin_removeUserButton)).isChecked());
-						//usersFile.removeUser(usernames[i]);
+					if(((RadioButton)findViewById(R.id.admin_lockUserButton)).isChecked())
+						usersFile.setLocked(usernames[i], true);
+					else if(((RadioButton)findViewById(R.id.admin_unlockUserButton)).isChecked())
+						usersFile.setLocked(usernames[i], false);
+					else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked())
+						usersFile.setAdmin(usernames[i], true);
+					else if(((RadioButton)findViewById(R.id.admin_removeUserButton)).isChecked())
+						usersFile.removeUser(usernames[i]);
 				}
 			}
-		//}	
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		
 	}
