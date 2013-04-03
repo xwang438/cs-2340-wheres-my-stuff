@@ -63,14 +63,5 @@
             android:layout_marginBottom="14dp"
             android:layout_marginRight="16dp"
             android:text="Admin" />
-       <Button 	    
-                android:id="@+id/btnHome2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="250dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="1dip"
-                android:text="@string/button_home2"
-                android:onClick="logout" />
   </RelativeLayout>
 </ScrollView>

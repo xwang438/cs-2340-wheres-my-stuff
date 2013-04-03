@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setContentView(R.layout.activity_login);
 		this.button = (Button) this.findViewById(R.id.button_register);
 		this.button.setOnClickListener(new OnClickListener() 
 		{
