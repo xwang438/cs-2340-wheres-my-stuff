@@ -1,4 +1,5 @@
 /**
+ **
  * @author Emily
  */
 package edu.gatech.cs2340.wheresmystuff;
@@ -29,6 +30,7 @@ public class RegisterActivity extends Activity {
 	private String lastName;
 	private String username;
 	private String password;
+	private Button registerButton;
 	//private DatabaseConnector db = new DatabaseConnector(RegisterActivity.this);
 	private UserVerifier uv = new UserVerifier();
 
@@ -49,15 +51,16 @@ public class RegisterActivity extends Activity {
 		lastName = lastNameView.getText().toString();
 		username = emailView.getText().toString();
 		password = passwordView.getText().toString();
-		
-		findViewById(R.id.register_button).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						createNewAccount();
-					}
-				});
-
+		this.registerButton = (Button) this.findViewById(R.id.register_button);
+		   this.registerButton.setOnClickListener(new OnClickListener() {
+			   @Override
+			   public void onClick(View v) {
+			    Intent intent1 = new Intent();
+			    intent1.setClass(RegisterActivity.this, HomeActivity.class);
+			    startActivity(intent1);
+			    createNewAccount();
+		    }
+			   });
 	}
 
 	@Override
@@ -71,16 +74,11 @@ public class RegisterActivity extends Activity {
 	 * Sets the info from the Register UI as attributes for the user. Adds the
 	 * username and password to the array of all users in UserVerifier
 	 */
-	public void createNewAccount() {
-
-		Intent intent = new Intent();
-		intent.setClass(RegisterActivity.this, HomeActivity.class);
-		User newUser = new User(username, password, firstName, lastName, false,
+	    public void createNewAccount() {
+		   
+		    User newUser = new User(username, password, firstName, lastName, false,
 					false);
-		//Adds the users credentials to the arrays in User Verifier
-		uv.addUser(newUser);
-		
-		startActivity(intent);
-	}
-
+		    //Adds the users credentials to the arrays in User Verifier
+		    uv.addUser(newUser);
+	    }
 }
