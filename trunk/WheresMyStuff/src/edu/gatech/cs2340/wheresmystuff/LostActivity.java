@@ -181,10 +181,6 @@ public class LostActivity extends Activity {
 
 		String newName = stuffname.getText().toString();
 
-		// Add lost item to the database???
-		// Create new database connector
-		// dc.insertItem()
-
 	}
 
 }
