@@ -54,15 +54,16 @@ public class TextFile {
 		if(user.isLocked())
 			info += "true:";
 		else
-			info += "false";
+			info += "false:";
 		
 		if(user.isAdmin())
-			info += "true:";
+			info += "true";
 		else
 			info += "false";
 			
 		
-		openInput();
+		FileWriter fw = new FileWriter(filename, true);
+		inputFile = new PrintWriter(fw);
 		inputFile.println(info);
 		closeInput();
 		

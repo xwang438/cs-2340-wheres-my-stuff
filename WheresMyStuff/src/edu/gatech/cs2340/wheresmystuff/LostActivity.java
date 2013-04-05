@@ -29,6 +29,8 @@ public class LostActivity extends Activity {
 	private Spinner categorySpinner, spinner3;
 	private Button submitButton, cancelButton, button2;
 	private static final String TAG = "LostActivity";
+	
+	private UserVerifier uv;
 
 	/**
 	 * On create, this method sets up all the instance variables of text from
@@ -38,6 +40,8 @@ public class LostActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lost);
 
+		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		
 		stuffname = (EditText) findViewById(R.id.loststuff_name);
 		stuffloc = (EditText) findViewById(R.id.loststuff_loc);
 		stuffdate = (EditText) findViewById(R.id.loststuff_date);
@@ -142,6 +146,7 @@ public class LostActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(LostActivity.this, ListActivity.class);
 				intent.putExtra("ITEM", newLost);
+				intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});
@@ -151,6 +156,7 @@ public class LostActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent1 = new Intent();
 				intent1.setClass(LostActivity.this, HomeActivity.class);
+				intent1.putExtra("VERIFIER", uv);
 				startActivity(intent1);
 			}
 		});
@@ -159,7 +165,8 @@ public class LostActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent2 = new Intent();
-				intent2.setClass(LostActivity.this, MainActivity.class);
+				intent2.setClass(LostActivity.this, LoginActivity.class);
+				intent2.putExtra("VERIFIER", uv);
 				startActivity(intent2);
 			}
 		});

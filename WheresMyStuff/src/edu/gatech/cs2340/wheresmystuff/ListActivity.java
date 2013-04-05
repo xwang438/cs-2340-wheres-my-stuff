@@ -44,6 +44,8 @@ public class ListActivity extends Activity {
 	private int month;
 	private int day;
 
+	private UserVerifier uv;
+	
 	@Override
 	/**
 	 * link list view items to adapter and onitemlicklistener
@@ -51,6 +53,9 @@ public class ListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listview);
+		
+		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		
 		adapter = new MyAdapter(this.getApplicationContext());
 		listViewItems = (ListView) findViewById(R.id.listview);
 		listViewItems.setAdapter(adapter);
@@ -75,7 +80,8 @@ public class ListActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.setClass(ListActivity.this, MainActivity.class);
+				intent.setClass(ListActivity.this, LoginActivity.class);
+				intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});

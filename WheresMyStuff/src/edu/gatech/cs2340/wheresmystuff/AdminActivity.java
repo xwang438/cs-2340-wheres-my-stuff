@@ -50,6 +50,7 @@ public class AdminActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(AdminActivity.this,ListActivity.class);
+				intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});
@@ -60,6 +61,7 @@ public class AdminActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent1 = new Intent();
 				intent1.setClass(AdminActivity.this,HomeActivity.class);
+				intent1.putExtra("VERIFIER", uv);
 				startActivity(intent1);
 			}
 		});
@@ -77,26 +79,27 @@ public class AdminActivity extends Activity {
 	 */
 	public void modifyUser(EditText userToModifyField){
 		//Do something. 
-		try {
-		TextFile usersFile = new TextFile("file:///android_asset/users.txt");
+		//try {
+		//TextFile usersFile = new TextFile("file:///android_asset/users.txt");
 		String userToModify = userToModifyField.getText().toString();
-		String[] usernames = usersFile.getUsernames();
+		//String[] usernames = usersFile.getUsernames();
+		String[] usernames = uv.getUsernames();
 		
 			for(int i = 0; i < usernames.length; i++) {
 				if(usernames[i].equals(userToModify)) {
 					if(((RadioButton)findViewById(R.id.admin_lockUserButton)).isChecked())
-						usersFile.setLocked(usernames[i], true);
+						uv.setLocked(i, true);
 					else if(((RadioButton)findViewById(R.id.admin_unlockUserButton)).isChecked())
-						usersFile.setLocked(usernames[i], false);
+						uv.setLocked(i, false);
 					else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked())
-						usersFile.setAdmin(usernames[i], true);
+						uv.setAdmin(i, true);
 					else if(((RadioButton)findViewById(R.id.admin_removeUserButton)).isChecked())
-						usersFile.removeUser(usernames[i]);
+						uv.removeUser(usernames[i]);
 				}
 			}
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+		//} catch (IOException e) {
+			//System.out.println(e.getMessage());
+		//}
 		
 		
 	}
