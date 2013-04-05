@@ -32,7 +32,7 @@ public class RegisterActivity extends Activity {
 	private String password;
 	private Button registerButton;
 	//private DatabaseConnector db = new DatabaseConnector(RegisterActivity.this);
-	private UserVerifier uv = new UserVerifier();
+	private UserVerifier uv;
 
 	/**
 	 * On create, this method sets up all the instance variables of text from
@@ -42,6 +42,8 @@ public class RegisterActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 
+		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		
 		emailView = (EditText) findViewById(R.id.edit_email);
 		passwordView = (EditText) findViewById(R.id.edit_password);
 		firstNameView = (EditText) findViewById(R.id.edit_firstName);
@@ -55,10 +57,13 @@ public class RegisterActivity extends Activity {
 		   this.registerButton.setOnClickListener(new OnClickListener() {
 			   @Override
 			   public void onClick(View v) {
+				   
+				createNewAccount();
 			    Intent intent1 = new Intent();
 			    intent1.setClass(RegisterActivity.this, HomeActivity.class);
+			    intent1.putExtra("VERIFIER", uv);
 			    startActivity(intent1);
-			    createNewAccount();
+			    
 		    }
 			   });
 	}

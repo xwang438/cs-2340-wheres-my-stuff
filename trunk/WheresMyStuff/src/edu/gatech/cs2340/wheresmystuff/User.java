@@ -1,7 +1,10 @@
 package edu.gatech.cs2340.wheresmystuff;
 
-public class User{
+import java.io.*;
+
+public class User implements Serializable {
 	//instance variables
+	private static final long serialVersionUID = 100;
 	private String username;
 	private String password;
 	private String firstName;

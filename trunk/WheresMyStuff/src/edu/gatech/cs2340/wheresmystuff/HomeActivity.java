@@ -36,6 +36,7 @@ public class HomeActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(HomeActivity.this,LostActivity.class);
+				intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});
@@ -46,6 +47,7 @@ public class HomeActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(HomeActivity.this,FoundActivity.class);
+				intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});
@@ -81,7 +83,8 @@ public class HomeActivity extends Activity {
 					public void onClick(View v) {
 						//Needs changing so that this will account for more than just the first user account.
 						Intent intent = new Intent();
-						intent.setClass(HomeActivity.this,MainActivity.class);
+						intent.setClass(HomeActivity.this,LoginActivity.class);
+						intent.putExtra("VERIFIER", uv);
 						startActivity(intent);
 					}
 				});

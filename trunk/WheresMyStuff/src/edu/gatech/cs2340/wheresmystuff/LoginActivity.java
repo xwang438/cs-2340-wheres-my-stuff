@@ -75,7 +75,17 @@ public class LoginActivity extends Activity {
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
-
+		if(this.getIntent() != null) {
+			if(this.getIntent().hasExtra("VERIFIER")) {
+				uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+			}
+			else {
+				uv = new UserVerifier();
+			}
+		} else {
+			uv = new UserVerifier();
+		}
+		
 		// mDebugBtn = (Button) this.findViewById(R.id.button_main);
 		findViewById(R.id.button_main).setOnClickListener(
 				new View.OnClickListener() {
@@ -84,11 +94,12 @@ public class LoginActivity extends Activity {
 
 						Intent intent = new Intent();
 						intent.setClass(LoginActivity.this, ListActivity.class);
+						intent.putExtra("VERIFIER", uv);
 						startActivity(intent);
 					}
 				});
 
-		uv = new UserVerifier();
+		
 
 		mPasswordView
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -128,6 +139,7 @@ public class LoginActivity extends Activity {
 						Intent intent = new Intent();
 						intent.setClass(LoginActivity.this,
 								RegisterActivity.class);
+						intent.putExtra("VERIFIER", uv);
 						startActivity(intent);
 					}
 				});

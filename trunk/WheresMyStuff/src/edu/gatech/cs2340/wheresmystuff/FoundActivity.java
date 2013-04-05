@@ -28,6 +28,9 @@ public class FoundActivity extends Activity {
 	private Spinner categorySpinner, spinner1;
 	private Button submitButton,cancelButton,button2;
 	private static final String TAG = "FoundActivity";
+	
+	private UserVerifier uv;
+	
 	/**
 	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
 	 * for the Register button
@@ -36,6 +39,9 @@ public class FoundActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_found);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        
+        uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+        
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter2.add("Category");
 		// adapter2.add("Electronics");
@@ -155,6 +161,7 @@ public class FoundActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent1 = new Intent();
 				intent1.setClass(FoundActivity.this,HomeActivity.class);
+				intent1.putExtra("VERIFIER", uv);
 				startActivity(intent1);
 			}
 		});
@@ -165,7 +172,8 @@ public class FoundActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent2 = new Intent();
-				intent2.setClass(FoundActivity.this,MainActivity.class);
+				intent2.setClass(FoundActivity.this,LoginActivity.class);
+				intent2.putExtra("VERIFIER", uv);
 				startActivity(intent2);
 			}
 		});
