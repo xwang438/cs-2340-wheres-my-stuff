@@ -21,12 +21,12 @@ public class UserVerifier implements Serializable {
 
 	private static final long serialVersionUID = 200;
 	
-	private static String[] usernames = {"admin@gatech.edu"};
-	private static String[] passwords = {"admin1"};
-	private static String[] firstNames = {"ad"};
-	private static String[] lastNames = {"min"};
-	private static boolean[] locked = {false};
-	private static boolean[] admins = {true};
+	private static String[] usernames = {"admin@gatech.edu", "user1@gmail.com", "user2@gmail.com", "newAdmin@gatech.edu"};
+	private static String[] passwords = {"admin1", "user1", "user2", "newAdmin"};
+	private static String[] firstNames = {"ad", "User", "User", "New"};
+	private static String[] lastNames = {"min", "1", "2", "Admin"};
+	private static boolean[] locked = {false, false, true, false};
+	private static boolean[] admins = {true, false, false, true};
 	//private static String[] usernames;
 	//private static String[] passwords;
 	private int userIndex;
@@ -288,7 +288,7 @@ public class UserVerifier implements Serializable {
 	}
 	
 	public void setAdmin(int i, boolean admin) {
-		locked[i] = admin;
+		admins[i] = admin;
 	}
 	
 	
