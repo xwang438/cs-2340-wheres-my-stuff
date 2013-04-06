@@ -16,6 +16,13 @@
     <string name="menu_find">Found</string>
     <string name="menu_admin">Admin</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="button_Name">Name</string>
+    <string name="button_Category">Category</string>
+    <string name="button_Lost">Lost</string>
+    <string name="button_List">List</string>
+    <string name="button_Found">Found</string>
+    <string name="button_Ok">OK</string>
+    <string name="button_search">Search</string>
     <string name="button_register">&quot;Register&quot;</string>
     <string name="button_home">&quot;I have lost something&quot;</string>
     <string name="button_home3">&quot;I have found something&quot;</string>
@@ -56,9 +63,11 @@
     <string name="title_activity_admin">AdminActivity</string>
     <string name="home_logOut">Logout</string>
     <string name="category_prompt">Choose a category</string>
+
     <string-array name="category_arrays">
         <item>Furnitures</item>
         <item>Personal Items</item>
         <item>Appliances</item>
-        </string-array>
+    </string-array>
+
 </resources>

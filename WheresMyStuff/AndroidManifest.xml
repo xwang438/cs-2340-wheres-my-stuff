@@ -13,8 +13,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
-        
         <activity
             android:name="edu.gatech.cs2340.wheresmystuff.LoadActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -26,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name="edu.gatech.cs2340.wheresmystuff.MainActivity" >
-          
         </activity>
         <activity
             android:name="edu.gatech.cs2340.wheresmystuff.LoginActivity"
@@ -37,26 +34,30 @@
             android:name="edu.gatech.cs2340.wheresmystuff.RegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
-		<activity
+        <activity
             android:name="edu.gatech.cs2340.wheresmystuff.AdminActivity"
             android:label="@string/title_activity_admin" >
         </activity>
-        <activity 
-             android:name="edu.gatech.cs2340.wheresmystuff.LostActivity" 
-             android:label="@string/loststuff_title" >
+        <activity
+            android:name="edu.gatech.cs2340.wheresmystuff.LostActivity"
+            android:label="@string/loststuff_title" >
         </activity>
-        <activity 
-             android:name="edu.gatech.cs2340.wheresmystuff.ListActivity" 
-             android:label="@string/app_name" >
+        <activity
+            android:name="edu.gatech.cs2340.wheresmystuff.ListActivity"
+            android:label="@string/app_name" >
         </activity>
-        <activity 
-             android:name="edu.gatech.cs2340.wheresmystuff.FoundActivity" 
-             android:label="@string/app_name" >
+        <activity
+            android:name="edu.gatech.cs2340.wheresmystuff.FoundActivity"
+            android:label="@string/app_name" >
         </activity>
- 
-        <activity 
-             android:name="edu.gatech.cs2340.wheresmystuff.HomeActivity" 
-             android:label="@string/app_name" >
+        <activity
+            android:name="edu.gatech.cs2340.wheresmystuff.HomeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="edu.gatech.cs2340.wheresmystuff.SearchActivity"
+            android:label="@string/app_name" >
         </activity>
     </application>
+
 </manifest>

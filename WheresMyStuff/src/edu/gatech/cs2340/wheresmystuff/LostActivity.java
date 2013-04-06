@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.content.Context;
 import android.content.Intent;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -29,7 +30,9 @@ public class LostActivity extends Activity {
 	private Spinner categorySpinner, spinner3;
 	private Button submitButton, cancelButton, button2;
 	private static final String TAG = "LostActivity";
-	
+	private Database db;
+	private Context context;
+
 	private UserVerifier uv;
 
 	/**
@@ -39,9 +42,11 @@ public class LostActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lost);
-
-		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		context = getApplicationContext();
 		
+		db = new Database(context);
+		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+
 		stuffname = (EditText) findViewById(R.id.loststuff_name);
 		stuffloc = (EditText) findViewById(R.id.loststuff_loc);
 		stuffdate = (EditText) findViewById(R.id.loststuff_date);
@@ -126,26 +131,32 @@ public class LostActivity extends Activity {
 					break;
 
 				}
-				
+
 				ItemStatus status;
 				switch (spinner3.getSelectedItemPosition()) {
 				case 1:
-					status = ItemStatus.LOST_ITEM;
+					status = ItemStatus.Lost;
 					break;
 				case 2:
-					status = ItemStatus.FOUND_ITEM;
+					status = ItemStatus.Found;
 					break;
-			
+
 				default:
-					status = ItemStatus.LOST_ITEM;
+					status = ItemStatus.Lost;
 					break;
 
 				}
 				newLost.setCategory(category);
 				newLost.setStatus(status);
+				newLost.setDate(stuffdate.getText().toString());
+				newLost.setLocation(stuffloc.getText().toString());
+				
+				/* now save to DB */
+				db.insertItem(newLost);
+				
 				Intent intent = new Intent();
 				intent.setClass(LostActivity.this, ListActivity.class);
-				intent.putExtra("ITEM", newLost);
+				//intent.putExtra("ITEM", newLost);
 				intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
