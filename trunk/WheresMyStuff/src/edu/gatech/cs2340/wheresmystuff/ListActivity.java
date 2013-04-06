@@ -3,6 +3,8 @@ package edu.gatech.cs2340.wheresmystuff;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+//import edu.gatech.cs2340.wheresmystuff.SearchActivity.SearchItemClickListener;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -31,7 +33,7 @@ import android.widget.AdapterView.OnItemClickListener;
  *
  */
 public class ListActivity extends Activity {
-	final Context context = this;
+	private Context context;
 	private MyAdapter adapter;
 	private ListView listViewItems;
 	private Button button;
@@ -43,9 +45,9 @@ public class ListActivity extends Activity {
 	private int year;
 	private int month;
 	private int day;
-
+	private Database db;
 	private UserVerifier uv;
-	
+
 	@Override
 	/**
 	 * link list view items to adapter and onitemlicklistener
@@ -53,11 +55,16 @@ public class ListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listview);
-		
+		context = getApplicationContext();
+		db = new Database(context);
 		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
 		
+		ArrayList<Item> items = db.getAllItems();
 		adapter = new MyAdapter(this.getApplicationContext());
 		listViewItems = (ListView) findViewById(R.id.listview);
+		
+		adapter.addAllItems(items);
+		
 		listViewItems.setAdapter(adapter);
 		listViewItems
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,9 +79,9 @@ public class ListActivity extends Activity {
 								.getItemAtPosition(position);
 					}
 				});
-		Item item = (Item) this.getIntent().getSerializableExtra("ITEM");
-		if (item != null)
-			adapter.addItem(item);
+		// Item item = (Item) this.getIntent().getSerializableExtra("ITEM");
+		// if (item != null)
+		// adapter.addItem(item);
 		this.button = (Button) this.findViewById(R.id.liststuff_logout);
 		this.button.setOnClickListener(new OnClickListener() {
 			@Override
@@ -93,12 +100,14 @@ public class ListActivity extends Activity {
 				final Dialog dialog = new Dialog(context);
 				dialog.setContentView(R.layout.filter_dialog);
 				dialog.setTitle("Filter");
+				
 
 				// set the custom dialog components - text, image and button
 				TextView text1 = (TextView) dialog.findViewById(R.id.text1);
 				text1.setText("Status");
 
-				radioStatusGroup = (RadioGroup) dialog.findViewById(R.id.radioStatus);
+				radioStatusGroup = (RadioGroup) dialog
+						.findViewById(R.id.radioStatus);
 
 				TextView text2 = (TextView) dialog.findViewById(R.id.text2);
 				text2.setText("Category");
@@ -164,6 +173,12 @@ class MyAdapter extends BaseAdapter {
 	 */
 	public void addItem(Item item) {
 		items.add(item);
+	}
+	
+	public void addAllItems(ArrayList<Item> inputList) {
+		for (Item cur : inputList) {
+			items.add(cur);
+		}
 	}
 
 	/**

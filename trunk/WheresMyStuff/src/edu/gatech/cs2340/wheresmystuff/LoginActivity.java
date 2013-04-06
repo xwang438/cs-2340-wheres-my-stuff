@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
 					public void onClick(View view) {
 
 						Intent intent = new Intent();
-						intent.setClass(LoginActivity.this, ListActivity.class);
+						intent.setClass(LoginActivity.this, HomeActivity.class);
 						intent.putExtra("VERIFIER", uv);
 						startActivity(intent);
 					}

@@ -8,13 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DatabaseConnector {
 
-	private static final String DB_NAME = "WMS";
 	private SQLiteDatabase database;
 	private Database DB;
 
 	public DatabaseConnector(Context context) {
-		DB = new Database(context, DB_NAME, null, 1);
-		insertUser("admin@gatech.edu", "admin1", "Admin", "Admin", false, true);
+		/*DB = new Database(context, null, 1);
+		insertUser("admin@gatech.edu", "admin1", "Admin", "Admin", false, true);*/
 	}
 
 	public void open() throws SQLException {
