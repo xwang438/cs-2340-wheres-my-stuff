@@ -55,6 +55,7 @@
     <string name="find_logout">Log out</string>
     <string name="liststuff_logout">Log out</string>
     <string name="liststuff_filter">Filter</string>
+    <string name="liststuff_addItem">Add Item</string>
     <string name="admin_makeAdmin">Make Admin</string>
     <string name="admin_removeUser">Remove User</string>
     <string name="admin_lockUser">Lock User</string>

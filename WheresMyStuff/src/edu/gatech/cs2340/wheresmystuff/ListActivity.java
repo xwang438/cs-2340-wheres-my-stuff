@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.AdapterView.OnItemClickListener;
 
 @SuppressWarnings("unused")
@@ -36,12 +37,16 @@ public class ListActivity extends Activity {
 	private Context context;
 	private MyAdapter adapter;
 	private ListView listViewItems;
+	private EditText search;
 	private Button button;
 	private Button button1;
+	private Button addButton;
+	private RadioGroup radioSearchGroup;
 	private RadioGroup radioStatusGroup;
 	private Spinner spinner;
 	private DatePicker datepicker;
 	private Button dialogButton;
+	private Button searchButton;
 	private int year;
 	private int month;
 	private int day;
@@ -58,13 +63,13 @@ public class ListActivity extends Activity {
 		context = getApplicationContext();
 		db = new Database(context);
 		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
-		
+
 		ArrayList<Item> items = db.getAllItems();
 		adapter = new MyAdapter(this.getApplicationContext());
 		listViewItems = (ListView) findViewById(R.id.listview);
-		
+
 		adapter.addAllItems(items);
-		
+
 		listViewItems.setAdapter(adapter);
 		listViewItems
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,13 +86,23 @@ public class ListActivity extends Activity {
 				});
 		// Item item = (Item) this.getIntent().getSerializableExtra("ITEM");
 		// if (item != null)
-		// adapter.addItem(item);
+
 		this.button = (Button) this.findViewById(R.id.liststuff_logout);
 		this.button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(ListActivity.this, LoginActivity.class);
+				intent.putExtra("VERIFIER", uv);
+				startActivity(intent);
+			}
+		});
+		this.button = (Button) this.findViewById(R.id.liststuff_addItem);
+		this.button.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(ListActivity.this, HomeActivity.class);
 				intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
@@ -100,9 +115,13 @@ public class ListActivity extends Activity {
 				final Dialog dialog = new Dialog(context);
 				dialog.setContentView(R.layout.filter_dialog);
 				dialog.setTitle("Filter");
-				
 
 				// set the custom dialog components - text, image and button
+				EditText search = (EditText) dialog
+						.findViewById(R.id.searchText);
+
+				radioSearchGroup = (RadioGroup) dialog
+						.findViewById(R.id.radioSearch);
 				TextView text1 = (TextView) dialog.findViewById(R.id.text1);
 				text1.setText("Status");
 
@@ -174,7 +193,7 @@ class MyAdapter extends BaseAdapter {
 	public void addItem(Item item) {
 		items.add(item);
 	}
-	
+
 	public void addAllItems(ArrayList<Item> inputList) {
 		for (Item cur : inputList) {
 			items.add(cur);
