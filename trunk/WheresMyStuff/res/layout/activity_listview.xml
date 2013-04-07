@@ -11,16 +11,23 @@
 
         <Button
             android:id="@+id/liststuff_filter"
-            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:text="@string/liststuff_filter" />
 
         <Button
-            android:id="@+id/liststuff_logout"
-            android:layout_alignParentRight="true"
+            android:id="@+id/liststuff_addItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/liststuff_filter"
+            android:text="@string/liststuff_addItem" />
+
+        <Button
+            android:id="@+id/liststuff_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:text="@string/liststuff_logout" />
     </RelativeLayout>
 
