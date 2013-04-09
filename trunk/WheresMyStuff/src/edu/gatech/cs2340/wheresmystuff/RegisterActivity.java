@@ -33,7 +33,7 @@ public class RegisterActivity extends Activity {
 	private String username;
 	private String password;
 	private Button registerButton;
-	private AlertDialog.Builder builder;
+	private AlertDialog.Builder alertBuilder;
 	//private DatabaseConnector db = new DatabaseConnector(RegisterActivity.this);
 	private UserVerifier uv;
 
@@ -52,9 +52,9 @@ public class RegisterActivity extends Activity {
 		View focusView = null;
 		boolean cancel = false;
 
-		builder = new AlertDialog.Builder(this);
-		builder.setMessage("Are you sure?").setPositiveButton("Yes", new DialogClickListener())
-	    .setNegativeButton("No", new DialogClickListener());
+		alertBuilder = new AlertDialog.Builder(this);
+		alertBuilder.setMessage("Are you sure?").setNegativeButton("No", new DialogClickListener())
+	    .setPositiveButton("Yes", new DialogClickListener());
 		
 		this.registerButton = (Button) this.findViewById(R.id.register_button);
 	    this.registerButton.setOnClickListener(new OnClickListener() {
@@ -71,30 +71,18 @@ public class RegisterActivity extends Activity {
 						focusView = passwordView;
 						cancel = true;
 					}
-                    else if (password.length() < 4) {
-						passwordView.setError(getString(R.string.error_invalid_password));
-						focusView = passwordView;
-						cancel = true;
-					}
+          
 					User newUser = new User(username, password, firstName, lastName, false,
 							false);
 					if (TextUtils.isEmpty(username)) {
 						emailView.setError(getString(R.string.error_field_required));
 						focusView = emailView;
 						cancel = true;
-					} else if (!username.contains("@") || !username.contains(".com")) {
-						emailView.setError(getString(R.string.error_invalid_email));
-						focusView = emailView;
-						cancel = true;
 					} 
 					// Check for a valid and non-duplicate email address.
-					if (cancel) {
-						// There was an error; don't attempt login and focus the first
-						// form field with an error.
-						focusView.requestFocus();
-					}
+					
 					else {			
-							builder.show();
+						    alertBuilder.show();
 							//startActivity(load);
 					}
 		    
