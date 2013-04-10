@@ -119,6 +119,33 @@ public class Database extends SQLiteOpenHelper {
 
 	}
 	
+	private ArrayList<Item> filterByName(){
+		ArrayList<Item> items = new ArrayList<Item>();
+		ArrayList<Item> currentItems = this.getAllItems();
+		int index = 0;
+		String firstItem = currentItems.get(0).getName();
+		
+
+			for(int x = 0; x < currentItems.size(); x++){//looping through the list and removing used items
+				for(int y = 0; y < currentItems.size(); y++){//comparing each name
+					for(int z = 0; z < firstItem.length(); z++){//comparing each letter
+						if(currentItems.get(y).getName().subString(z,z+1).equalsIgnoreCase(firstItem.subString(z,z+1)) == false){
+							if(currentItems.get(y).getName().subString(z,z+1).compareToIgnoreCase(firstItem.subString(z,z+1)) > 0){
+								firstItem = currentItems.get(y).getName();
+								index = y;
+							}
+							else{break;}
+						}
+						
+					}
+				}
+				items.add(firstItem);
+				currentItems.remove(index);
+			}
+
+		return items;
+	}
+	
 	private ArrayList<Item> filterByDate(){
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
