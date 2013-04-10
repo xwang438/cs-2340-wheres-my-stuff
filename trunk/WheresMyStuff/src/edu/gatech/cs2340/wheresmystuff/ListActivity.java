@@ -122,6 +122,17 @@ public class ListActivity extends Activity {
 
 				radioSearchGroup = (RadioGroup) dialog
 						.findViewById(R.id.radioSearch);
+				
+				Button searchButton = (Button) dialog
+						.findViewById(R.id.btnSearchForItems);
+				// if button is clicked, close the custom dialog
+				dialogButton.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+					}
+				});
+				
 				TextView text1 = (TextView) dialog.findViewById(R.id.text1);
 				text1.setText("Status");
 
@@ -173,7 +184,7 @@ public class ListActivity extends Activity {
  */
 class MyAdapter extends BaseAdapter {
 	private ArrayList<Item> items;
-	private TextView tvName, tvCategory, tvStatus;
+	private TextView tvName, tvCategory, tvStatus, tvDate;
 	private LayoutInflater inflater;
 	private Context context;
 
@@ -241,11 +252,13 @@ class MyAdapter extends BaseAdapter {
 			tvName = (TextView) convertView.findViewById(R.id.tv_name);
 			tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
 			tvCategory = (TextView) convertView.findViewById(R.id.tv_category);
+			tvDate = (TextView) convertView.findViewById(R.id.tv_date);
 
 			Item item = (Item) getItem(position);
 			tvName.setText(item.getName());
 			tvStatus.setText(item.getStatus().toString());
 			tvCategory.setText(item.getCategory().toString());
+			tvDate.setText (item.getDate().toString());
 
 		}
 		return convertView;
