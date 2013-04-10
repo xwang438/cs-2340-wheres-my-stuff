@@ -2,6 +2,7 @@ package edu.gatech.cs2340.wheresmystuff;
 
 import java.util.ArrayList;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -48,7 +49,7 @@ public class SearchActivity extends Activity {
 
 			RadioButton name = (RadioButton) findViewById(R.id.radioName);
 			RadioButton category = (RadioButton) findViewById(R.id.radioCategory);
-
+            RadioButton match = (RadioButton)findViewById(R.id.radioMatch);
 			if (name.isChecked()) {
 				// search by name
 				//ArrayList<Item> tempNames = SearchHelper
@@ -65,7 +66,11 @@ public class SearchActivity extends Activity {
 				//	adapterTemp.add(item.getName());
 				}
 			}
-
+            if(match.isChecked()){
+            	Intent intent = new Intent();
+				intent.setClass(SearchActivity.this,MatchActivity.class);
+				startActivity(intent);
+            }
 			// gets currently selected search type
 			RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioSearch);
 			int radioButtonID = radioGroup.getCheckedRadioButtonId();

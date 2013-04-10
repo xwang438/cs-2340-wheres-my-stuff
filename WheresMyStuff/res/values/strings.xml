@@ -18,6 +18,7 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="button_Name">Name</string>
     <string name="button_Category">Category</string>
+    <string name="button_Match">Match</string>
     <string name="button_Lost">Lost</string>
     <string name="button_List">List</string>
     <string name="button_Found">Found</string>
