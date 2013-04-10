@@ -207,7 +207,18 @@ public class Database extends SQLiteOpenHelper {
 		return found;
 	}
 	
-	
+	private Item searchByCategory(String category){
+		ArrayList<Item> searchList = this.filterByCategory();
+		Item found;
+		
+		for(int i =0; i < searchList.size(); i++){
+			if(find.equalsIgnoreCase(searchList.get(i).getCategory().toString)){
+				found = searchList.get(i);
+				break;
+			}
+		}
+		return found;
+	}
 
 	private Item cursorToItem(Cursor cursor) {
 		Item item = new Item();
