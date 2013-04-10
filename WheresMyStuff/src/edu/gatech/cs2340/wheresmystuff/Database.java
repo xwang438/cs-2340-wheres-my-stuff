@@ -129,8 +129,8 @@ public class Database extends SQLiteOpenHelper {
 			for(int x = 0; x < currentItems.size(); x++){//looping through the list and removing used items
 				for(int y = 0; y < currentItems.size(); y++){//comparing each name
 					for(int z = 0; z < firstItem.length(); z++){//comparing each letter
-						if(currentItems.get(y).getName().subString(z,z+1).equalsIgnoreCase(firstItem.subString(z,z+1)) == false){
-							if(currentItems.get(y).getName().subString(z,z+1).compareToIgnoreCase(firstItem.subString(z,z+1)) > 0){
+						if(currentItems.get(y).getName().substring(z,z+1).equalsIgnoreCase(firstItem.substring(z,z+1)) == false){
+							if(currentItems.get(y).getName().substring(z,z+1).compareToIgnoreCase(firstItem.substring(z,z+1)) > 0){
 								firstItem = currentItems.get(y).getName();
 								index = y;
 							}
@@ -139,7 +139,7 @@ public class Database extends SQLiteOpenHelper {
 						
 					}
 				}
-				items.add(firstItem);
+				items.add(currentItems.get(index));
 				currentItems.remove(index);
 			}
 
@@ -149,8 +149,8 @@ public class Database extends SQLiteOpenHelper {
 	private ArrayList<Item> filterByDate(){//NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
-		int lowDate;
-		int lowIndex;
+		int lowDate = 0;
+		int lowIndex = 0;
 		
 		
 		for(int x = 0; x < currentItems.size(); x++){
@@ -159,7 +159,7 @@ public class Database extends SQLiteOpenHelper {
 					lowDate = Integer.parseInt(currentItems.get(i).getDate());
 					lowIndex = i;}
 				else{
-					if(lowDate > Integer.parseInt(currentItems.get(i).getDate());){
+					if(lowDate > Integer.parseInt(currentItems.get(i).getDate())){
 						lowDate = Integer.parseInt(currentItems.get(i).getDate());
 						lowIndex = i;}
 				}
@@ -195,7 +195,7 @@ public class Database extends SQLiteOpenHelper {
 	
 	private Item searchByName(String find){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByName();
-		Item found;
+		Item found = null;
 		
 		for(int i = 0; i < searchList.size(); i++){
 			if(find.equalsIgnoreCase(searchList.get(i).getName())){
@@ -209,10 +209,10 @@ public class Database extends SQLiteOpenHelper {
 	
 	private Item searchByCategory(String category){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByCategory();
-		Item found;
+		Item found = null;
 		
 		for(int i =0; i < searchList.size(); i++){
-			if(find.equalsIgnoreCase(searchList.get(i).getCategory().toString)){
+			if(category.equalsIgnoreCase(searchList.get(i).getCategory().toString())){
 				found = searchList.get(i);
 				break;
 			}
