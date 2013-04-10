@@ -36,7 +36,7 @@
     <string name="LostStuff">Lost Stuff Information</string>
     <string name="loststuff_loc">Where did you last see your item?</string>
     <string name="loststuff_cat">Category of Your Item</string>
-    <string name="loststuff_date">When did you lose it?</string>
+    <string name="loststuff_date">When did you lose it? (yyyy/mm/dd)</string>
     <string name="loststuff_cancel">Cancel</string>
     <string name="loststuff_prize">Any reward for getting back this stuff?</string>
     <string name="loststuff_title">Lost Stuff Information</string>
