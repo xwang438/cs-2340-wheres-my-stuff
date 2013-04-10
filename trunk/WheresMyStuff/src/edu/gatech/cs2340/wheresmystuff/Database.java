@@ -119,7 +119,7 @@ public class Database extends SQLiteOpenHelper {
 
 	}
 	
-	private ArrayList<Item> filterByName(){
+	private ArrayList<Item> filterByName(){//NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
 		int index = 0;
@@ -146,7 +146,7 @@ public class Database extends SQLiteOpenHelper {
 		return items;
 	}
 	
-	private ArrayList<Item> filterByDate(){
+	private ArrayList<Item> filterByDate(){//NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
 		int lowDate;
@@ -170,7 +170,7 @@ public class Database extends SQLiteOpenHelper {
 		return items;
 	}
 	
-	private ArrayList<Item> filterByCategory(){
+	private ArrayList<Item> filterByCategory(){//NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
 		ArrayList<String> categs = new ArrayList<String>();
@@ -193,7 +193,7 @@ public class Database extends SQLiteOpenHelper {
 		return items;
 	}
 	
-	private Item searchByName(String find){
+	private Item searchByName(String find){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByName();
 		Item found;
 		
@@ -207,7 +207,7 @@ public class Database extends SQLiteOpenHelper {
 		return found;
 	}
 	
-	private Item searchByCategory(String category){
+	private Item searchByCategory(String category){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByCategory();
 		Item found;
 		
