@@ -119,7 +119,7 @@ public class Database extends SQLiteOpenHelper {
 
 	}
 	
-	private ArrayList<Item> filterByDate(ArrayList<Item> array){
+	private ArrayList<Item> filterByDate(){
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
 		int lowDate;
@@ -137,8 +137,31 @@ public class Database extends SQLiteOpenHelper {
 						lowIndex = i;}
 				}
 			}
-			items.add(x, currentItems.get(lowIndex));
+			items.add(currentItems.get(lowIndex));
 			currentItems.remove(lowIndex);
+		}
+		return items;
+	}
+	
+	private ArrayList<Item> filterByCategory(){
+		ArrayList<Item> items = new ArrayList<Item>();
+		ArrayList<Item> currentItems = this.getAllItems();
+		ArrayList<String> categs = new ArrayList<String>();
+		categs.add("Personal Item");
+		categs.add("Appliance");
+		categs.add("Furniture");
+		
+		
+		
+		for(int x = 0; x < categs.size(); x++){
+			for(int i = 0; i < currentItems.size(); i++){
+				for(int y = 0; y < currentItems.size(); y++){
+					if(categs.get(x).toString().equals(currentItems.get(y).getCategory().toString())){
+						items.add(currentItems.get(y));
+						currentItems.remove(y);
+					}
+				}				
+			}
 		}
 		return items;
 	}
