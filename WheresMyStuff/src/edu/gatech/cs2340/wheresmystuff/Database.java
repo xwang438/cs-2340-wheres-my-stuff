@@ -118,6 +118,30 @@ public class Database extends SQLiteOpenHelper {
 		return items;
 
 	}
+	
+	private ArrayList<Item> filterByDate(ArrayList<Item> array){
+		ArrayList<Item> items = new ArrayList<Item>();
+		ArrayList<Item> currentItems = this.getAllItems();
+		int lowDate;
+		int lowIndex;
+		
+		
+		for(int x = 0; x < currentItems.size(); x++){
+			for(int i = 0; i < currentItems.size(); i++){
+				if(i == 0){
+					lowDate = Integer.parseInt(currentItems.get(i).getDate());
+					lowIndex = i;}
+				else{
+					if(lowDate > Integer.parseInt(currentItems.get(i).getDate());){
+						lowDate = Integer.parseInt(currentItems.get(i).getDate());
+						lowIndex = i;}
+				}
+			}
+			items.add(x, currentItems.get(lowIndex));
+			currentItems.remove(lowIndex);
+		}
+		return items;
+	}
 
 	private Item cursorToItem(Cursor cursor) {
 		Item item = new Item();
