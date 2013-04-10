@@ -123,15 +123,15 @@ public class ListActivity extends Activity {
 				radioSearchGroup = (RadioGroup) dialog
 						.findViewById(R.id.radioSearch);
 				
-				Button searchButton = (Button) dialog
-						.findViewById(R.id.btnSearchForItems);
-				// if button is clicked, close the custom dialog
-				dialogButton.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-					}
-				});
+//				Button searchButton = (Button) dialog
+//						.findViewById(R.id.btnSearchForItems);
+//				// if button is clicked, close the custom dialog
+//				dialogButton.setOnClickListener(new OnClickListener() {
+//					@Override
+//					public void onClick(View v) {
+//						dialog.dismiss();
+//					}
+//				});
 				
 				TextView text1 = (TextView) dialog.findViewById(R.id.text1);
 				text1.setText("Status");
