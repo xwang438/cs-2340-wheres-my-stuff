@@ -66,34 +66,6 @@ public class LostActivity extends Activity {
 		categorySpinner = (Spinner) findViewById(R.id.spinner2);
 		categorySpinner.setAdapter(adapter2);
 
-		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item);
-		adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		adapter1.add("Status");
-		adapter1.add("Lost");
-		adapter1.add("Found");
-		spinner3 = (Spinner) findViewById(R.id.spinner3);
-		spinner3.setAdapter(adapter1);
-		spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> adapterView, View view,
-					int position, long id) {
-
-				Spinner spinner = (Spinner) adapterView;
-
-				String itemContent = (String) adapterView
-						.getItemAtPosition(position);
-
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> view) {
-
-				Log.i(TAG, view.getClass().getName());
-
-			}
-		});
 
 		findViewById(R.id.loststuff_submit).setOnClickListener(
 				new View.OnClickListener() {
@@ -132,22 +104,8 @@ public class LostActivity extends Activity {
 
 				}
 
-				ItemStatus status;
-				switch (spinner3.getSelectedItemPosition()) {
-				case 1:
-					status = ItemStatus.Lost;
-					break;
-				case 2:
-					status = ItemStatus.Found;
-					break;
-
-				default:
-					status = ItemStatus.Lost;
-					break;
-
-				}
 				newLost.setCategory(category);
-				newLost.setStatus(status);
+				newLost.setStatus(ItemStatus.Lost);
 				newLost.setDate(stuffdate.getText().toString());
 				newLost.setLocation(stuffloc.getText().toString());
 				

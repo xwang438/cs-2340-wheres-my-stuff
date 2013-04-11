@@ -30,6 +30,10 @@
     <string name="edit_lastName">&quot;Last Name&quot;</string>
     <string name="register_button">Register</string>
     <string name="edit_email">Email</string>
+    <string name="item_name">Name</string>
+    <string name="item_status">Status</string>
+    <string name="item_category">Category</string>
+    <string name="item_date">Date</string>
     <string name="edit_password">Password</string>
     <string name="loststuff_name">Name of Your Lost Item</string>
     <string name="loststuff_submit">Submit</string>
@@ -47,7 +51,7 @@
     <string name="find_submit">Submit</string>
     <string name="FindStuff">Found Stuff Information</string>
     <string name="find_loc">Where did you find this item?</string>
-    <string name="find_date">When did you find it?</string>
+    <string name="find_date">When did you find it? (yyyy/mm/dd)</string>
     <string name="find_cancel">Cancel</string>
     <string name="find_prize">Ask reward for giving back this stuff?</string>
     <string name="find_title">Found Stuff Information</string>

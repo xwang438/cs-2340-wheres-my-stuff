@@ -116,6 +116,8 @@ public class FoundActivity extends Activity {
 			public void onClick(View v) {
 
 				Item newFound = new Item(findname.getText().toString());
+				
+				String date = finddate.getText().toString();
 				ItemCategory category;
 				switch (categorySpinner.getSelectedItemPosition()) {
 				case 1:
@@ -152,6 +154,7 @@ public class FoundActivity extends Activity {
 
 				newFound.setStatus(status);
 				newFound.setCategory(category);
+				newFound.setDate(date);
 
 				/* now save to DB */
 				db.insertItem(newFound);
