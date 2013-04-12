@@ -41,6 +41,7 @@ public class ListActivity extends Activity {
 	private Button button;
 	private Button button1;
 	private Button button2;
+	private Button button3;
 	private Button addButton;
 	private RadioGroup radioSearchGroup;
 	private RadioGroup radioStatusGroup;
@@ -114,6 +115,16 @@ public class ListActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(ListActivity.this, MatchActivity.class);
+		//		intent.putExtra("VERIFIER", uv);
+				startActivity(intent);
+			}
+		});
+		this.button3 = (Button) this.findViewById(R.id.liststuff_search);
+		this.button3.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(ListActivity.this, SearchActivity.class);
 		//		intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
