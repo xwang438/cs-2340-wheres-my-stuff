@@ -21,11 +21,19 @@ public class SearchActivity extends Activity {
 	private ArrayAdapter<String> adapterItems;
 	private ArrayAdapter<String> adapterTemp;
 	private ListView itemsList;
+	private Database db;//NEW - NEW - NEW
+	private UserVerifier uv;//NEW - NEW - NEW
+	private Context context;//NEW - NEW - NEW
+	
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listview);
+		context = getApplicationContext();//NEW - NEW - NEW
+		db = new Database(context);//NEW - NEW - NEW
+		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");//NEW - NEW - NEW
 
 		// item List array of strings that appears on screen
 		itemsList = (ListView) findViewById(R.id.listview);
@@ -51,21 +59,27 @@ public class SearchActivity extends Activity {
 			RadioButton category = (RadioButton) findViewById(R.id.radioCategory);
 
 			if (name.isChecked()) {
+				Item foundItem = db.searchByName(searchCriteria);
+				adapterTemp.clear();
+				adapterTemp.add(foundItem);
 				// search by name
 				//ArrayList<Item> tempNames = SearchHelper
 				//		.searchByName(searchCriteria);
 				//for (Item item : tempNames) {
 					//adapterTemp.add(item.getName());
 				//}
-			//}
+			}
 			if (category.isChecked()) {
+				Item foundItem = db.searchByCategory(searchCriteria);
+				adapterTemp.clear();
+				adapterTemp.add(foundItem);
 				// search by category
 			//	ArrayList<Item> tempCategories = SearchHelper
 				//		.searchByCategory(searchCriteria);
 				//for (Item item : tempCategories) {
 				//	adapterTemp.add(item.getName());
 				}
-			}
+			
             
 			// gets currently selected search type
 			RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioSearch);
