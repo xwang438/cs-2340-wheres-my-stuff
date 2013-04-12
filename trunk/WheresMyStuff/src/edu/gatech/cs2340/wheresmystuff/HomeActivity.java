@@ -17,13 +17,17 @@ public class HomeActivity extends Activity {
 	// private DatabaseConnector DB;
 	private Button lostButton, adminButton, logoutButton, button1, findButton;
 	private UserVerifier uv;
+	private User loggedInUser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
-
-		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		
+		uv = new UserVerifier(this);
+		//uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		loggedInUser = (User)this.getIntent().getSerializableExtra("LOGGED_IN_USER");
+		
 		/**
 		 * Set the intent between HomeActivity and LostActivity. The user could
 		 * be able to input their lost stuff information after they confirm that
@@ -35,7 +39,8 @@ public class HomeActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(HomeActivity.this, LostActivity.class);
-				intent.putExtra("VERIFIER", uv);
+				//intent.putExtra("VERIFIER", uv);
+				intent.putExtra("LOGGED_IN_USER", loggedInUser);
 				startActivity(intent);
 			}
 		});
@@ -45,7 +50,8 @@ public class HomeActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(HomeActivity.this, FoundActivity.class);
-				intent.putExtra("VERIFIER", uv);
+				//intent.putExtra("VERIFIER", uv);
+				intent.putExtra("LOGGED_IN_USER", loggedInUser);
 				startActivity(intent);
 			}
 		});
@@ -56,7 +62,8 @@ public class HomeActivity extends Activity {
 
 						Intent intent = new Intent();
 						intent.setClass(HomeActivity.this, ListActivity.class);
-						intent.putExtra("VERIFIER", uv);
+						//intent.putExtra("VERIFIER", uv);
+						intent.putExtra("LOGGED_IN_USER", loggedInUser);
 						startActivity(intent);
 					}
 				});
@@ -69,10 +76,11 @@ public class HomeActivity extends Activity {
 		this.adminButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (uv.getLoggedInUser().isAdmin()) {
+				if (loggedInUser.isAdmin()) {
 					Intent intent = new Intent();
 					intent.setClass(HomeActivity.this, AdminActivity.class);
-					intent.putExtra("VERIFIER", uv);
+					//intent.putExtra("VERIFIER", uv);
+					intent.putExtra("LOGGED_IN_USER", loggedInUser);
 					startActivity(intent);
 				}
 			}
@@ -91,7 +99,8 @@ public class HomeActivity extends Activity {
 				// the first user account.
 				Intent intent = new Intent();
 				intent.setClass(HomeActivity.this, LoginActivity.class);
-				intent.putExtra("VERIFIER", uv);
+				//intent.putExtra("VERIFIER", uv);
+				//intent.putExtra("LOGGED_IN_USER", loggedInUser);
 				startActivity(intent);
 			}
 		});
