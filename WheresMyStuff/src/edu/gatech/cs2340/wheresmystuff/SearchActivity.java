@@ -21,9 +21,10 @@ public class SearchActivity extends Activity {
 	private ArrayAdapter<String> adapterItems;
 	private ArrayAdapter<String> adapterTemp;
 	private ListView itemsList;
-	private Database db;//NEW - NEW - NEW
-	private UserVerifier uv;//NEW - NEW - NEW
-	private Context context;//NEW - NEW - NEW
+	private Database db;
+	private UserVerifier uv;
+	private Context context;
+	private MyAdapter adapter;//NEW - NEW - NEW
 	
 	
 
@@ -31,13 +32,17 @@ public class SearchActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listview);
-		context = getApplicationContext();//NEW - NEW - NEW
-		db = new Database(context);//NEW - NEW - NEW
-		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");//NEW - NEW - NEW
-
+		context = getApplicationContext();
+		db = new Database(context);
+		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		ArrayList<Item> items = db.getAllItems();
+		
 		// item List array of strings that appears on screen
-		itemsList = (ListView) findViewById(R.id.listview);
-		itemsList.setAdapter(adapterItems);
+		//itemsList = (ListView) findViewById(R.id.listview);
+		adapter = new MyAdapter(this.getApplicationContext());
+		adapter.addAllItems(items);
+		itemsList.setAdapter(adapter);
+		
 
 		// Button listener for Search
 		findViewById(R.id.btnSearchForItems).setOnClickListener(
@@ -62,8 +67,8 @@ public class SearchActivity extends Activity {
 				Item foundItem = db.searchByName(searchCriteria);
 				if(foundItem == null){}
 				else{
-					adapterTemp.clear();
-					adapterTemp.add(foundItem);
+					//adapterTemp.clear();
+					adapter.add(foundItem);
 				}
 				// search by name
 				//ArrayList<Item> tempNames = SearchHelper
@@ -76,8 +81,8 @@ public class SearchActivity extends Activity {
 				Item foundItem = db.searchByCategory(searchCriteria);
 				if(foundItem == null){}
 				else{
-					adapterTemp.clear();
-					adapterTemp.add(foundItem);
+					//adapterTemp.clear();
+					adapter.add(foundItem);
 				}
 				// search by category
 			//	ArrayList<Item> tempCategories = SearchHelper
@@ -88,13 +93,13 @@ public class SearchActivity extends Activity {
 			
             
 			// gets currently selected search type
-			RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioSearch);
-			int radioButtonID = radioGroup.getCheckedRadioButtonId();
-			RadioButton rad = (RadioButton) findViewById(radioButtonID);
-			String type = rad.getText().toString();
+//			RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioSearch);
+//			int radioButtonID = radioGroup.getCheckedRadioButtonId();
+//			RadioButton rad = (RadioButton) findViewById(radioButtonID);
+//			String type = rad.getText().toString();
 
-			adapterItems = adapterTemp;
-			itemsList.setAdapter(adapterItems);
+			
+			itemsList.setAdapter(adapter);
 
 			finish();
 		}
