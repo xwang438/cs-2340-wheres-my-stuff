@@ -2,8 +2,9 @@
 
 package edu.gatech.cs2340.wheresmystuff;
 
+import java.util.ArrayList;
 import java.io.*;
-
+import android.content.Context;
 /**
  * M5
  * UserVerifier.java
@@ -17,9 +18,7 @@ import java.io.*;
  * passwords for the "Where's My Stuff" App
  **/
 
-public class UserVerifier implements Serializable {
-
-	private static final long serialVersionUID = 200;
+public class UserVerifier {
 	
 	private static String[] usernames = {"admin@gatech.edu", "user1@gmail.com", "user2@gmail.com", "newAdmin@gatech.edu"};
 	private static String[] passwords = {"admin1", "user1", "user2", "newAdmin"};
@@ -27,6 +26,7 @@ public class UserVerifier implements Serializable {
 	private static String[] lastNames = {"min", "1", "2", "Admin"};
 	private static boolean[] locked = {false, false, true, false};
 	private static boolean[] admins = {true, false, false, true};
+	private ArrayList<User> users;
 	//private static String[] usernames;
 	//private static String[] passwords;
 	private int userIndex;
@@ -34,20 +34,20 @@ public class UserVerifier implements Serializable {
 	@SuppressWarnings("unused")
 	private User loggedInUser;
 	private User defaultAdminUser;
-	private TextFile usersFile;
-	
+	//private TextFile usersFile;
+	private UserDatabase udb;
 	
 	// Basic constructor, creates a "default" username and password for demo
 	// purposes
-	public UserVerifier() {
+	public UserVerifier(Context context) {
 		//try {
-			defaultAdminUser = new User("admin@gatech.edu", "admin1", "Ad", "Min", false, true);
+			defaultAdminUser = new User(0,"admin@gatech.edu", "admin1", "Ad", "Min", false, true);
 			
+			udb = new UserDatabase(context);
 			//usersFile = new TextFile("file:///android_asset/users.txt");
 			//usersFile.addUser(defaultAdminUser);
-			//usernames = usersFile.getUsernames();
-			//passwords = usersFile.getPasswords();
-			
+			users = udb.getAllUsers();
+			addUser(defaultAdminUser);
 			//addUser(defaultAdminUser);
 			
 			userIndex = -1;
@@ -66,11 +66,11 @@ public class UserVerifier implements Serializable {
 	 * @return returns the found username as a string
 	 */
 	public String getUser(int index) {
-		if (index > usernames.length) {
+		if (index > users.size()) {
 			System.out.println("Invalid Index");
 			return null;
 		} else {
-			return usernames[index];
+			return users.get(index).getUsername();
 		}
 	}
 
@@ -82,11 +82,11 @@ public class UserVerifier implements Serializable {
 	 * @return returns the found password as a string
 	 */
 	public String getPassword(int index) {
-		if (index > passwords.length) {
+		if (index > users.size()) {
 			System.out.println("Invalid Index");
 			return null;
 		} else {
-			return passwords[index];
+			return users.get(index).getPassword();
 		}
 	}
 
@@ -98,8 +98,8 @@ public class UserVerifier implements Serializable {
 	 * @return returns true if the username exists, false is it doesn't
 	 */
 	public boolean checkUsername(String user) {
-		for (int i = 0; i < usernames.length; i++) {
-			if (usernames[i].equals(user)) {
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUsername().equals(user)) {
 				userIndex = i;
 				return true;
 			}
@@ -115,7 +115,7 @@ public class UserVerifier implements Serializable {
 	 * @return returns true if the password exists, false is it doesn't
 	 */
 	public boolean checkPassword(String pass) {
-		if (passwords[userIndex].equals(pass)) {
+		if (users.get(userIndex).getPassword().equals(pass)) {
 			userIndex = -1;
 			return true;
 		}
@@ -132,8 +132,8 @@ public class UserVerifier implements Serializable {
 	 *         arrays, false if the user name already exists
 	 */
 	public Boolean addUser(String newUser, String newPassword) {
-		for (int i = 0; i < usernames.length; i++) {
-			if (usernames[i]!= null && usernames[i].equals(newUser)) {
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i) != null && users.get(i).getUsername().equals(newUser)) {
 				System.out.println("Username already exists.");
 				return false;
 			}
@@ -141,17 +141,8 @@ public class UserVerifier implements Serializable {
 		//try {
 			//usersFile.addUser(new User(newUser, newPassword));
 		
-		String[] tempUsers = usernames;
-		usernames = new String[usernames.length + 1];
-		String[] tempPass = passwords;
-		passwords = new String[passwords.length + 1];
-		for (int i = 0; i < tempUsers.length; i++) {
-			usernames[i] = tempUsers[i];
-			passwords[i] = tempPass[i];
-		}
-		usernames[usernames.length - 1] = newUser;
-		passwords[passwords.length - 1] = newPassword;
-		
+		udb.insertUser(new User(newUser, newPassword));
+		users = udb.getAllUsers();
 		//	usernames = usersFile.getUsernames();
 		//	passwords = usersFile.getPasswords();
 		//} catch (IOException e) {
@@ -161,26 +152,29 @@ public class UserVerifier implements Serializable {
 	}
 	
 	public Boolean removeUser(String username) {
-		for (int i = 0; i < usernames.length; i++) {
-			if (usernames[i]!= null && usernames[i].equals(username)) {
-				String[] tempUsers = usernames;
-				usernames = new String[usernames.length - 1];
-				String[] tempPass = passwords;
-				passwords = new String[passwords.length - 1];
-				
-				int k = 0;
-				for (int j = 0; j < tempUsers.length; j++) {
-					
-					if(i == j) j++;
-					else {
-						usernames[k] = tempUsers[j];
-						passwords[k] = tempPass[j];
-					}
-					k++;
-				}
-				return true;
-			}
-		}
+		
+		udb.deleteUser(udb.searchByUsername(username));
+		users = udb.getAllUsers();
+		//for (int i = 0; i < usernames.length; i++) {
+		//	if (usernames[i]!= null && usernames[i].equals(username)) {
+		//		String[] tempUsers = usernames;
+		//		usernames = new String[usernames.length - 1];
+		//		String[] tempPass = passwords;
+		//		passwords = new String[passwords.length - 1];
+		//		
+		//		int k = 0;
+		//		for (int j = 0; j < tempUsers.length; j++) {
+		//			
+		//			if(i == j) j++;
+		//			else {
+		//				usernames[k] = tempUsers[j];
+		//				passwords[k] = tempPass[j];
+		//			}
+		//			k++;
+		//		}
+		//		return true;
+		//	}
+		//}
 		//try {
 			//usersFile.addUser(new User(newUser, newPassword));
 		
@@ -189,29 +183,31 @@ public class UserVerifier implements Serializable {
 		//} catch (IOException e) {
 		//	System.out.println(e.getMessage());
 		//}
-		return false;
+		return true;
 	}
 	
 	public Boolean addUser(User user) {
-		for (int i = 0; i < usernames.length; i++) {
-			if (usernames[i]!= null && usernames[i].equals(user.getUsername())) {
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i)!= null && users.get(i).getUsername().equals(user.getUsername())) {
 				System.out.println("Username already exists.");
 				return false;
 			}
 		}
 		//try {
 		//usersFile.addUser(user);
-		
-		String[] tempUsers = usernames;
-		usernames = new String[usernames.length + 1];
-		String[] tempPass = passwords;
-		passwords = new String[passwords.length + 1];
-		for (int i = 0; i < tempUsers.length; i++) {
-			usernames[i] = tempUsers[i];
-			passwords[i] = tempPass[i];
-		}
-		usernames[usernames.length - 1] = user.getUsername();
-		passwords[passwords.length - 1] = user.getPassword();
+		System.out.println("Well, it made it here.");
+		udb.insertUser(user);
+		users = udb.getAllUsers();
+		//String[] tempUsers = usernames;
+		//usernames = new String[usernames.length + 1];
+		//String[] tempPass = passwords;
+		//passwords = new String[passwords.length + 1];
+		//for (int i = 0; i < tempUsers.length; i++) {
+		//	usernames[i] = tempUsers[i];
+		//	passwords[i] = tempPass[i];
+		//}
+		//usernames[usernames.length - 1] = user.getUsername();
+		//passwords[passwords.length - 1] = user.getPassword();
 		
 		//usernames = usersFile.getUsernames();
 		//passwords = usersFile.getPasswords();
@@ -243,11 +239,10 @@ public class UserVerifier implements Serializable {
 	}
 
 	public User makeLoggedInUser(String username) {
-		User user = new User("", "");
-		for (int i = 0; i < usernames.length; i++) {
-			if (usernames[i].equals(username)) {
-				user = new User(usernames[i], passwords[i], firstNames[i], lastNames[i], locked[i], admins[i]);
-				
+		User user = null;
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUsername().equals(username)) {
+				user = users.get(i);
 			}
 		}
 		return user;
@@ -271,26 +266,41 @@ public class UserVerifier implements Serializable {
 	}
 
 	
+	public ArrayList<User> getUsers() {
+		return users;
+	}
+	
 	public User getLoggedInUser() {
 		return loggedInUser;
 	}
 	
 	public String[] getUsernames() {
-		return usernames;
+		String[] uns = new String[users.size()];
+		for(int i = 0; i < users.size(); i++)
+			uns[i] = users.get(i).getUsername();
+		return uns;
 	}
 	
 	public String[] getPasswords() {
-		return passwords;
+		String[] pws = new String[users.size()];
+		for(int i = 0; i < users.size(); i++)
+			pws[i] = users.get(i).getPassword();
+		return pws;
 	}
 	
 	public void setLocked(int i, boolean lock) {
-		locked[i] = lock;
+		//locked[i] = lock;
+		udb.updateUser(new User(i, users.get(i).getUsername(),
+				users.get(i).getPassword(), users.get(i).getFirstName(),
+				users.get(i).getLastName(), lock, users.get(i).isAdmin()));
 	}
 	
 	public void setAdmin(int i, boolean admin) {
-		admins[i] = admin;
+		//admins[i] = admin;
+		udb.updateUser(new User(i, users.get(i).getUsername(),
+				users.get(i).getPassword(), users.get(i).getFirstName(),
+				users.get(i).getLastName(), users.get(i).isLocked(), admin));
 	}
-	
 	
 	/**
 	 * 
