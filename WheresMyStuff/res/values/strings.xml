@@ -18,7 +18,6 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="button_Name">Name</string>
     <string name="button_Category">Category</string>
-    <string name="button_Match">Match</string>
     <string name="button_Lost">Lost</string>
     <string name="button_List">List</string>
     <string name="button_Found">Found</string>
@@ -61,6 +60,7 @@
     <string name="liststuff_logout">Log out</string>
     <string name="liststuff_filter">Filter</string>
     <string name="liststuff_addItem">Add Item</string>
+    <string name="liststuff_match">Match</string>   
     <string name="admin_makeAdmin">Make Admin</string>
     <string name="admin_removeUser">Remove User</string>
     <string name="admin_lockUser">Lock User</string>
@@ -69,7 +69,7 @@
     <string name="title_activity_admin">AdminActivity</string>
     <string name="home_logOut">Logout</string>
     <string name="category_prompt">Choose a category</string>
-
+    <string name="match_logout">Log out</string>
     <string-array name="category_arrays">
         <item>Furnitures</item>
         <item>Personal Items</item>

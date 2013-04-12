@@ -29,6 +29,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="@string/liststuff_logout" />
+
+        <Button
+            android:id="@+id/liststuff_match"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/liststuff_addItem"
+            android:text="@string/liststuff_match" />
+
     </RelativeLayout>
 
     <ListView

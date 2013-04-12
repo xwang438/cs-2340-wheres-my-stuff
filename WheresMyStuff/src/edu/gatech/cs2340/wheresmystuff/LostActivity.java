@@ -34,7 +34,8 @@ public class LostActivity extends Activity {
 	private Context context;
 
 	private UserVerifier uv;
-
+	public String lostCategory;
+    public String lostName;
 	/**
 	 * On create, this method sets up all the instance variables of text from
 	 * the UI. And sets up an on click listener for the Register button
@@ -103,7 +104,7 @@ public class LostActivity extends Activity {
 					break;
 
 				}
-
+                lostCategory = category.toString();
 				newLost.setCategory(category);
 				newLost.setStatus(ItemStatus.Lost);
 				newLost.setDate(stuffdate.getText().toString());
@@ -155,7 +156,7 @@ public class LostActivity extends Activity {
 	public void createNewLost() {
 		// Do something.
 
-		String newName = stuffname.getText().toString();
+		lostName = stuffname.getText().toString();
 
 	}
 

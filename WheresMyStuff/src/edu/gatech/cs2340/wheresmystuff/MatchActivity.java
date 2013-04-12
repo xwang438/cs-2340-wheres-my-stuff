@@ -3,6 +3,11 @@ package edu.gatech.cs2340.wheresmystuff;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+
+
+import edu.gatech.cs2340.wheresmystuff.Item.ItemStatus;
+import edu.gatech.cs2340.wheresmystuff.LostActivity;
+
 //import edu.gatech.cs2340.wheresmystuff.SearchActivity.SearchItemClickListener;
 
 import android.app.Activity;
@@ -29,17 +34,16 @@ import android.widget.AdapterView.OnItemClickListener;
 @SuppressWarnings("unused")
 /**
  * 
- * @author Bongsu Kim
- *this is list of lost items.
+ * @author Xinlu Wang
+ *this is list of matched items.
  *
  */
 public class MatchActivity extends Activity {
 	private Context context;
 	private MyAdapter2 adapter;
-	private ListView listViewItems;
+	private ListView MatchViewItems;
 	private EditText search;
 	private Button button;
-	private Button button1;
 	private Button addButton;
 	private RadioGroup radioSearchGroup;
 	private RadioGroup radioStatusGroup;
@@ -59,19 +63,19 @@ public class MatchActivity extends Activity {
 	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_listview);
+		setContentView(R.layout.activity_match);
 		context = getApplicationContext();
 		db = new Database(context);
 		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
 
 		ArrayList<Item> items = db.getAllItems();
 		adapter = new MyAdapter2(this.getApplicationContext());
-		listViewItems = (ListView) findViewById(R.id.listview);
+		MatchViewItems = (ListView) findViewById(R.id.matchview);
 
 		adapter.addAllItems(items);
 
-		listViewItems.setAdapter(adapter);
-		listViewItems
+		MatchViewItems.setAdapter(adapter);
+		MatchViewItems
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 					@Override
@@ -80,14 +84,14 @@ public class MatchActivity extends Activity {
 					 */
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int position, long arg3) {
-						Item item = (Item) listViewItems
+						Item item = (Item) MatchViewItems
 								.getItemAtPosition(position);
 					}
 				});
 		// Item item = (Item) this.getIntent().getSerializableExtra("ITEM");
 		// if (item != null)
 
-		this.button = (Button) this.findViewById(R.id.liststuff_logout);
+		this.button = (Button) this.findViewById(R.id.match_logout);
 		this.button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -97,6 +101,7 @@ public class MatchActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+
 	}
 
 	@Override
@@ -113,7 +118,8 @@ public class MatchActivity extends Activity {
  */
 class MyAdapter2 extends BaseAdapter {
 	private ArrayList<Item> items;
-	private TextView tvName, tvCategory, tvStatus;
+	private TextView tvName, tvCategory, tvStatus, tvDate;
+	private TextView tvName1, tvCategory1, tvStatus1, tvDate1;
 	private LayoutInflater inflater;
 	private Context context;
 
@@ -181,15 +187,37 @@ class MyAdapter2 extends BaseAdapter {
 			tvName = (TextView) convertView.findViewById(R.id.tv_name);
 			tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
 			tvCategory = (TextView) convertView.findViewById(R.id.tv_category);
-
-			
+			tvDate = (TextView) convertView.findViewById(R.id.tv_date);
 			Item item = (Item) getItem(position);
-			tvName.setText(item.getName());
-			tvStatus.setText(item.getStatus().toString());
-			tvCategory.setText(item.getCategory().toString());
-
+	        ArrayList<Item> matches = new ArrayList<Item>();
+			for(int i = 0; i < items.size(); i++){
+				Item curritem = items.get(i);
+				for(int j = 0; j<items.size();j++){
+					Item nextitem = items.get(j);
+					if(curritem.getStatus().toString() == "Lost" && nextitem.getStatus().toString() == "Found"
+							&& curritem.getName().toString().equals(nextitem.getName().toString()) && curritem.getCategory().toString().equals(nextitem.getCategory().toString())  )
+					{
+						matches.add(curritem);
+						matches.add(nextitem);
+					}
+				}
+			}
+				
+			if(position<matches.size()){
+				tvName.setText(matches.get(position).getName().toString());
+				tvCategory.setText(matches.get(position).getCategory().toString());
+				tvDate.setText(matches.get(position).getDate().toString());
+				tvStatus.setText(matches.get(position).getStatus().toString());
+			}
+			else
+			{
+		       tvName.setText(null);
+			   tvCategory.setText(null);
+			   tvDate.setText(null);
+			   tvStatus.setText(null);		
+			}
 		}
+			
 		return convertView;
 	}
 }
-
