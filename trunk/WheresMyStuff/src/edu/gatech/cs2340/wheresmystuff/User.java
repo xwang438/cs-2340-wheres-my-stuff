@@ -4,15 +4,17 @@ import java.io.*;
 
 public class User implements Serializable {
 	//instance variables
-	private static final long serialVersionUID = 100;
+	private int id;
 	private String username;
 	private String password;
 	private String firstName;
 	private String lastName;
 	private Boolean locked = false;
 	private Boolean admin = false;
+	private static final long serialVersionUID = 555;
 	
 	public User(String username, String password, String firstName, String lastName, Boolean locked, Boolean admin){
+		this.id = 1;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
@@ -21,8 +23,33 @@ public class User implements Serializable {
 		this.admin = admin;
 	}
 	
+	public User(int i, String username, String password, String firstName, String lastName, Boolean locked, Boolean admin){
+		this.id = i;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.locked = locked;
+		this.admin = admin;
+	}
+	
+	public User(){
+		this.username = "";
+		this.password = "";
+		this.firstName = "";
+		this.lastName = "";
+	}
+	
 	public User(String username, String password){
 		this(username, password, "New", "User", false, false);
+	}
+	
+	public int getID(){
+		return id;
+	}
+	
+	public void setID(int i){
+		this.id = i;
 	}
 	
 	public String getUsername(){
@@ -41,7 +68,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 	
-	public String getFirstname(){
+	public String getFirstName(){
 		return firstName;
 	}
 	
@@ -49,7 +76,7 @@ public class User implements Serializable {
 		this.firstName = firstName;
 	}
 	
-	public String getLastname(){
+	public String getLastName(){
 		return lastName;
 	}
 	
@@ -61,19 +88,15 @@ public class User implements Serializable {
 		return admin;
 	}
 	
-	public void setAsAdmin(){
-		admin = true;
+	public void setAdmin(boolean a){
+		admin = a;
 	}
 	
 	public boolean isLocked(){
 		return locked;
 	}
-	public void lockAccount(){
-		locked = true;
-	}
 	
-	public void unlockAccount(){
-		locked = false;
+	public void setLocked(boolean l){
+		locked = l;
 	}
-	
 }
