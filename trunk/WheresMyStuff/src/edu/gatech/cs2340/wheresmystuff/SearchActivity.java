@@ -60,8 +60,11 @@ public class SearchActivity extends Activity {
 
 			if (name.isChecked()) {
 				Item foundItem = db.searchByName(searchCriteria);
-				adapterTemp.clear();
-				adapterTemp.add(foundItem);
+				if(foundItem == null){}
+				else{
+					adapterTemp.clear();
+					adapterTemp.add(foundItem);
+				}
 				// search by name
 				//ArrayList<Item> tempNames = SearchHelper
 				//		.searchByName(searchCriteria);
@@ -71,8 +74,11 @@ public class SearchActivity extends Activity {
 			}
 			if (category.isChecked()) {
 				Item foundItem = db.searchByCategory(searchCriteria);
-				adapterTemp.clear();
-				adapterTemp.add(foundItem);
+				if(foundItem == null){}
+				else{
+					adapterTemp.clear();
+					adapterTemp.add(foundItem);
+				}
 				// search by category
 			//	ArrayList<Item> tempCategories = SearchHelper
 				//		.searchByCategory(searchCriteria);
