@@ -157,7 +157,7 @@ public class Database extends SQLiteOpenHelper {
 		for(int x = 0; x < currentItems.size(); x++){
 			for(int i = 0; i < currentItems.size(); i++){
 				if(i == 0){
-					low = currentItems.get(i).getDate();//2013/02/02
+					low = currentItems.get(i).getDate();//sample date: 2013/02/02
 					lowDate = Integer.parseInt(low.substring(0,4) + low.substring(5,7) + low.substring(8));
 					lowIndex = i;}
 				else{
@@ -195,7 +195,7 @@ public class Database extends SQLiteOpenHelper {
 		return items;
 	}
 	
-	private Item searchByName(String find){//NEW - NEW - NEW
+	public Item searchByName(String find){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByName();
 		Item found = null;
 		
@@ -209,7 +209,7 @@ public class Database extends SQLiteOpenHelper {
 		return found;
 	}
 	
-	private Item searchByCategory(String category){//NEW - NEW - NEW
+	public Item searchByCategory(String category){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByCategory();
 		Item found = null;
 		
