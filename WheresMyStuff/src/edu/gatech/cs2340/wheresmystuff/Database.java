@@ -150,13 +150,15 @@ public class Database extends SQLiteOpenHelper {
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
 		int lowDate = 0;
+		String low;
 		int lowIndex = 0;
 		
 		
 		for(int x = 0; x < currentItems.size(); x++){
 			for(int i = 0; i < currentItems.size(); i++){
 				if(i == 0){
-					lowDate = Integer.parseInt(currentItems.get(i).getDate());
+					low = currentItems.get(i).getDate();//2013/02/02
+					lowDate = Integer.parseInt(low.substring(0,4) + low.substring(5,7) + low.substring(8));
 					lowIndex = i;}
 				else{
 					if(lowDate > Integer.parseInt(currentItems.get(i).getDate())){
