@@ -36,6 +36,7 @@ public class RegisterActivity extends Activity {
 	private AlertDialog.Builder alertBuilder;
 	//private DatabaseConnector db = new DatabaseConnector(RegisterActivity.this);
 	private UserVerifier uv;
+	private User loggedInUser;
 
 	/**
 	 * On create, this method sets up all the instance variables of text from
@@ -43,8 +44,11 @@ public class RegisterActivity extends Activity {
 	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_register);	
-		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		setContentView(R.layout.activity_register);
+		//if(this.getIntent().hasExtra("VERIFIER"))
+			//uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		//else
+			uv = new UserVerifier(this);
 		emailView = (EditText) findViewById(R.id.edit_email);
 		passwordView = (EditText) findViewById(R.id.edit_password);
 		firstNameView = (EditText) findViewById(R.id.edit_firstName);
@@ -72,7 +76,7 @@ public class RegisterActivity extends Activity {
 						cancel = true;
 					}
           
-					User newUser = new User(username, password, firstName, lastName, false,
+					User newUser = new User(2, username, password, firstName, lastName, false,
 							false);
 					if (TextUtils.isEmpty(username)) {
 						emailView.setError(getString(R.string.error_field_required));
@@ -107,6 +111,7 @@ public class RegisterActivity extends Activity {
 					false);
 		    //Adds the users credentials to the arrays in User Verifier
 		    uv.addUser(newUser);
+		    loggedInUser = uv.getLoggedInUser();
 	    }
 		private class DialogClickListener implements DialogInterface.OnClickListener{
 
@@ -123,7 +128,8 @@ public class RegisterActivity extends Activity {
 					createNewAccount();
 				    Intent intent1 = new Intent();
 				    intent1.setClass(RegisterActivity.this, HomeActivity.class);
-				    intent1.putExtra("VERIFIER", uv);
+				    //intent1.putExtra("VERIFIER", uv);
+				    intent1.putExtra("LOGGED_IN_USER", loggedInUser);
 				    startActivity(intent1);
 		        	break;
 		        case DialogInterface.BUTTON_NEGATIVE:
