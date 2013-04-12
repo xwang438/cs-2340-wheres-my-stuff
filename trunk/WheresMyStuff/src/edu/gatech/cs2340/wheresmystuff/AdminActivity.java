@@ -1,6 +1,6 @@
 package edu.gatech.cs2340.wheresmystuff;
 
-import android.widget.RadioButton;
+import android.widget.*;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -21,7 +21,10 @@ public class AdminActivity extends Activity {
 
 	private EditText userToModifyField;
 	private Button submitButton,cancelButton; //STOP CALLING YOUR BUTTONS "button"
+	private RadioButton makeAdminButton, removeUserButton, lockUserButton, unlockUserButton;
+	private RadioGroup radioGroup;
 	private UserVerifier uv;
+	private User loggedInUser;
 	/**
 	 * On create, this method sets up all the instance variables of text from the UI. And sets up an on click listener
 	 * for the Submit button
@@ -31,15 +34,16 @@ public class AdminActivity extends Activity {
 		setContentView(R.layout.activity_admin);
 		
 		userToModifyField = (EditText) findViewById(R.id.admin_textField);
-		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		uv = new UserVerifier(this);
+		loggedInUser = (User)this.getIntent().getSerializableExtra("LOGGED_IN_USER");
 
-		findViewById(R.id.admin_submit).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						modifyUser(userToModifyField);
-					}
-				});
+		//findViewById(R.id.admin_submit).setOnClickListener(
+		//		new View.OnClickListener() {
+		//			@Override
+		//			public void onClick(View view) {
+		//				modifyUser(userToModifyField);
+		//			}
+		//		});
         /**
          * Connect the AdminActivity with the ListActivity and the HomeActivity
          */
@@ -48,9 +52,10 @@ public class AdminActivity extends Activity {
 		{
 			@Override
 			public void onClick(View v) {
+				modifyUser(userToModifyField);
 				Intent intent = new Intent();
-				intent.setClass(AdminActivity.this,ListActivity.class);
-				intent.putExtra("VERIFIER", uv);
+				intent.setClass(AdminActivity.this,HomeActivity.class);
+				intent.putExtra("LOGGED_IN_USER", loggedInUser);
 				startActivity(intent);
 			}
 		});
@@ -61,12 +66,20 @@ public class AdminActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent1 = new Intent();
 				intent1.setClass(AdminActivity.this,HomeActivity.class);
-				intent1.putExtra("VERIFIER", uv);
+				intent1.putExtra("LOGGED_IN_USER", loggedInUser);
 				startActivity(intent1);
 			}
 		});
+		
+		this.makeAdminButton = (RadioButton) this.findViewById(R.id.admin_makeAdminButton);
+		this.removeUserButton = (RadioButton) this.findViewById(R.id.admin_removeUserButton);
+		this.lockUserButton = (RadioButton) this.findViewById(R.id.admin_lockUserButton);
+		this.unlockUserButton = (RadioButton) this.findViewById(R.id.admin_unlockUserButton);
+		this.radioGroup = (RadioGroup) this.findViewById(R.id.admin_radioGroup);
+		
 	}
-
+	
+	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_admin, menu);
@@ -87,13 +100,13 @@ public class AdminActivity extends Activity {
 		
 			for(int i = 0; i < usernames.length; i++) {
 				if(usernames[i].equals(userToModify)) {
-					if(((RadioButton)findViewById(R.id.admin_lockUserButton)).isChecked())
+					if(lockUserButton.isChecked())
 						uv.setLocked(i, true);
-					else if(((RadioButton)findViewById(R.id.admin_unlockUserButton)).isChecked())
+					else if(unlockUserButton.isChecked())
 						uv.setLocked(i, false);
-					else if(((RadioButton)findViewById(R.id.admin_makeAdminButton)).isChecked())
+					else if(makeAdminButton.isChecked())
 						uv.setAdmin(i, true);
-					else if(((RadioButton)findViewById(R.id.admin_removeUserButton)).isChecked())
+					else if(removeUserButton.isChecked())
 						uv.removeUser(usernames[i]);
 				}
 			}
