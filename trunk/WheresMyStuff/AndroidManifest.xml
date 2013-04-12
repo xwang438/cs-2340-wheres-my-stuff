@@ -58,6 +58,10 @@
             android:name="edu.gatech.cs2340.wheresmystuff.SearchActivity"
             android:label="@string/app_name" >
         </activity>
+                <activity
+            android:name="edu.gatech.cs2340.wheresmystuff.MatchActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
