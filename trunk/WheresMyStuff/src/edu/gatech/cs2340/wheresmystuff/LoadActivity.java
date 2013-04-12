@@ -25,13 +25,13 @@ public class LoadActivity extends Activity {
 		        getWindow().setFormat(PixelFormat.RGBA_8888);    
 		        setContentView(R.layout.load);  
 		        
-		        uv = new UserVerifier();
+		        uv = new UserVerifier(this);
 		        
 		        new Handler().postDelayed(new Runnable() {  
 		            public void run() {  
 		                //Go to main activity, and finish load activity  
 		                Intent mainIntent = new Intent(LoadActivity.this, LoginActivity.class);  
-		                mainIntent.putExtra("VERIFIER", uv);
+		     //           mainIntent.putExtra("VERIFIER", uv);
 		                LoadActivity.this.startActivity(mainIntent);  
 		                LoadActivity.this.finish();  
 		            }  

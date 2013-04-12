@@ -171,7 +171,7 @@ public class FoundActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent1 = new Intent();
 				intent1.setClass(FoundActivity.this, HomeActivity.class);
-				intent1.putExtra("VERIFIER", uv);
+			//	intent1.putExtra("VERIFIER", uv);
 				startActivity(intent1);
 			}
 		});
@@ -182,7 +182,7 @@ public class FoundActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent2 = new Intent();
 				intent2.setClass(FoundActivity.this,LoginActivity.class);
-				intent2.putExtra("VERIFIER", uv);
+			//	intent2.putExtra("VERIFIER", uv);
 				startActivity(intent2);
 			}
 		});

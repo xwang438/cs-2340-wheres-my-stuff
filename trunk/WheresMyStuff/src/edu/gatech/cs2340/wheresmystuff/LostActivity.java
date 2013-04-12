@@ -116,7 +116,7 @@ public class LostActivity extends Activity {
 				Intent intent = new Intent();
 				intent.setClass(LostActivity.this, ListActivity.class);
 				//intent.putExtra("ITEM", newLost);
-				intent.putExtra("VERIFIER", uv);
+		//		intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});
@@ -126,7 +126,7 @@ public class LostActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent1 = new Intent();
 				intent1.setClass(LostActivity.this, HomeActivity.class);
-				intent1.putExtra("VERIFIER", uv);
+		//		intent1.putExtra("VERIFIER", uv);
 				startActivity(intent1);
 			}
 		});
@@ -136,7 +136,7 @@ public class LostActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent2 = new Intent();
 				intent2.setClass(LostActivity.this, LoginActivity.class);
-				intent2.putExtra("VERIFIER", uv);
+		//		intent2.putExtra("VERIFIER", uv);
 				startActivity(intent2);
 			}
 		});
