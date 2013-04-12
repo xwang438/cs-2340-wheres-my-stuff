@@ -86,7 +86,7 @@ public class LoginActivity extends Activity {
 
 						Intent intent = new Intent();
 						intent.setClass(LoginActivity.this, HomeActivity.class);
-						intent.putExtra("VERIFIER", uv);
+			//			intent.putExtra("VERIFIER", uv);
 						startActivity(intent);
 					}
 				});
@@ -131,7 +131,7 @@ public class LoginActivity extends Activity {
 						Intent intent = new Intent();
 						intent.setClass(LoginActivity.this,
 								RegisterActivity.class);
-						intent.putExtra("VERIFIER", uv);
+			//			intent.putExtra("VERIFIER", uv);
 						startActivity(intent);
 					}
 				});
@@ -198,7 +198,7 @@ public class LoginActivity extends Activity {
 			if (uv.loginCheck(mEmail, mPassword)) {
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, HomeActivity.class);
-				intent.putExtra("VERIFIER", uv);
+			//	intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			} else {
 				if (uv.checkAttempt()) {

@@ -94,7 +94,7 @@ public class ListActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(ListActivity.this, LoginActivity.class);
-				intent.putExtra("VERIFIER", uv);
+		//		intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});
@@ -104,7 +104,7 @@ public class ListActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(ListActivity.this, HomeActivity.class);
-				intent.putExtra("VERIFIER", uv);
+			//	intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});
@@ -114,7 +114,7 @@ public class ListActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(ListActivity.this, MatchActivity.class);
-				intent.putExtra("VERIFIER", uv);
+		//		intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});

@@ -97,7 +97,7 @@ public class MatchActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent();
 				intent.setClass(MatchActivity.this, LoginActivity.class);
-				intent.putExtra("VERIFIER", uv);
+				//intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});
