@@ -48,7 +48,6 @@ public class ListActivity extends Activity {
 	private Spinner spinner;
 	private DatePicker datepicker;
 	private Button dialogButton;
-	private Button searchButton;
 	private int year;
 	private int month;
 	private int day;
@@ -113,20 +112,20 @@ public class ListActivity extends Activity {
 		this.button2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(ListActivity.this, MatchActivity.class);
+				Intent intent1 = new Intent();
+				intent1.setClass(ListActivity.this, MatchActivity.class);
 		//		intent.putExtra("VERIFIER", uv);
-				startActivity(intent);
+				startActivity(intent1);
 			}
 		});
 		this.button3 = (Button) this.findViewById(R.id.liststuff_search);
 		this.button3.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(ListActivity.this, SearchActivity.class);
+				Intent intent2 = new Intent();
+				intent2.setClass(ListActivity.this, SearchActivity.class);
 		//		intent.putExtra("VERIFIER", uv);
-				startActivity(intent);
+				startActivity(intent2);
 			}
 		});
 		this.button1 = (Button) this.findViewById(R.id.liststuff_filter);
