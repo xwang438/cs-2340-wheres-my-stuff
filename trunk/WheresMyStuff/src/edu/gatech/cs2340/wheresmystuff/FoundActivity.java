@@ -101,15 +101,11 @@ public class FoundActivity extends Activity {
 						createNewLost();
 					}
 				});
-
 		/**
-		 * Connect the LostActivity with the ListActivity and the HomeActivity
+		 * Connect the LostActivity with the ListActivity, LoginActivity, and the HomeActivity
+		 * Add the item information to the database on submitting.
 		 */
-		// I don't understand what newLost is and does. I think it should just
-		// create an item, set the status to lost and then
-		// add that item to the database, where the database will create the
-		// list. So connecting it to list activity doesn't
-		// really matter.
+
 		this.submitButton = (Button) this.findViewById(R.id.find_submit);
 		this.submitButton.setOnClickListener(new OnClickListener() {
 			@Override

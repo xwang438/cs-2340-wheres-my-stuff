@@ -1,7 +1,3 @@
-/**
- **
- * @author Emily
- */
 package edu.gatech.cs2340.wheresmystuff;
 
 import edu.gatech.cs2340.wheresmystuff.LoginActivity.UserLoginTask;
@@ -18,7 +14,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import java.io.*;
 
-
+/**
+ * The RegisterActivity enable the user to register a new account
+ * 
+ * @author Emily Jackson
+ * 
+ */
 @SuppressWarnings("unused")
 
 

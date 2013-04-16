@@ -10,7 +10,7 @@ import android.widget.Button;
 /**
  * The first page after launching the app. 
  * It is connected with the LoginActivity and the RegisterActivity
- * @author Xinlu
+ * @author Xinlu Wang
  *
  */
 
