@@ -1,5 +1,10 @@
 package edu.gatech.cs2340.wheresmystuff;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +50,7 @@ public class Database extends SQLiteOpenHelper {
 	public void insertItem(Item item) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues newCon = new ContentValues();
-//		newCon.put("itemID", item.getIid());
+		// newCon.put("itemID", item.getIid());
 		newCon.put("name", item.getName());
 		newCon.put("description", item.getDescription());
 		newCon.put("userID", item.getUid());
@@ -61,7 +66,7 @@ public class Database extends SQLiteOpenHelper {
 	public int updateItem(Item item) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues newCon = new ContentValues();
-//		newCon.put("itemID", item.getIid());
+		// newCon.put("itemID", item.getIid());
 		newCon.put("name", item.getName());
 		newCon.put("description", item.getDescription());
 		newCon.put("userID", item.getUid());
@@ -72,6 +77,13 @@ public class Database extends SQLiteOpenHelper {
 		newCon.put("location", item.getLocation());
 		return db.update("items", newCon, "itemID",
 				new String[] { String.valueOf(item.getIid()) });
+	}
+
+
+
+	public int getLength(){
+		ArrayList<Item> items = this.getAllItems();
+		return items.size();
 	}
 
 	public ArrayList<Item> getAllItems() {
@@ -93,18 +105,25 @@ public class Database extends SQLiteOpenHelper {
 				item.setName(cursor.getString(1));
 				item.setDescription(cursor.getString(2));
 				item.setUid(cursor.getString(3));
-				
+
 				String status = cursor.getString(4);
-				if (status.equals("Lost")) item.setStatus(ItemStatus.Lost);
-				else if (status.equals("Found")) item.setStatus(ItemStatus.Found);
-				else if (status.equals("Returned")) item.setStatus(ItemStatus.Returned);
-				else item.setStatus(ItemStatus.Donation);
-				
+				if (status.equals("Lost"))
+					item.setStatus(ItemStatus.Lost);
+				else if (status.equals("Found"))
+					item.setStatus(ItemStatus.Found);
+				else if (status.equals("Returned"))
+					item.setStatus(ItemStatus.Returned);
+				else
+					item.setStatus(ItemStatus.Donation);
+
 				String category = cursor.getString(5);
-				if (category.equals("Personal Item")) item.setCategory(ItemCategory.PERSONAL_ITEM);
-				else if (category.equals("Appliance")) item.setCategory(ItemCategory.APPLIANCE);
-				else item.setCategory(ItemCategory.FURNITURE);
-				
+				if (category.equals("Personal Item"))
+					item.setCategory(ItemCategory.PERSONAL_ITEM);
+				else if (category.equals("Appliance"))
+					item.setCategory(ItemCategory.APPLIANCE);
+				else
+					item.setCategory(ItemCategory.FURNITURE);
+
 				item.setResolved(Boolean.valueOf(cursor.getString(6)));
 				item.setDate(cursor.getString(7));
 				item.setLocation(cursor.getString(8));
@@ -114,39 +133,49 @@ public class Database extends SQLiteOpenHelper {
 		}
 		// return item list
 		db.close();
-		
+
 		return items;
 
 	}
-	
-	private ArrayList<Item> filterByName(){//NEW - NEW - NEW
+
+	private ArrayList<Item> filterByName() {// NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
 		int index = 0;
 		String firstItem = currentItems.get(0).getName();
-		
 
-			for(int x = 0; x < currentItems.size(); x++){//looping through the list and removing used items
-				for(int y = 0; y < currentItems.size(); y++){//comparing each name
-					for(int z = 0; z < firstItem.length(); z++){//comparing each letter
-						if(currentItems.get(y).getName().substring(z,z+1).equalsIgnoreCase(firstItem.substring(z,z+1)) == false){
-							if(currentItems.get(y).getName().substring(z,z+1).compareToIgnoreCase(firstItem.substring(z,z+1)) > 0){
-								firstItem = currentItems.get(y).getName();
-								index = y;
-							}
-							else{break;}
+		for (int x = 0; x < currentItems.size(); x++) {// looping through the
+														// list and removing
+														// used items
+			for (int y = 0; y < currentItems.size(); y++) {// comparing each
+															// name
+				for (int z = 0; z < firstItem.length(); z++) {// comparing each
+																// letter
+					if (currentItems.get(y).getName().substring(z, z + 1)
+							.equalsIgnoreCase(firstItem.substring(z, z + 1)) == false) {
+						if (currentItems
+								.get(y)
+								.getName()
+								.substring(z, z + 1)
+								.compareToIgnoreCase(
+										firstItem.substring(z, z + 1)) > 0) {
+							firstItem = currentItems.get(y).getName();
+							index = y;
+						} else {
+							break;
 						}
-						
 					}
+
 				}
-				items.add(currentItems.get(index));
-				currentItems.remove(index);
 			}
+			items.add(currentItems.get(index));
+			currentItems.remove(index);
+		}
 
 		return items;
 	}
-	
-	private ArrayList<Item> filterByDate(){//NEW - NEW - NEW
+
+	private ArrayList<Item> filterByDate() {// NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
 		int lowDate = 0;
@@ -164,6 +193,7 @@ public class Database extends SQLiteOpenHelper {
 					if(lowDate > Integer.parseInt(currentItems.get(i).getDate())){
 						lowDate = Integer.parseInt(currentItems.get(i).getDate());
 						lowIndex = i;}
+
 				}
 			}
 			items.add(currentItems.get(lowIndex));
@@ -171,25 +201,27 @@ public class Database extends SQLiteOpenHelper {
 		}
 		return items;
 	}
-	
-	private ArrayList<Item> filterByCategory(){//NEW - NEW - NEW
+
+	private ArrayList<Item> filterByCategory() {// NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
 		ArrayList<String> categs = new ArrayList<String>();
 		categs.add("Personal Item");
 		categs.add("Appliance");
 		categs.add("Furniture");
-		
-		
-		
-		for(int x = 0; x < categs.size(); x++){
-			for(int i = 0; i < currentItems.size(); i++){
-				for(int y = 0; y < currentItems.size(); y++){
-					if(categs.get(x).toString().equals(currentItems.get(y).getCategory().toString())){
+
+		for (int x = 0; x < categs.size(); x++) {
+			for (int i = 0; i < currentItems.size(); i++) {
+				for (int y = 0; y < currentItems.size(); y++) {
+					if (categs
+							.get(x)
+							.toString()
+							.equals(currentItems.get(y).getCategory()
+									.toString())) {
 						items.add(currentItems.get(y));
 						currentItems.remove(y);
 					}
-				}				
+				}
 			}
 		}
 		return items;
@@ -198,23 +230,24 @@ public class Database extends SQLiteOpenHelper {
 	public Item searchByName(String find){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByName();
 		Item found = null;
-		
-		for(int i = 0; i < searchList.size(); i++){
-			if(find.equalsIgnoreCase(searchList.get(i).getName())){
+
+		for (int i = 0; i < searchList.size(); i++) {
+			if (find.equalsIgnoreCase(searchList.get(i).getName())) {
 				found = searchList.get(i);
 				break;
 			}
-			
+
 		}
 		return found;
 	}
-	
+
 	public Item searchByCategory(String category){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByCategory();
 		Item found = null;
-		
-		for(int i =0; i < searchList.size(); i++){
-			if(category.equalsIgnoreCase(searchList.get(i).getCategory().toString())){
+
+		for (int i = 0; i < searchList.size(); i++) {
+			if (category.equalsIgnoreCase(searchList.get(i).getCategory()
+					.toString())) {
 				found = searchList.get(i);
 				break;
 			}
