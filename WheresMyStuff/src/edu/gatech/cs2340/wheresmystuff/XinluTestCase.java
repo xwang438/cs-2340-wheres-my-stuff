@@ -6,7 +6,7 @@ import edu.gatech.cs2340.wheresmystuff.LoginActivity;
 
 import junit.framework.TestCase;
 /**
- * This is a JUnit test for the getAllItems method,
+ * This is a JUnit test for the updateItem method,
  * test to see if the method can return all of the items in the system.
  * 
  * @author Xinlu Wang
@@ -37,13 +37,14 @@ public class XinluTestCase extends ActivityInstrumentationTestCase2<LoginActivit
 		/**
 		 * This method test to see if the item is present
 		 */
-		public void testGetAllItem(){
-			db.getAllItems();
-			if (db.getItem(db.getLength() - 1) == null) {
-				System.out.println("Database cannot get all items");
+		public void testUpdateItem(Item item2){
+			item2 = new Item("test2");
+			db.updateItem(item2);
+			if (db.searchByName("test2") == null) {
+				System.out.println("Database cannot update items");
 			} else {
 				System.out
-						.println("Database successfully get all items)");
+						.println("Database successfully update items)");
 			}
 		}
 }
