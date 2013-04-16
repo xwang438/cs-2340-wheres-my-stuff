@@ -69,7 +69,7 @@ public class SearchActivity extends Activity {
                                 if(foundItem == null){}
                                 else{
                                         //adapterTemp.clear();
-                                       // adapter.add(foundItem);
+                                        //adapter.add(foundItem);
                                 }
                                 // search by name
                                 //ArrayList<Item> tempNames = SearchHelper
@@ -83,7 +83,7 @@ public class SearchActivity extends Activity {
                                 if(foundItem == null){}
                                 else{
                                         //adapterTemp.clear();
-                                      //  adapter.add(foundItem);
+                                       // adapter.add(foundItem);
                                 }
                                 // search by category
                         //      ArrayList<Item> tempCategories = SearchHelper

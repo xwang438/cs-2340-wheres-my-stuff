@@ -19,7 +19,7 @@ import android.widget.Spinner;
 /**
  * The LostActivity enable the user to add a new item that they have lost
  * 
- * @author Xinlu
+ * @author Xinlu Wang
  * 
  */
 public class LostActivity extends Activity {
@@ -76,14 +76,10 @@ public class LostActivity extends Activity {
 					}
 				});
 		/**
-		 * Connect the LostActivity with the ListActivity and the HomeActivity
+		 * Connect the LostActivity with the ListActivity LoginActivity and the HomeActivity
+		 * Add the item information to the list on submitting
 		 */
-		// I don't understand what newLost is and does. I think it should just
-		// create an item, set the status to lost and then
-		// add that item to the database, where the database will create the
-		// list. So connecting it to list activity doesn't
-		// really matter.
-		this.submitButton = (Button) this.findViewById(R.id.loststuff_submit);
+	this.submitButton = (Button) this.findViewById(R.id.loststuff_submit);
 		this.submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -115,8 +111,6 @@ public class LostActivity extends Activity {
 				
 				Intent intent = new Intent();
 				intent.setClass(LostActivity.this, ListActivity.class);
-				//intent.putExtra("ITEM", newLost);
-		//		intent.putExtra("VERIFIER", uv);
 				startActivity(intent);
 			}
 		});

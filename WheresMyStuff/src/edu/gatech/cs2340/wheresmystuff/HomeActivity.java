@@ -10,6 +10,7 @@ import android.widget.Button;
 /**
  * Activity which displays a screen to the user, the user can indicate they have
  * lost something.
+ * Author: Xinlu Wang
  */
 
 public class HomeActivity extends Activity {
@@ -25,7 +26,6 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.home);
 		
 		uv = new UserVerifier(this);
-		//uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
 		loggedInUser = (User)this.getIntent().getSerializableExtra("LOGGED_IN_USER");
 		
 		/**
@@ -44,6 +44,12 @@ public class HomeActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		/**
+		 * Set the intent between HomeActivity and FoundActivity. The user could
+		 * be able to input their lost stuff information after they confirm that
+		 * they have found something
+		 */
+	
 		this.findButton = (Button) this.findViewById(R.id.btnHome3);
 		this.findButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -55,6 +61,12 @@ public class HomeActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		
+		/**
+		 * Set the intent between HomeActivity and ListActivity. The user could
+		 * be able to see the current list of items 
+		 */
+	
 		findViewById(R.id.button_list).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
