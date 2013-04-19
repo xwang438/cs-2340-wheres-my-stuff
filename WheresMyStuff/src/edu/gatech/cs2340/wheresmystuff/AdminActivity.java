@@ -14,7 +14,7 @@ import android.widget.Button;
 import java.io.*;
 /**
  * The AdminActivity enables admins to modify user accounts. 
- * @author Kenneth
+ * @author Kenneth Craig
  *
  */
 public class AdminActivity extends Activity {
@@ -72,15 +72,15 @@ public class AdminActivity extends Activity {
 		
 	}
 	
-	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_admin, menu);
 		return true;
 	}
 	
 	/**
-	 * 
-	 * 
+	 * @param userToModifyField
+	 *            textfield containing potential username of user to be altered.
 	 */
 	public void modifyUser(EditText userToModifyField){
 		String userToModify = userToModifyField.getText().toString();
