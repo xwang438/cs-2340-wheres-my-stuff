@@ -36,6 +36,9 @@ public class Database extends SQLiteOpenHelper {
 	}
 
 	@Override
+	/*
+	 * @param db database for app
+	 */
 	public void onCreate(SQLiteDatabase db) {
 		String Create_Itable = "CREATE TABLE items (itemID Integer primary key autoincrement, name, description,userID, status, category, resolved, date, location)";
 		db.execSQL(Create_Itable);
@@ -45,6 +48,11 @@ public class Database extends SQLiteOpenHelper {
  * 
  */
 	@Override
+	/*
+	 * @param db database for app
+	 * @param oldVersion old index
+	 * @param newVersion new index
+	 */
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// Drop older table if existed
 		db.execSQL("DROP TABLE IF EXISTS " + "items");
