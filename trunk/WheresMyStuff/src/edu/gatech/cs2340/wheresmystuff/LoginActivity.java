@@ -76,7 +76,7 @@ public class LoginActivity extends Activity {
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 		
-		uv = (UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
+		uv = new UserVerifier(this);//(UserVerifier) this.getIntent().getSerializableExtra("VERIFIER");
 		
 		// mDebugBtn = (Button) this.findViewById(R.id.button_main);
 		findViewById(R.id.button_main).setOnClickListener(
