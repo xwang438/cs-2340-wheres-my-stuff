@@ -20,7 +20,7 @@ import java.io.*;
 public class AdminActivity extends Activity {
 
 	private EditText userToModifyField;
-	private Button submitButton,cancelButton; //STOP CALLING YOUR BUTTONS "button"
+	private Button submitButton,cancelButton;
 	private RadioButton makeAdminButton, removeUserButton, lockUserButton, unlockUserButton;
 	private RadioGroup radioGroup;
 	private UserVerifier uv;
@@ -37,13 +37,6 @@ public class AdminActivity extends Activity {
 		uv = new UserVerifier(this);
 		loggedInUser = (User)this.getIntent().getSerializableExtra("LOGGED_IN_USER");
 
-		//findViewById(R.id.admin_submit).setOnClickListener(
-		//		new View.OnClickListener() {
-		//			@Override
-		//			public void onClick(View view) {
-		//				modifyUser(userToModifyField);
-		//			}
-		//		});
         /**
          * Connect the AdminActivity with the ListActivity and the HomeActivity
          */
@@ -81,7 +74,6 @@ public class AdminActivity extends Activity {
 	
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_admin, menu);
 		return true;
 	}
@@ -91,11 +83,7 @@ public class AdminActivity extends Activity {
 	 * 
 	 */
 	public void modifyUser(EditText userToModifyField){
-		//Do something. 
-		//try {
-		//TextFile usersFile = new TextFile("file:///android_asset/users.txt");
 		String userToModify = userToModifyField.getText().toString();
-		//String[] usernames = usersFile.getUsernames();
 		String[] usernames = uv.getUsernames();
 		
 			for(int i = 0; i < usernames.length; i++) {
@@ -110,10 +98,6 @@ public class AdminActivity extends Activity {
 						uv.removeUser(usernames[i]);
 				}
 			}
-		//} catch (IOException e) {
-			//System.out.println(e.getMessage());
-		//}
-		
 		
 	}
 
