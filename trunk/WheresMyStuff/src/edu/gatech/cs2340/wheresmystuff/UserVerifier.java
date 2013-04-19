@@ -1,4 +1,3 @@
-// TODO: Kyle, make a User class and embed it in UserVerifier. It should have all the properties for User according to the CRC. 
 
 package edu.gatech.cs2340.wheresmystuff;
 
@@ -27,20 +26,16 @@ public class UserVerifier {
 	private static boolean[] locked = {false, false, true, false};
 	private static boolean[] admins = {true, false, false, true};
 	private ArrayList<User> users;
-	//private static String[] usernames;
-	//private static String[] passwords;
 	private int userIndex;
 	private int loginAttempts;
 	@SuppressWarnings("unused")
 	private User loggedInUser;
 	private User defaultAdminUser;
-	//private TextFile usersFile;
 	private UserDatabase udb;
 	
 	// Basic constructor, creates a "default" username and password for demo
 	// purposes
 	public UserVerifier(Context context) {
-		//try {
 			defaultAdminUser = new User(0,"admin@gatech.edu", "admin1", "Ad", "Min", false, true);
 			
 			udb = new UserDatabase(context);
@@ -53,9 +48,6 @@ public class UserVerifier {
 			userIndex = -1;
 			loginAttempts = 0;
 			loggedInUser = new User("", "");
-		//} catch(IOException e) {
-		//	System.out.println(e.getMessage());
-		//}
 	}
 
 	/**
@@ -151,6 +143,11 @@ public class UserVerifier {
 		return true;
 	}
 	
+	/**
+	 * @param user
+	 *            user to be removed from database.
+	 * @return true if successfully removed, false otherwise.
+	 */
 	public Boolean removeUser(String username) {
 		
 		udb.deleteUser(udb.searchByUsername(username));
@@ -175,17 +172,14 @@ public class UserVerifier {
 		//		return true;
 		//	}
 		//}
-		//try {
-			//usersFile.addUser(new User(newUser, newPassword));
-		
-		//	usernames = usersFile.getUsernames();
-		//	passwords = usersFile.getPasswords();
-		//} catch (IOException e) {
-		//	System.out.println(e.getMessage());
-		//}
 		return true;
 	}
 	
+	/**
+	 * @param user
+	 *            user to be added to database.
+	 * @return true if successfully added, false otherwise.
+	 */
 	public Boolean addUser(User user) {
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i)!= null && users.get(i).getUsername().equals(user.getUsername())) {
@@ -193,8 +187,6 @@ public class UserVerifier {
 				return false;
 			}
 		}
-		//try {
-		//usersFile.addUser(user);
 		System.out.println("Well, it made it here.");
 		udb.insertUser(user);
 		users = udb.getAllUsers();
@@ -211,9 +203,6 @@ public class UserVerifier {
 		
 		//usernames = usersFile.getUsernames();
 		//passwords = usersFile.getPasswords();
-		//} catch (IOException e) {
-		//	System.out.println(e.getMessage());
-		//}
 		return true;
 	}
 
@@ -238,6 +227,11 @@ public class UserVerifier {
 		return false;
 	}
 
+	/**
+	 * @param username
+	 *            username of logged in user.
+	 * @return the user that is logged in.
+	 */
 	public User makeLoggedInUser(String username) {
 		User user = null;
 		for (int i = 0; i < users.size(); i++) {
@@ -265,15 +259,23 @@ public class UserVerifier {
 		}
 	}
 
-	
+	/**
+	 * @return list of users.
+	 */
 	public ArrayList<User> getUsers() {
 		return users;
 	}
 	
+	/**
+	 * @return the user that is logged in.
+	 */
 	public User getLoggedInUser() {
 		return loggedInUser;
 	}
 	
+	/**
+	 * @return array of usernames.
+	 */
 	public String[] getUsernames() {
 		String[] uns = new String[users.size()];
 		for(int i = 0; i < users.size(); i++)
@@ -281,6 +283,9 @@ public class UserVerifier {
 		return uns;
 	}
 	
+	/**
+	 * @return array of passwords.
+	 */
 	public String[] getPasswords() {
 		String[] pws = new String[users.size()];
 		for(int i = 0; i < users.size(); i++)
@@ -288,6 +293,12 @@ public class UserVerifier {
 		return pws;
 	}
 	
+	/**
+	 * @param i
+	 *            index of user to be altered.
+	 * @param lock
+	 *            true to lock, false to unlock.
+	 */
 	public void setLocked(int i, boolean lock) {
 		//locked[i] = lock;
 		udb.updateUser(new User(i, users.get(i).getUsername(),
@@ -295,6 +306,12 @@ public class UserVerifier {
 				users.get(i).getLastName(), lock, users.get(i).isAdmin()));
 	}
 	
+	/**
+	 * @param i
+	 *            index of user to be altered.
+	 * @param lock
+	 *            true to make admin, false to remove admin privileges.
+	 */
 	public void setAdmin(int i, boolean admin) {
 		//admins[i] = admin;
 		udb.updateUser(new User(i, users.get(i).getUsername(),
