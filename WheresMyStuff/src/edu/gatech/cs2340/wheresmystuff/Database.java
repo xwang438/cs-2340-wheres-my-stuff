@@ -16,7 +16,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+/**
+ * Database for items
+ * @author Bongsu
+ *
+ */
 public class Database extends SQLiteOpenHelper {
 
 	private SQLiteDatabase database;
@@ -37,7 +41,9 @@ public class Database extends SQLiteOpenHelper {
 		db.execSQL(Create_Itable);
 
 	}
-
+/**
+ * 
+ */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// Drop older table if existed
@@ -46,7 +52,12 @@ public class Database extends SQLiteOpenHelper {
 		onCreate(db);
 
 	}
-
+/**
+ * 
+ * @param item
+ * insert item info in the database
+ * 
+ */
 	public void insertItem(Item item) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues newCon = new ContentValues();
@@ -62,7 +73,13 @@ public class Database extends SQLiteOpenHelper {
 		db.insert("items", null, newCon);
 		db.close();
 	}
-
+/**
+ * 
+ * @param item
+ * 
+ * update exist item info
+ * @return item in the database
+ */
 	public int updateItem(Item item) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues newCon = new ContentValues();
@@ -79,12 +96,20 @@ public class Database extends SQLiteOpenHelper {
 				new String[] { String.valueOf(item.getIid()) });
 	}
 
-
+/**
+ * get size of item list
+ * @return size of item list
+ */
 
 	public int getLength(){
 		ArrayList<Item> items = this.getAllItems();
 		return items.size();
 	}
+	
+/**
+  * get every times in the database
+  * @return items
+  */
 
 	public ArrayList<Item> getAllItems() {
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -137,7 +162,11 @@ public class Database extends SQLiteOpenHelper {
 		return items;
 
 	}
-
+/**
+ *  show the list filtered by name
+ * @return filtered items
+ */
+	
 	private ArrayList<Item> filterByName() {// NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
 		ArrayList<Item> currentItems = this.getAllItems();
@@ -174,6 +203,11 @@ public class Database extends SQLiteOpenHelper {
 
 		return items;
 	}
+	
+/**
+ * show the list filtered by date
+ * @return filtered items
+ */
 
 	private ArrayList<Item> filterByDate() {// NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -201,6 +235,11 @@ public class Database extends SQLiteOpenHelper {
 		}
 		return items;
 	}
+	
+/**
+ * show the list filtered by category
+ * @return filtered items
+ */
 
 	private ArrayList<Item> filterByCategory() {// NEW - NEW - NEW
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -227,6 +266,13 @@ public class Database extends SQLiteOpenHelper {
 		return items;
 	}
 	
+/**
+ * 
+ * @param find
+ * 				search items by name
+ * @return items after search
+ */
+	
 	public Item searchByName(String find){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByName();
 		Item found = null;
@@ -240,7 +286,12 @@ public class Database extends SQLiteOpenHelper {
 		}
 		return found;
 	}
-
+/**
+ * 
+ * @param category
+ * 					search items by category
+ * @return items after search
+ */
 	public Item searchByCategory(String category){//NEW - NEW - NEW
 		ArrayList<Item> searchList = this.filterByCategory();
 		Item found = null;
@@ -255,6 +306,12 @@ public class Database extends SQLiteOpenHelper {
 		return found;
 	}
 
+/**
+ * 	
+ * @param cursor
+ * 					indicate the items location in the database
+ * @return item
+ */
 	private Item cursorToItem(Cursor cursor) {
 		Item item = new Item();
 		if (cursor != null) {
@@ -297,7 +354,12 @@ public class Database extends SQLiteOpenHelper {
 		return cursorToItem(cursor);
 
 	}
-
+/**
+ * 
+ * @param item
+ * 					delete item in the database
+ */
+	
 	public void deleteItem(Item item) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete("items", "itemID",

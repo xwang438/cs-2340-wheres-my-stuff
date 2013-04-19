@@ -8,8 +8,6 @@ import java.io.Serializable;
  */
 public class Item implements Serializable {
 
-	// public static Item item;
-
 	private String uid;
 	private int iid;
 	private String description;
@@ -59,7 +57,7 @@ public class Item implements Serializable {
 	private ItemStatus status;
 
 	/**
-	 * Constructor for the LostItem class. Please do not delete.
+	 * Constructor for the Item class. Please do not delete.
 	 * 
 	 * @param name
 	 */
@@ -71,7 +69,7 @@ public class Item implements Serializable {
 	}
 
 	/**
-	 * name of the lost items
+	 * name of the items
 	 * 
 	 * @return name of the lost items
 	 */
@@ -96,6 +94,11 @@ public class Item implements Serializable {
 		this.uid = uid;
 	}
 
+	/**
+	 * Item Id 
+	 * 
+	 * @return Item Id
+	 */
 	public int getIid() {
 		return iid;
 	}
@@ -118,7 +121,7 @@ public class Item implements Serializable {
 	}
 
 	/**
-	 * lost or fond status of the item
+	 * lost or found status of the item
 	 * 
 	 * @return lost or found as a string
 	 */
@@ -130,6 +133,10 @@ public class Item implements Serializable {
 		this.status = status;
 	}
 
+	/**
+	 *  lost or found description of the item
+	 * @return lost or found as a string
+	 */
 	public String getDescription() {
 		return description;
 	}
@@ -138,6 +145,10 @@ public class Item implements Serializable {
 		this.description = description;
 	}
 
+	/**
+	 *  date when post the item
+	 * @return Date
+	 */
 	public String getDate() {
 		return date;
 	}
@@ -145,6 +156,11 @@ public class Item implements Serializable {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
+	/**
+	 * location where lost or found item
+	 * @return location
+	 */
 
 	public String getLocation() {
 		return location;
@@ -153,6 +169,11 @@ public class Item implements Serializable {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
+	/**
+	 * status of the resolve lost item
+	 * @return resolved
+	 */
 
 	public Boolean getResolved() {
 		return resolved;

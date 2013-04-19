@@ -2,8 +2,11 @@ package edu.gatech.cs2340.wheresmystuff;
 
 import android.database.sqlite.SQLiteDatabase;
 import junit.framework.TestCase;
-
-//author: Bong
+/**
+ * 
+ * @author Bongsu
+ * Junit: test for insert items in the database
+ */
 
 public class InsertItemTest extends TestCase {
 
@@ -13,6 +16,9 @@ public class InsertItemTest extends TestCase {
 
 	private Database database;
 
+	/**
+	 * insert the item in the database and check the database
+	 */
 	public void testInsertItem() {
 		Item item = new Item("test");
 		database.insertItem(item);

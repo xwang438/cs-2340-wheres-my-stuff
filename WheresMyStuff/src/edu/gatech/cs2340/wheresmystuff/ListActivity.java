@@ -264,7 +264,7 @@ class MyAdapter extends BaseAdapter {
 	/**
 	 * view list of lost items
 	 * 
-	 * @author Emily added status + category to list view
+	 * @author Bongsu added name, status, category, and date to list view
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
