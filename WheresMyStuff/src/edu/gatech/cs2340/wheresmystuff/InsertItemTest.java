@@ -3,6 +3,8 @@ package edu.gatech.cs2340.wheresmystuff;
 import android.database.sqlite.SQLiteDatabase;
 import junit.framework.TestCase;
 
+//author: Bong
+
 public class InsertItemTest extends TestCase {
 
 	protected void setUp() {

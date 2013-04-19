@@ -42,6 +42,11 @@ public class UserDatabase extends SQLiteOpenHelper {
 
 	}
 
+	public int getLength(){
+		ArrayList<User> users = this.getAllUsers();
+		return users.size();
+	}
+	
 	public void insertUser(User user) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues newCon = new ContentValues();
