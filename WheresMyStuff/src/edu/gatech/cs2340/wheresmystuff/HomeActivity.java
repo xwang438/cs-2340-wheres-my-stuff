@@ -21,6 +21,9 @@ public class HomeActivity extends Activity {
 	private User loggedInUser;
 
 	@Override
+	/**
+	 * * @param savedInstanceState bundle to be loaded into the app
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home);
