@@ -13,6 +13,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * UserDatabase.java
+ * Database for users.
+ * @author Kenneth Craig
+ **/
+
+/**
+ * This class handles the saving/loading of user information
+ * for the "Where's My Stuff" App
+ **/
+
 public class UserDatabase extends SQLiteOpenHelper { 
 
 	private SQLiteDatabase database;
@@ -42,11 +53,19 @@ public class UserDatabase extends SQLiteOpenHelper {
 
 	}
 
+	/**
+	 * @return returns the length of the list of users.
+	 */
 	public int getLength(){
 		ArrayList<User> users = this.getAllUsers();
 		return users.size();
 	}
 	
+	
+	/**
+	 * @param user
+	 *            the user to be added to the database.
+	 */
 	public void insertUser(User user) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues newCon = new ContentValues();
@@ -61,7 +80,12 @@ public class UserDatabase extends SQLiteOpenHelper {
 		db.insert("users", null, newCon);
 		db.close();
 	}
-
+	
+	/**
+	 * @param user
+	 *            user whose information is being updated.
+	 * @return index of row updated in database.
+	 */
 	public int updateUser(User user) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues newCon = new ContentValues();
@@ -76,6 +100,9 @@ public class UserDatabase extends SQLiteOpenHelper {
 				new String[] { String.valueOf(user.getID()) });
 	}
 
+	/**
+	 * @return list of users from database.
+	 */
 	public ArrayList<User> getAllUsers() {
 		ArrayList<User> users = new ArrayList<User>();
 
@@ -107,6 +134,9 @@ public class UserDatabase extends SQLiteOpenHelper {
 
 	}
 	
+	/**
+	 * @return users filtered by username.
+	 */
 	private ArrayList<User> filterByUsername(){//NEW - NEW - NEW
 		ArrayList<User> users = new ArrayList<User>();
 		ArrayList<User> currentUsers = this.getAllUsers();
@@ -143,6 +173,13 @@ public class UserDatabase extends SQLiteOpenHelper {
 		return users;
 	}
 	
+	/**
+	 * 
+	 * @param find
+	 * 				username being searched for.
+	 * @return the user with a matching username.
+	 */
+	
 	public User searchByUsername(String find){//NEW - NEW - NEW
 		ArrayList<User> searchList = this.filterByUsername();
 		User found = new User();
@@ -157,6 +194,12 @@ public class UserDatabase extends SQLiteOpenHelper {
 		return found;
 	}
 	
+	/**
+	 * 	
+	 * @param cursor
+	 * 					indicates the users' locations in the database
+	 * @return user made from the cursor.
+	 */
 	private User cursorToUser(Cursor cursor) {
 		User user = new User();
 		if (cursor != null) {
@@ -172,8 +215,12 @@ public class UserDatabase extends SQLiteOpenHelper {
 
 	}
 
-	// itemID Integer primary key, name, description,userID, status, category,
-	// resolved, date, location
+	/**
+	 * 
+	 * @param uid
+	 * 				index to find user at in database.
+	 * @return the user at the specified index in the database.
+	 */
 
 	User getUser(int uid) {
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -189,6 +236,12 @@ public class UserDatabase extends SQLiteOpenHelper {
 		return cursorToUser(cursor);
 	}
 
+	/**
+	 * removes a user from the database.
+	 * @param user
+	 * 				user to be removed from the database.
+	 */
+	
 	public void deleteUser(User user) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete("users", "id",
