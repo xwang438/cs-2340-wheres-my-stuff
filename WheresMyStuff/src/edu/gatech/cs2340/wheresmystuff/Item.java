@@ -59,7 +59,7 @@ public class Item implements Serializable {
 	/**
 	 * Constructor for the Item class. Please do not delete.
 	 * 
-	 * @param name
+	 * @param name name for item
 	 */
 	public Item(String name) {
 		this.name = name;
@@ -76,7 +76,10 @@ public class Item implements Serializable {
 	public String getName() {
 		return name;
 	}
-
+/**
+ * 
+ * @param name new name of item
+ */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -89,7 +92,10 @@ public class Item implements Serializable {
 	public String getUid() {
 		return uid;
 	}
-
+/**
+ * 
+ * @param id item identification string
+ */
 	public void setUid(String id) {
 		this.uid = uid;
 	}
@@ -102,7 +108,10 @@ public class Item implements Serializable {
 	public int getIid() {
 		return iid;
 	}
-
+/**
+ * 
+ * @param iid item ID number
+ */
 	public void setIid(int iid) {
 		this.iid = iid;
 	}
@@ -115,7 +124,10 @@ public class Item implements Serializable {
 	public ItemCategory getCategory() {
 		return category;
 	}
-
+/**
+ * 
+ * @param category classification of item
+ */
 	public void setCategory(ItemCategory category) {
 		this.category = category;
 	}
@@ -128,7 +140,10 @@ public class Item implements Serializable {
 	public ItemStatus getStatus() {
 		return status;
 	}
-
+/**
+ * 
+ * @param status lost or found
+ */
 	public void setStatus(ItemStatus status) {
 		this.status = status;
 	}
@@ -140,7 +155,10 @@ public class Item implements Serializable {
 	public String getDescription() {
 		return description;
 	}
-
+/**
+ * 
+ * @param description what do you think?
+ */
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -152,7 +170,10 @@ public class Item implements Serializable {
 	public String getDate() {
 		return date;
 	}
-
+/**
+ * 
+ * @param date date the item was lost/found
+ */
 	public void setDate(String date) {
 		this.date = date;
 	}
@@ -165,7 +186,10 @@ public class Item implements Serializable {
 	public String getLocation() {
 		return location;
 	}
-
+/**
+ * 
+ * @param location place the item was lost/found
+ */
 	public void setLocation(String location) {
 		this.location = location;
 	}
@@ -178,7 +202,10 @@ public class Item implements Serializable {
 	public Boolean getResolved() {
 		return resolved;
 	}
-
+/**
+ * 
+ * @param resolved stores whether the item has been returned to its owner or not
+ */
 	public void setResolved(Boolean resolved) {
 		this.resolved = resolved;
 	}
