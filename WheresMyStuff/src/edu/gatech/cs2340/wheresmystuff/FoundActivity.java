@@ -36,6 +36,7 @@ public class FoundActivity extends Activity {
 	/**
 	 * On create, this method sets up all the instance variables of text from
 	 * the UI. And sets up an on click listener for the Register button
+	 * @param savedInstanceState bundle to be loaded into the app
 	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
