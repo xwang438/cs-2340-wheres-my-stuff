@@ -17,7 +17,10 @@ public class LoadActivity extends Activity {
 		private static final int LOAD_DISPLAY_TIME = 1500;  
 		private UserVerifier uv;
 		
-		    /** Called when the activity is first created. */  
+		    /** Called when the activity is first created. */ 
+			/*
+			 * @param savedInstanceStance loaded UI bundle
+			 */
 		    @Override  
 		    public void onCreate(Bundle savedInstanceState) {  
 		        super.onCreate(savedInstanceState);  
